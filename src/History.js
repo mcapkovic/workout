@@ -1,0 +1,47 @@
+import React, { useRef, useState } from "react";
+import { FirebaseContext } from "./context";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
+function Row(props) {
+  const { createdAt, count } = props.item;
+  let date = undefined;
+  if (createdAt && "seconds" in createdAt)
+    date = new Date(createdAt.seconds * 1000);
+  const dateString = date ? date.toLocaleDateString() : "";
+  const timeString = date ? date.toLocaleTimeString() : "";
+  return (
+    <tr>
+      <th>{dateString}</th>
+      <th>{timeString}</th>
+      <th>{count}</th>
+    </tr>
+  );
+}
+function Table(props) {
+  const { data } = props;
+  return (
+    <table>
+      {data.map((item) => (
+        <Row key={item.id} item={item} />
+      ))}
+    </table>
+  );
+}
+
+function History(props) {
+  const { auth, firestore, firebase } = React.useContext(FirebaseContext);
+
+  const dummy = useRef();
+  const historyRef = firestore.collection("pushUp");
+  const query = historyRef.orderBy("createdAt", "asc").limitToLast(25);
+
+  const [data = []] = useCollectionData(query, { idField: "id" });
+  console.log(data);
+  return (
+    <div>
+      <Table data={data} />
+    </div>
+  );
+}
+
+export default History;

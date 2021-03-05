@@ -9,7 +9,8 @@ import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import Chat from "./Chat";
-// import PushUpPage from './PushUpPage';
+import PushUpPage from "./PushUpPage";
+import History from "./History";
 import { FirebaseContext } from "./context";
 
 const config = {
@@ -39,9 +40,14 @@ function getFirebase() {
   };
 }
 
+const PUSH_UP_COUNT_PAGE = "push-up-count";
+const PUSH_UP_HISTORY = "push-up-history";
+
 function App() {
   const [user] = useAuthState(auth);
   const [firebaseData, setFirebaseDate] = React.useState(getFirebase);
+  const [tab, setTab] = React.useState("");
+
   return (
     <div className="App">
       <header>
@@ -54,11 +60,17 @@ function App() {
       </section> */}
       {/* <section>{user && <ChatRoom />}</section> */}
 
+      <div>
+        <button onClick={() => setTab(PUSH_UP_COUNT_PAGE)}>Add push ups</button>
+        <button onClick={() => setTab(PUSH_UP_HISTORY)}>History</button>
+      </div>
       <FirebaseContext.Provider value={firebaseData}>
-        <section>
+        {/* <section>
           {user && <Chat />}
-          </section>
-          {/* <PushUpPage/> */}
+          </section> */}
+
+        {tab === PUSH_UP_COUNT_PAGE && <PushUpPage />}
+        {tab === PUSH_UP_HISTORY && <History />}
       </FirebaseContext.Provider>
     </div>
   );
