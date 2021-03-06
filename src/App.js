@@ -1,17 +1,16 @@
 import React, { useRef, useState } from "react";
 import "./App.css";
-
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 // import 'firebase/analytics';
-
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import { FirebaseContext } from "./context";
 import Chat from "./Chat";
 import PushUpPage from "./PushUpPage";
 import History from "./History";
-import { FirebaseContext } from "./context";
+import Room from "./Room";
+import Profile from "./Profile";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -42,6 +41,8 @@ function getFirebase() {
 
 const PUSH_UP_COUNT_PAGE = "push-up-count";
 const PUSH_UP_HISTORY = "push-up-history";
+const PUSH_UP_ROOM = "push-up-room";
+const PROFILE_PAGE = "profile-page";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -51,19 +52,19 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>⚛️🔥💬</h1>
-
-        {user ? <SignOut /> : <SignIn />}
+        {user ? (
+          <>
+            <button onClick={() => setTab(PUSH_UP_COUNT_PAGE)}>
+              Add push ups
+            </button>
+            <button onClick={() => setTab(PUSH_UP_HISTORY)}>History</button>
+            <button onClick={() => setTab(PUSH_UP_ROOM)}>Room</button>
+            <button onClick={() => setTab(PROFILE_PAGE)}>Profile</button>{" "}
+          </>
+        ) : (
+          <SignIn />
+        )}
       </header>
-      {/* <section>
-        <CreateName />
-      </section> */}
-      {/* <section>{user && <ChatRoom />}</section> */}
-
-      <div>
-        <button onClick={() => setTab(PUSH_UP_COUNT_PAGE)}>Add push ups</button>
-        <button onClick={() => setTab(PUSH_UP_HISTORY)}>History</button>
-      </div>
       <FirebaseContext.Provider value={firebaseData}>
         {/* <section>
           {user && <Chat />}
@@ -71,32 +72,10 @@ function App() {
 
         {tab === PUSH_UP_COUNT_PAGE && <PushUpPage />}
         {tab === PUSH_UP_HISTORY && <History />}
+        {tab === PUSH_UP_ROOM && <Room />}
+        {tab === PROFILE_PAGE && <Profile />}
       </FirebaseContext.Provider>
     </div>
-  );
-}
-
-function CreateName() {
-  const [value, setValue] = React.useState("");
-  const messagesRef = firestore.collection("name");
-
-  const sendMessage = async (e) => {
-    const { uid } = auth.currentUser;
-
-    await messagesRef.add({
-      name: value,
-      uid,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-
-    setValue("");
-  };
-
-  return (
-    <>
-      <input value={value} onChange={(e) => setValue(e.target.value)} />{" "}
-      <button onClick={sendMessage}>sent</button>{" "}
-    </>
   );
 }
 
@@ -115,16 +94,6 @@ function SignIn() {
         Do not violate the community guidelines or you will be banned for life!
       </p>
     </>
-  );
-}
-
-function SignOut() {
-  return (
-    auth.currentUser && (
-      <button className="sign-out" onClick={() => auth.signOut()}>
-        Sign Out
-      </button>
-    )
   );
 }
 
