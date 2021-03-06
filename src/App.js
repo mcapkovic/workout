@@ -9,7 +9,7 @@ import { FirebaseContext } from "./context";
 import Chat from "./Chat";
 import PushUpPage from "./PushUpPage";
 import History from "./History";
-import Room from "./Room";
+import Room from "./Rooms";
 import Profile from "./Profile";
 
 const config = {
@@ -55,7 +55,7 @@ function App() {
         {user ? (
           <>
             <button onClick={() => setTab(PUSH_UP_COUNT_PAGE)}>
-              Add push ups
+              Workouts
             </button>
             <button onClick={() => setTab(PUSH_UP_HISTORY)}>History</button>
             <button onClick={() => setTab(PUSH_UP_ROOM)}>Room</button>

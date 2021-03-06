@@ -6,7 +6,7 @@ import Chat from "./Chat";
 
 // /users/joe/workouts/RT44V08pwuiKIQswJuNe/history/9LefO67bEi6JNQVmGc0s
 
-function Room(props){
+function Rooms(props){
     const { auth, firestore, firebase } = React.useContext(FirebaseContext);
 
 
@@ -23,4 +23,4 @@ function Room(props){
     </div>
 }
 
-export default Room;
+export default Rooms;

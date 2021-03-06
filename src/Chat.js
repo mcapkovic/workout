@@ -54,8 +54,12 @@ function Chat() {
     });
 
     setFormValue("");
-    dummy.current.scrollIntoView({ behavior: "smooth" });
+    // dummy.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  React.useEffect(()=>{
+    dummy.current.scrollIntoView({ behavior: "smooth" });
+  },[messages])
 
   return (
     <>

@@ -22,9 +22,11 @@ function Table(props) {
   const { data } = props;
   return (
     <table>
-      {data.map((item) => (
-        <Row key={item.id} item={item} />
-      ))}
+      <tbody>
+        {data.map((item) => (
+          <Row key={item.id} item={item} />
+        ))}
+      </tbody>
     </table>
   );
 }

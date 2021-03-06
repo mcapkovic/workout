@@ -78,12 +78,9 @@ function WorkoutsManager(props) {
 
   const workoutsRef = firestore.collection(`users/${uid}/workouts`);
 
-  // const query = workoutsRef.orderBy("createdAt", "asc").limitToLast(25);
-  // const [data = []] = useCollectionData(query, { idField: "id" });
-
   async function createWorkout() {
     await workoutsRef.add({
-      category: "pushUp",
+      template: "pushUp",
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       name: "Push up",
       uid,
@@ -96,10 +93,11 @@ function WorkoutsManager(props) {
         {workouts.length > 0 &&
           workouts.map((item) => (
             <WorkoutItem setWorkout={setWorkout} item={item} />
-          ))}{" "}
+          ))}
       </div>
+      <hr/>
       <div>
-        <button onClick={createWorkout}>create workout</button>
+        <button onClick={createWorkout}>create new workout</button>
       </div>
     </div>
   );
@@ -136,10 +134,16 @@ function PushUpCounter(props) {
 
   return (
     <div>
-      selected: {workoutId}
+     {workoutId}
       <div style={{ color: "white" }}> {count}</div>
+    
+      <button onClick={() => changeCount(-1)}>-1</button>
+      <button onClick={() => changeCount(1)}>+1</button>
       <button onClick={() => changeCount(-5)}>-5</button>
       <button onClick={() => changeCount(5)}>+5</button>
+      <button onClick={() => changeCount(-10)}>-10</button>
+      <button onClick={() => changeCount(10)}>+10</button>
+      <br/>
       <button disabled={!workout || !count} onClick={saveCount2}>
         save2
       </button>
