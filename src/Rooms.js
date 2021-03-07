@@ -9,7 +9,7 @@ function RoomItem(props) {
 }
 
 function RoomsManager(props) {
-  const { setRoom , rooms} = props;
+  const { setRoom, rooms } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const { uid, photoURL } = auth.currentUser;
 
@@ -22,11 +22,10 @@ function RoomsManager(props) {
       uid,
       type: "pushUp",
       roomName: newRoomName,
-      members: [uid]
+      members: [uid],
     });
     setNewRoomName("");
   }
-
 
   return (
     <div>
@@ -46,9 +45,82 @@ function RoomsManager(props) {
   );
 }
 
-function Room(props){
-  const {setRoom, room} = props;
-  return<div>{room.id}<button onClick={()=> setRoom(null)}>close</button></div>
+function Row(props) {
+  const { createdAt, count, workoutId } = props.item;
+  let date = undefined;
+  if (createdAt && "seconds" in createdAt)
+    date = new Date(createdAt.seconds * 1000);
+  const dateString = date ? date.toLocaleDateString() : "";
+  const timeString = date ? date.toLocaleTimeString() : "";
+  return (
+    <tr>
+      <th>{workoutId}</th>
+      <th>{dateString}</th>
+      <th>{timeString}</th>
+      <th>{count}</th>
+    </tr>
+  );
+}
+function Table(props) {
+  const { data } = props;
+  return (
+    <div style={{ margin: "10px" }}>
+      <table>
+        <tbody>
+          {data.map((item) => (
+            <Row key={item.id} item={item} />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function Room(props) {
+  const { setRoom, room } = props;
+  const { workoutIds = [] } = room;
+  const { auth, firestore, firebase } = React.useContext(FirebaseContext);
+
+  const [workouts, setwWorkouts] = React.useState(null);
+
+  React.useEffect(() => {
+    async function getDate() {
+      const data = [];
+
+      const queries = workoutIds.map((id) =>
+        firestore
+          .collectionGroup("workoutsHistory")
+          .where("workoutId", "==", id)
+      );
+
+      const rawResults = await Promise.all(queries.map((q) => q.get()));
+
+      const results = rawResults.map((querySnapshot2) => {
+        const items = [];
+        querySnapshot2.forEach((doc) => items.push(doc.data()));
+        return items;
+      });
+
+      setwWorkouts(results);
+    }
+
+    getDate();
+  }, []);
+
+  return (
+    <div>
+      roomID: {room.id}
+      <hr />
+      workoutIds
+      {workoutIds.map((workout) => (
+        <div>{workout}</div>
+      ))}
+      <hr />
+      {workouts && workouts.map((workout) => <Table data={workout} />)}
+      <br />
+      <button onClick={() => setRoom(null)}>close</button>
+    </div>
+  );
 }
 
 function Rooms(props) {
@@ -61,7 +133,6 @@ function Rooms(props) {
   const query = roomsRef.where("members", "array-contains", uid);
 
   const [rooms = []] = useCollectionData(query, { idField: "id" });
-
   return (
     <div>
       {!room && <RoomsManager rooms={rooms} setRoom={setRoom} />}

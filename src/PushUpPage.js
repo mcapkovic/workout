@@ -53,7 +53,9 @@ function PushUpPage(props) {
 
   return (
     <div>
-      {!workout && <WorkoutsManager workouts={workouts} setWorkout={setWorkout} />}
+      {!workout && (
+        <WorkoutsManager workouts={workouts} setWorkout={setWorkout} />
+      )}
       {workout && <PushUpCounter workout={workout} setWorkout={setWorkout} />}
     </div>
   );
@@ -95,10 +97,44 @@ function WorkoutsManager(props) {
             <WorkoutItem setWorkout={setWorkout} item={item} />
           ))}
       </div>
-      <hr/>
+      <hr />
       <div>
         <button onClick={createWorkout}>create new workout</button>
       </div>
+    </div>
+  );
+}
+
+function RoomsManager(props) {
+  const { workoutId } = props;
+  const { auth, firestore, firebase } = React.useContext(FirebaseContext);
+  const { uid, photoURL } = auth.currentUser;
+  const [roomId, setRoomId] = React.useState("");
+
+  const myRoomsRef = firestore.collection(`rooms`);
+  const query = myRoomsRef.where("workoutIds", "array-contains", workoutId);
+  const [myRooms = []] = useCollectionData(query, { idField: "id" });
+
+  const roomRef = roomId && firestore.collection(`rooms`).doc(roomId.trim());
+
+  async function updateRoom() {
+    await roomRef.update({
+      uid,
+      workoutIds: firebase.firestore.FieldValue.arrayUnion(workoutId),
+    });
+    setRoomId("");
+  }
+
+  return (
+    <div>
+      <div>
+        {myRooms.length > 0 && myRooms.map((room) => <div>{room.id}</div>)}
+      </div>
+      Room ID
+      <input value={roomId} onChange={(e) => setRoomId(e.target.value)} />
+      <button disabled={!roomId} onClick={updateRoom}>
+        join room
+      </button>
     </div>
   );
 }
@@ -134,20 +170,24 @@ function PushUpCounter(props) {
 
   return (
     <div>
-     {workoutId}
+      {workoutId}
       <div style={{ color: "white" }}> {count}</div>
-    
+
       <button onClick={() => changeCount(-1)}>-1</button>
       <button onClick={() => changeCount(1)}>+1</button>
       <button onClick={() => changeCount(-5)}>-5</button>
       <button onClick={() => changeCount(5)}>+5</button>
       <button onClick={() => changeCount(-10)}>-10</button>
       <button onClick={() => changeCount(10)}>+10</button>
-      <br/>
+      <br />
       <button disabled={!workout || !count} onClick={saveCount2}>
         save2
       </button>
       <button onClick={() => setWorkout(null)}>cancel</button>
+
+      <hr />
+
+      {workoutId !== -1 && <RoomsManager workoutId={workoutId} />}
     </div>
   );
 }
