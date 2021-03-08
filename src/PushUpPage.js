@@ -67,9 +67,16 @@ function WorkoutItem(props) {
   const { id, name } = item;
   console.log("item", props.item);
   return (
-    <button onClick={() => setWorkout(item)}>
-      {id} - {name}
-    </button>
+    <div style={{margin: '20px', border: '1px solid white'}}>
+      <div>
+        {name} <br />
+        {id}
+      </div>
+      <div>
+        <button onClick={() => setWorkout(item)}>Add</button>
+        <button>details</button>
+      </div>
+    </div>
   );
 }
 
@@ -77,21 +84,22 @@ function WorkoutsManager(props) {
   const { setWorkout, workouts } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const { uid, photoURL } = auth.currentUser;
-
+  const [newWorkoutName, setNewWorkoutName] = React.useState("");
   const workoutsRef = firestore.collection(`users/${uid}/workouts`);
 
   async function createWorkout() {
     await workoutsRef.add({
       template: "pushUp",
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      name: "Push up",
+      name: newWorkoutName,
       uid,
     });
+    setNewWorkoutName("");
   }
 
   return (
     <div>
-      <div style={{ maxHeight: "200px", overflow: "auto" }}>
+      <div style={{ maxHeight: "600px", overflow: "auto", display:'flex', flexWrap: 'wrap' }}>
         {workouts.length > 0 &&
           workouts.map((item) => (
             <WorkoutItem setWorkout={setWorkout} item={item} />
@@ -99,7 +107,13 @@ function WorkoutsManager(props) {
       </div>
       <hr />
       <div>
-        <button onClick={createWorkout}>create new workout</button>
+        <input
+          value={newWorkoutName}
+          onChange={(e) => setNewWorkoutName(e.target.value)}
+        />
+        <button disabled={!newWorkoutName} onClick={createWorkout}>
+          create new workout
+        </button>
       </div>
     </div>
   );

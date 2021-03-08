@@ -58,7 +58,7 @@ function App() {
               Workouts
             </button>
             <button onClick={() => setTab(PUSH_UP_HISTORY)}>History</button>
-            <button onClick={() => setTab(PUSH_UP_ROOM)}>Room</button>
+            <button onClick={() => setTab(PUSH_UP_ROOM)}>Rooms</button>
             <button onClick={() => setTab(PROFILE_PAGE)}>Profile</button>{" "}
           </>
         ) : (
