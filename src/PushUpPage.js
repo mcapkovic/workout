@@ -1,87 +1,109 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
+const DEFAULT_SUB_PAGE = "default-sub-page";
+const WORKOUT_SUB_PAGE = "workout-sub-page";
+const DETAILS_SUB_PAGE = "details-sub-page";
+
 function PushUpPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
-  const [count, setCount] = React.useState(0);
-
   const [workout, setWorkout] = React.useState(null);
-
-  const pushUpRef = firestore.collection("pushUp");
   const { uid, photoURL } = auth.currentUser;
-
-  const workoutId = "1l1oXP6osY0YYGaQd7zu";
-  const pushUp2Ref = firestore.collection(
-    `users/${uid}/workouts/${workoutId}/history`
-  );
 
   const workoutsRef = firestore.collection(`users/${uid}/workouts`);
   const query = workoutsRef.orderBy("createdAt", "asc").limitToLast(25);
   const [workouts = []] = useCollectionData(query, { idField: "id" });
 
-  const pushUp3Ref = firestore.collection(`users/${uid}/workouts/`);
-
-  function changeCount(value) {
-    let newValue = count + value;
-    if (newValue < 0) newValue = 0;
-    setCount(newValue);
-  }
-
-  async function saveCount() {
-    console.log(count);
-
-    await pushUpRef.add({
-      count,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-      collection: "default",
-    });
-    setCount(0);
-  }
-
-  async function saveCount2() {
-    console.log(count);
-
-    await pushUp2Ref.add({
-      count,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-    });
-    setCount(0);
-  }
+  const [subPage, setSubPage] = React.useState(DEFAULT_SUB_PAGE);
 
   return (
     <div>
-      {!workout && (
-        <WorkoutsManager workouts={workouts} setWorkout={setWorkout} />
+      {(!workout || subPage === DEFAULT_SUB_PAGE) && (
+        <WorkoutsManager
+          workouts={workouts}
+          setWorkout={setWorkout}
+          setSubPage={setSubPage}
+        />
       )}
-      {workout && <PushUpCounter workout={workout} setWorkout={setWorkout} />}
+
+      {workout && subPage === WORKOUT_SUB_PAGE && (
+        <PushUpCounter
+          workout={workout}
+          setWorkout={setWorkout}
+          setSubPage={setSubPage}
+        />
+      )}
+
+      {workout && subPage === DETAILS_SUB_PAGE && (
+        <WrokoutDetails workout={workout} setSubPage={setSubPage} />
+      )}
     </div>
   );
 }
 export default PushUpPage;
 
+function WrokoutDetails(props) {
+  const { workout = {}, setSubPage } = props;
+  const { auth, firestore, firebase } = React.useContext(FirebaseContext);
+  const { uid, photoURL } = auth.currentUser;
+  // const workoutsRef = firestore.collection(`users/${uid}/workouts/${workout.id}`);
+
+  async function deleteWorkout() {
+    await firestore.collection(`users/${uid}/workouts`).doc(workout.id).delete({uid});
+    setSubPage(DEFAULT_SUB_PAGE)
+  }
+  console.log(workout);
+
+
+  return (
+    <div>
+      <div>name: {workout.name}</div>
+      <div>workout id: {workout.id}</div>
+      <div>category: {workout.template}</div>
+
+      <br />
+      <button onClick={deleteWorkout }>remove workout</button>
+
+      <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</button>
+    </div>
+  );
+}
+
 function WorkoutItem(props) {
-  const { item = {}, setWorkout } = props;
+  const { item = {}, setWorkout, setSubPage } = props;
   const { id, name } = item;
   console.log("item", props.item);
   return (
-    <div style={{margin: '20px', border: '1px solid white'}}>
+    <div style={{ margin: "20px", border: "1px solid white" }}>
       <div>
         {name} <br />
         {id}
       </div>
       <div>
-        <button onClick={() => setWorkout(item)}>Add</button>
-        <button>details</button>
+        <button
+          onClick={() => {
+            setWorkout(item);
+            setSubPage(WORKOUT_SUB_PAGE);
+          }}
+        >
+          Add
+        </button>
+        <button
+          onClick={() => {
+            setWorkout(item);
+            setSubPage(DETAILS_SUB_PAGE);
+          }}
+        >
+          details
+        </button>
       </div>
     </div>
   );
 }
 
 function WorkoutsManager(props) {
-  const { setWorkout, workouts } = props;
+  const { setWorkout, workouts, setSubPage } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const { uid, photoURL } = auth.currentUser;
   const [newWorkoutName, setNewWorkoutName] = React.useState("");
@@ -99,10 +121,21 @@ function WorkoutsManager(props) {
 
   return (
     <div>
-      <div style={{ maxHeight: "600px", overflow: "auto", display:'flex', flexWrap: 'wrap' }}>
+      <div
+        style={{
+          maxHeight: "600px",
+          overflow: "auto",
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
         {workouts.length > 0 &&
           workouts.map((item) => (
-            <WorkoutItem setWorkout={setWorkout} item={item} />
+            <WorkoutItem
+              setWorkout={setWorkout}
+              item={item}
+              setSubPage={setSubPage}
+            />
           ))}
       </div>
       <hr />
@@ -154,7 +187,7 @@ function RoomsManager(props) {
 }
 
 function PushUpCounter(props) {
-  const { workout, setWorkout } = props;
+  const { workout, setWorkout, setSubPage } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [count, setCount] = React.useState(0);
 
@@ -197,7 +230,7 @@ function PushUpCounter(props) {
       <button disabled={!workout || !count} onClick={saveCount2}>
         save2
       </button>
-      <button onClick={() => setWorkout(null)}>cancel</button>
+      <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</button>
 
       <hr />
 

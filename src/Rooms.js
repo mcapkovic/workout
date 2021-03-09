@@ -78,34 +78,51 @@ function Table(props) {
 
 function Room(props) {
   const { setRoom, room } = props;
-  const { workoutIds = [] } = room;
+  const { workoutIds = [''], members = [''] } = room;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
 
-  const [workouts, setwWorkouts] = React.useState(null);
+  // const [workouts, setwWorkouts] = React.useState(null);
 
-  React.useEffect(() => {
-    async function getDate() {
-      const data = [];
+  // React.useEffect(() => {
+  //   async function getDate() {
+  //     const data = [];
 
-      const queries = workoutIds.map((id) =>
-        firestore
-          .collectionGroup("workoutsHistory")
-          .where("workoutId", "==", id)
-      );
+  //     const queries = workoutIds.map((id) =>
+  //       firestore
+  //         .collectionGroup("workoutsHistory")
+  //         .where("workoutId", "==", id)
+  //     );
 
-      const rawResults = await Promise.all(queries.map((q) => q.get()));
+  //     const rawResults = await Promise.all(queries.map((q) => q.get()));
 
-      const results = rawResults.map((querySnapshot2) => {
-        const items = [];
-        querySnapshot2.forEach((doc) => items.push(doc.data()));
-        return items;
-      });
+  //     const results = rawResults.map((querySnapshot2) => {
+  //       const items = [];
+  //       querySnapshot2.forEach((doc) => items.push(doc.data()));
+  //       return items;
+  //     });
 
-      setwWorkouts(results);
-    }
+  //     setwWorkouts(results);
+  //   }
 
-    getDate();
-  }, []);
+  //   getDate();
+  // }, []);
+
+  const workoutsRef = firestore.collectionGroup(`workoutsHistory`);
+  const query = workoutsRef.where("workoutId", "in", workoutIds);
+  const [workouts = []] = useCollectionData(query, { idField: "id" });
+
+  // const membersRef = firestore.collection(`users`);
+  // const query2 = membersRef.where("__name__", "in", members);
+  // const [membersData = []] = useCollectionData(query2, { idField: "id" });
+
+  const membersRef = firestore.collectionGroup(`userPublicData`);
+  const query2 = membersRef.where("id", "in", members);
+  const [membersData = []] = useCollectionData(query2, { idField: "id" });
+
+  console.log("workouts", workouts);
+  console.log("membersData", membersData);
+
+  console.log("room", room);
 
   return (
     <div>
@@ -116,7 +133,8 @@ function Room(props) {
         <div>{workout}</div>
       ))}
       <hr />
-      {workouts && workouts.map((workout) => <Table data={workout} />)}
+      {/* {workouts && workouts.map((workout) => <Table data={workout} />)} */}
+      <Table data={workouts} />
       <br />
       <button onClick={() => setRoom(null)}>close</button>
     </div>
@@ -129,10 +147,9 @@ function Rooms(props) {
   const { uid, photoURL } = auth.currentUser;
 
   const roomsRef = firestore.collection(`rooms`);
-
   const query = roomsRef.where("members", "array-contains", uid);
-
   const [rooms = []] = useCollectionData(query, { idField: "id" });
+
   return (
     <div>
       {!room && <RoomsManager rooms={rooms} setRoom={setRoom} />}
