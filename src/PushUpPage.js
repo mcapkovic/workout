@@ -43,6 +43,35 @@ function PushUpPage(props) {
 }
 export default PushUpPage;
 
+function Row(props) {
+  const { createdAt, count, workoutId } = props.item;
+  let date = undefined;
+  if (createdAt && "seconds" in createdAt)
+    date = new Date(createdAt.seconds * 1000);
+  const dateString = date ? date.toLocaleDateString() : "";
+  const timeString = date ? date.toLocaleTimeString() : "";
+  return (
+    <tr>
+      <th>{workoutId}</th>
+      <th>{dateString}</th>
+      <th>{timeString}</th>
+      <th>{count}</th>
+    </tr>
+  );
+}
+function Table(props) {
+  const { data } = props;
+  return (
+    <table>
+      <tbody>
+        {data.map((item) => (
+          <Row key={item.id} item={item} />
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 function WrokoutDetails(props) {
   const { workout = {}, setSubPage } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -55,7 +84,11 @@ function WrokoutDetails(props) {
   }
   console.log(workout);
 
-
+  // const historyRef = firestore.collection("pushUp");
+  const historyRef = firestore.collection(`users/${uid}/workoutsHistory`);
+  const query = historyRef.orderBy("createdAt", "asc").limitToLast(25);
+  const [data = []] = useCollectionData(query, { idField: "id" });
+console.log(data)
   return (
     <div>
       <div>name: {workout.name}</div>
@@ -69,6 +102,10 @@ function WrokoutDetails(props) {
 
 
       <hr />
+
+      {data.length > 1 && <Table data={data}/>}
+
+      <hr/>
 
       {workout.id !== -1 && <RoomsManager workoutId={workout.id} />}
 
