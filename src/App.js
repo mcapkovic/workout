@@ -11,6 +11,9 @@ import PushUpPage from "./PushUpPage";
 import History from "./History";
 import Room from "./Rooms";
 import Profile from "./Profile";
+import NewUserPage from "./NewUserPage";
+import LandingPage from "./LandingPage";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -47,52 +50,44 @@ const PROFILE_PAGE = "profile-page";
 function App() {
   const [user] = useAuthState(auth);
   const [firebaseData, setFirebaseDate] = React.useState(getFirebase);
-  const [tab, setTab] = React.useState("");
 
   return (
     <div className="App">
-      <header>
-        {user ? (
-          <>
-            <button onClick={() => setTab(PUSH_UP_COUNT_PAGE)}>
-              Workouts
-            </button>
-            <button onClick={() => setTab(PUSH_UP_HISTORY)}>History</button>
-            <button onClick={() => setTab(PUSH_UP_ROOM)}>Rooms</button>
-            <button onClick={() => setTab(PROFILE_PAGE)}>Profile</button>{" "}
-          </>
-        ) : (
-          <SignIn />
-        )}
-      </header>
       <FirebaseContext.Provider value={firebaseData}>
-        {/* <section>
-          {user && <Chat />}
-          </section> */}
-
-        {tab === PUSH_UP_COUNT_PAGE && <PushUpPage />}
-        {tab === PUSH_UP_HISTORY && <History />}
-        {tab === PUSH_UP_ROOM && <Room />}
-        {tab === PROFILE_PAGE && <Profile />}
+        {user ? <LogedUser /> : <LandingPage />}
       </FirebaseContext.Provider>
     </div>
   );
 }
 
-function SignIn() {
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
-  };
+function LogedUser(props) {
+  const { uid, photoURL } = auth.currentUser;
+  const [tab, setTab] = React.useState("");
+
+  const userPubicDataRef = firestore.collection(`users/${uid}/userPublicData`);
+  const query2 = userPubicDataRef.where("uid", "==", uid);
+  const [userPubicData = []] = useCollectionData(query2, { idField: "id" });
+  console.log("userPubicData", userPubicData);
 
   return (
     <>
-      <button className="sign-in" onClick={signInWithGoogle}>
-        Sign in with Google
-      </button>
-      <p>
-        Do not violate the community guidelines or you will be banned for life!
-      </p>
+      {userPubicData.length > 0 ? (
+        <>
+          <header>
+            <button onClick={() => setTab(PUSH_UP_COUNT_PAGE)}>Workouts</button>
+            <button onClick={() => setTab(PUSH_UP_HISTORY)}>History</button>
+            <button onClick={() => setTab(PUSH_UP_ROOM)}>Rooms</button>
+            <button onClick={() => setTab(PROFILE_PAGE)}>Profile</button>{" "}
+          </header>
+
+          {tab === PUSH_UP_COUNT_PAGE && <PushUpPage />}
+          {tab === PUSH_UP_HISTORY && <History />}
+          {tab === PUSH_UP_ROOM && <Room />}
+          {tab === PROFILE_PAGE && <Profile />}
+        </>
+      ) : (
+        <NewUserPage />
+      )}
     </>
   );
 }

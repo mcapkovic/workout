@@ -116,7 +116,7 @@ function Room(props) {
   // const [membersData = []] = useCollectionData(query2, { idField: "id" });
 
   const membersRef = firestore.collectionGroup(`userPublicData`);
-  const query2 = membersRef.where("id", "in", members);
+  const query2 = membersRef.where("uid", "in", members);
   const [membersData = []] = useCollectionData(query2, { idField: "id" });
 
   console.log("workouts", workouts);
@@ -128,9 +128,14 @@ function Room(props) {
     <div>
       roomID: {room.id}
       <hr />
-      workoutIds
+      workoutIds:
       {workoutIds.map((workout) => (
         <div>{workout}</div>
+      ))}
+        <hr />
+      users:
+      {membersData.map((member ={}) => (
+        <div>{member.name}</div>
       ))}
       <hr />
       {/* {workouts && workouts.map((workout) => <Table data={workout} />)} */}

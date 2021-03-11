@@ -66,6 +66,12 @@ function WrokoutDetails(props) {
       <button onClick={deleteWorkout }>remove workout</button>
 
       <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</button>
+
+
+      <hr />
+
+      {workout.id !== -1 && <RoomsManager workoutId={workout.id} />}
+
     </div>
   );
 }
@@ -168,6 +174,7 @@ function RoomsManager(props) {
     await roomRef.update({
       uid,
       workoutIds: firebase.firestore.FieldValue.arrayUnion(workoutId),
+      members: firebase.firestore.FieldValue.arrayUnion(uid),
     });
     setRoomId("");
   }
@@ -232,9 +239,6 @@ function PushUpCounter(props) {
       </button>
       <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</button>
 
-      <hr />
-
-      {workoutId !== -1 && <RoomsManager workoutId={workoutId} />}
     </div>
   );
 }
