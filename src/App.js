@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./App.css";
+import "./App.scss";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
@@ -42,14 +42,14 @@ function getFirebase() {
   };
 }
 
-const PUSH_UP_COUNT_PAGE = "push-up-count";
+const WORKOUT = "workout";
 const PUSH_UP_HISTORY = "push-up-history";
 const PUSH_UP_ROOM = "push-up-room";
 const PROFILE_PAGE = "profile-page";
 
 function App() {
   const [user] = useAuthState(auth);
-  const [firebaseData, setFirebaseDate] = React.useState(getFirebase);
+  const [firebaseData, setFirebaseData] = React.useState(getFirebase);
 
   return (
     <div className="App">
@@ -61,29 +61,60 @@ function App() {
 }
 
 function LogedUser(props) {
-  const { uid, photoURL } = auth.currentUser;
-  const [tab, setTab] = React.useState("");
+  const { uid } = auth.currentUser;
+  const [tab, setTab] = React.useState(WORKOUT);
 
   const userPubicDataRef = firestore.collection(`users/${uid}/userPublicData`);
   const query2 = userPubicDataRef.where("uid", "==", uid);
   const [userPubicData = []] = useCollectionData(query2, { idField: "id" });
-  console.log("userPubicData", userPubicData);
 
   return (
     <>
       {userPubicData.length > 0 ? (
         <>
-          <header>
-            <button onClick={() => setTab(PUSH_UP_COUNT_PAGE)}>Workouts</button>
-            <button onClick={() => setTab(PUSH_UP_HISTORY)}>History</button>
-            <button onClick={() => setTab(PUSH_UP_ROOM)}>Rooms</button>
-            <button onClick={() => setTab(PROFILE_PAGE)}>Profile</button>{" "}
+          <header className="header">
+            <button
+               className={`header__button ${
+                tab === WORKOUT ? "header__button--active" : ""
+              } `}
+              onClick={() => setTab(WORKOUT)}
+            >
+              Workouts
+            </button>
+            <button
+               className={`header__button ${
+                tab === PUSH_UP_HISTORY ? "header__button--active" : ""
+              } `}
+              onClick={() => setTab(PUSH_UP_HISTORY)}
+            >
+              History
+            </button>
+            <button
+              className={`header__button ${
+                tab === PUSH_UP_ROOM ? "header__button--active" : ""
+              } `}
+              onClick={() => setTab(PUSH_UP_ROOM)}
+            >
+              Rooms
+            </button>
+            <button
+                className={`header__button ${
+                  tab === PROFILE_PAGE ? "header__button--active" : ""
+                } `}
+              onClick={() => setTab(PROFILE_PAGE)}
+            >
+              Profile
+            </button>{" "}
           </header>
 
-          {tab === PUSH_UP_COUNT_PAGE && <PushUpPage />}
+          <div className='main-content'>
+          {tab === WORKOUT && <PushUpPage />}
           {tab === PUSH_UP_HISTORY && <History />}
           {tab === PUSH_UP_ROOM && <Room />}
           {tab === PROFILE_PAGE && <Profile />}
+          </div>
+
+        
         </>
       ) : (
         <NewUserPage />

@@ -74,54 +74,59 @@ function Table(props) {
 
 function WrokoutDetails(props) {
   const { workout = {}, setSubPage } = props;
-  const { auth, firestore, firebase } = React.useContext(FirebaseContext);
-  const { uid, photoURL } = auth.currentUser;
+  const { auth, firestore } = React.useContext(FirebaseContext);
+  const { uid } = auth.currentUser;
   // const workoutsRef = firestore.collection(`users/${uid}/workouts/${workout.id}`);
 
   async function deleteWorkout() {
-    await firestore.collection(`users/${uid}/workouts`).doc(workout.id).delete({uid});
-    setSubPage(DEFAULT_SUB_PAGE)
+    await firestore
+      .collection(`users/${uid}/workouts`)
+      .doc(workout.id)
+      .delete({ uid });
+    setSubPage(DEFAULT_SUB_PAGE);
   }
   console.log(workout);
 
-  // const historyRef = firestore.collection("pushUp");
   const historyRef = firestore.collection(`users/${uid}/workoutsHistory`);
   const query = historyRef.orderBy("createdAt", "asc").limitToLast(25);
+
   const [data = []] = useCollectionData(query, { idField: "id" });
-console.log(data)
+  console.log(data);
   return (
     <div>
-      <div>name: {workout.name}</div>
+      <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>go back</button>
+
+      <h1>Info</h1>
+      <div>workout name: {workout.name}</div>
       <div>workout id: {workout.id}</div>
-      <div>category: {workout.template}</div>
+      {/* <div>category: {workout.template}</div> */}
 
       <br />
-      <button onClick={deleteWorkout }>remove workout</button>
-
-      <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</button>
-
+      <button onClick={deleteWorkout}>delete workout</button>
 
       <hr />
 
-      {data.length > 1 && <Table data={data}/>}
+      <h1>History</h1>
+      {data.length > 1 && <Table data={data} />}
 
-      <hr/>
+      <hr />
+
+      <h1>Rooms</h1>
 
       {workout.id !== -1 && <RoomsManager workoutId={workout.id} />}
-
     </div>
   );
 }
 
 function WorkoutItem(props) {
-  const { item = {}, setWorkout, setSubPage } = props;
+  const { item = {}, setWorkout, setSubPage, className } = props;
   const { id, name } = item;
-  console.log("item", props.item);
+
   return (
-    <div style={{ margin: "20px", border: "1px solid white" }}>
+    <div className="workout-item">
       <div>
-        {name} <br />
-        {id}
+        name: {name} <br />
+        {/* id:{id} */}
       </div>
       <div>
         <button
@@ -130,7 +135,7 @@ function WorkoutItem(props) {
             setSubPage(WORKOUT_SUB_PAGE);
           }}
         >
-          Add
+          Start
         </button>
         <button
           onClick={() => {
@@ -138,7 +143,7 @@ function WorkoutItem(props) {
             setSubPage(DETAILS_SUB_PAGE);
           }}
         >
-          details
+          More info
         </button>
       </div>
     </div>
@@ -163,25 +168,7 @@ function WorkoutsManager(props) {
   }
 
   return (
-    <div>
-      <div
-        style={{
-          maxHeight: "600px",
-          overflow: "auto",
-          display: "flex",
-          flexWrap: "wrap",
-        }}
-      >
-        {workouts.length > 0 &&
-          workouts.map((item) => (
-            <WorkoutItem
-              setWorkout={setWorkout}
-              item={item}
-              setSubPage={setSubPage}
-            />
-          ))}
-      </div>
-      <hr />
+    <div className="workouts">
       <div>
         <input
           value={newWorkoutName}
@@ -190,6 +177,18 @@ function WorkoutsManager(props) {
         <button disabled={!newWorkoutName} onClick={createWorkout}>
           create new workout
         </button>
+      </div>
+      {/* <hr /> */}
+
+      <div className="workouts__selection">
+        {workouts.length > 0 &&
+          workouts.map((item) => (
+            <WorkoutItem
+              setWorkout={setWorkout}
+              item={item}
+              setSubPage={setSubPage}
+            />
+          ))}
       </div>
     </div>
   );
@@ -275,7 +274,6 @@ function PushUpCounter(props) {
         save2
       </button>
       <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</button>
-
     </div>
   );
 }

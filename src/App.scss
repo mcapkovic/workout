@@ -1,0 +1,52 @@
+body {
+  /* background-color: #282c34;
+    color: white; */
+}
+
+.App {
+  /* text-align: center; */
+  max-width: 728px;
+  margin: 0 auto;
+}
+
+.header {
+  /* background-color: #181717; */
+  height: 10vh;
+  min-height: 50px;
+  /* color: white; */
+  width: 100%;
+  max-width: 728px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 99;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .header__button {
+    height: 100%;
+    flex-grow: 1;
+    &--active {
+      background-color: rgb(192, 192, 192);
+    }
+  }
+}
+
+.main-content{
+  padding: 10px;
+}
+
+.workouts{
+  &__selection{
+    // maxHeight: "600px",
+    // overflow: "auto",
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.workout-item{
+  border: 1px solid black;
+  margin:0.5rem 0.5rem 0.5rem 0;
+  padding: 0.5rem;
+}
