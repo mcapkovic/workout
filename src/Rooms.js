@@ -78,36 +78,36 @@ function Table(props) {
 
 function Room(props) {
   const { setRoom, room } = props;
-  const { workoutIds = [''], members = [''] } = room;
+  const { workoutIds = [""], members = [""] } = room;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
 
-  // const [workouts, setwWorkouts] = React.useState(null);
+  const [workouts2, setwWorkouts] = React.useState(null);
 
-  // React.useEffect(() => {
-  //   async function getDate() {
-  //     const data = [];
+  React.useEffect(() => {
+    async function loadData() {
+      const queries = workoutIds.map((id) =>
+        firestore
+          .collection(`workoutsHistory/${id}/workoutEntries`)
+          .orderBy("createdAt", "asc")
+          .limitToLast(25)
+      );
 
-  //     const queries = workoutIds.map((id) =>
-  //       firestore
-  //         .collectionGroup("workoutsHistory")
-  //         .where("workoutId", "==", id)
-  //     );
+      const rawResults = await Promise.all(queries.map((q) => q.get()));
 
-  //     const rawResults = await Promise.all(queries.map((q) => q.get()));
+      const results = rawResults.map((querySnapshot2) => {
+        const items = [];
+        querySnapshot2.forEach((doc) => items.push(doc.data()));
+        return items;
+      });
 
-  //     const results = rawResults.map((querySnapshot2) => {
-  //       const items = [];
-  //       querySnapshot2.forEach((doc) => items.push(doc.data()));
-  //       return items;
-  //     });
+      setwWorkouts(results);
+    }
 
-  //     setwWorkouts(results);
-  //   }
+    loadData();
+  }, []);
+  console.log("workouts2", workouts2);
 
-  //   getDate();
-  // }, []);
-
-  const workoutsRef = firestore.collectionGroup(`workoutsHistory`);
+  const workoutsRef = firestore.collectionGroup(`workoutEntries`);
   const query = workoutsRef.where("workoutId", "in", workoutIds);
   const [workouts = []] = useCollectionData(query, { idField: "id" });
 
@@ -132,14 +132,19 @@ function Room(props) {
       {workoutIds.map((workout) => (
         <div>{workout}</div>
       ))}
-        <hr />
+      <hr />
       users:
-      {membersData.map((member ={}) => (
+      {membersData.map((member = {}) => (
         <div>{member.name}</div>
       ))}
       <hr />
       {/* {workouts && workouts.map((workout) => <Table data={workout} />)} */}
       <Table data={workouts} />
+      <hr />
+      <div>workouts history</div>
+      {workouts2 &&
+        workouts2.length > 0 &&
+        workouts2.map((workout) => <Table data={workout} />)}
       <br />
       <button onClick={() => setRoom(null)}>close</button>
     </div>

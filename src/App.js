@@ -81,14 +81,14 @@ function LogedUser(props) {
             >
               Workouts
             </button>
-            <button
+            {/* <button
                className={`header__button ${
                 tab === PUSH_UP_HISTORY ? "header__button--active" : ""
               } `}
               onClick={() => setTab(PUSH_UP_HISTORY)}
             >
               History
-            </button>
+            </button> */}
             <button
               className={`header__button ${
                 tab === PUSH_UP_ROOM ? "header__button--active" : ""

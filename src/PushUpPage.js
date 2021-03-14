@@ -52,7 +52,7 @@ function Row(props) {
   const timeString = date ? date.toLocaleTimeString() : "";
   return (
     <tr>
-      <th>{workoutId}</th>
+      {/* <th>{workoutId}</th> */}
       <th>{dateString}</th>
       <th>{timeString}</th>
       <th>{count}</th>
@@ -87,7 +87,9 @@ function WrokoutDetails(props) {
   }
   console.log(workout);
 
-  const historyRef = firestore.collection(`users/${uid}/workoutsHistory`);
+  const historyRef = firestore.collection(`workoutsHistory/${workout.id}/workoutEntries`);
+
+  // const historyRef = firestore.collection(`users/${uid}/workoutsHistory`);
   const query = historyRef.orderBy("createdAt", "asc").limitToLast(25);
 
   const [data = []] = useCollectionData(query, { idField: "id" });
@@ -107,12 +109,11 @@ function WrokoutDetails(props) {
       <hr />
 
       <h1>History</h1>
-      {data.length > 1 && <Table data={data} />}
+      {data.length > 0 && <Table data={data} />}
 
       <hr />
 
       <h1>Rooms</h1>
-
       {workout.id !== -1 && <RoomsManager workoutId={workout.id} />}
     </div>
   );
@@ -217,14 +218,16 @@ function RoomsManager(props) {
 
   return (
     <div>
-      <div>
-        {myRooms.length > 0 && myRooms.map((room) => <div>{room.id}</div>)}
-      </div>
-      Room ID
+     
+      <div>paste room id to join a room</div>
       <input value={roomId} onChange={(e) => setRoomId(e.target.value)} />
       <button disabled={!roomId} onClick={updateRoom}>
         join room
       </button>
+      <h2>Joined rooms:</h2>
+      <div>
+        {myRooms.length > 0 && myRooms.map((room) => <div>{room.id}</div>)}
+      </div>
     </div>
   );
 }
@@ -237,7 +240,7 @@ function PushUpCounter(props) {
   const { uid, photoURL } = auth.currentUser;
 
   const workoutId = workout ? workout.id : -1;
-  const pushUp2Ref = firestore.collection(`users/${uid}/workoutsHistory`);
+  const pushUp2Ref = firestore.collection(`workoutsHistory/${workoutId}/workoutEntries`);
 
   function changeCount(value) {
     let newValue = count + value;
