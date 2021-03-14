@@ -76,6 +76,7 @@ function WrokoutDetails(props) {
   const { workout = {}, setSubPage } = props;
   const { auth, firestore } = React.useContext(FirebaseContext);
   const { uid } = auth.currentUser;
+  const[isDeletable, setIsDeletable] = React.useState(false);
   // const workoutsRef = firestore.collection(`users/${uid}/workouts/${workout.id}`);
 
   async function deleteWorkout() {
@@ -104,7 +105,8 @@ function WrokoutDetails(props) {
       {/* <div>category: {workout.template}</div> */}
 
       <br />
-      <button onClick={deleteWorkout}>delete workout</button>
+      <button disabled={!isDeletable} onClick={deleteWorkout}>delete workout</button>
+      {!isDeletable && <div> delete is disabled because this workout is part of a room</div>}
 
       <hr />
 
@@ -114,7 +116,7 @@ function WrokoutDetails(props) {
       <hr />
 
       <h1>Rooms</h1>
-      {workout.id !== -1 && <RoomsManager workoutId={workout.id} />}
+      {workout.id !== -1 && <RoomsManager setIsDeletable={setIsDeletable} workoutId={workout.id} />}
     </div>
   );
 }
@@ -196,7 +198,7 @@ function WorkoutsManager(props) {
 }
 
 function RoomsManager(props) {
-  const { workoutId } = props;
+  const { workoutId, setIsDeletable } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const { uid, photoURL } = auth.currentUser;
   const [roomId, setRoomId] = React.useState("");
@@ -215,6 +217,11 @@ function RoomsManager(props) {
     });
     setRoomId("");
   }
+
+  React.useEffect(()=> {
+    if (myRooms.length === 0) setIsDeletable(true)
+    if (myRooms.length > 0) setIsDeletable(false)
+  },[myRooms])
 
   return (
     <div>
