@@ -1,0 +1,11 @@
+.textbox{
+    border-radius: 9px;
+    background: #eef0f4;
+    box-shadow: inset 4px 4px 8px #cacccf, inset -4px -4px 8px #ffffff;
+    // box-shadow: inset 2px 2px 3px #cacccf, inset -2px -2px 3px #ffffff;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 0 12px;
+    color: $text-color;
+}

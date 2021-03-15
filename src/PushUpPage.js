@@ -1,7 +1,7 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import {Button} from './common';
+import { Button, TextBox } from "./common";
 
 const DEFAULT_SUB_PAGE = "default-sub-page";
 const WORKOUT_SUB_PAGE = "workout-sub-page";
@@ -20,23 +20,6 @@ function PushUpPage(props) {
 
   return (
     <div>
-      
-      <Button>asaf</Button>
-      <br />
-      <br />
-      <Button>fadfada dfa</Button>
-      <br />
-      <br />
-      <Button>fae faefaeaefaefa </Button>
-      <br />
-      <br />
-      <Button>aef awefaw fafawf afawfawfw</Button>
-
-      <br />
-      <br />
-
-      <br />
-
       {(!workout || subPage === DEFAULT_SUB_PAGE) && (
         <WorkoutsManager
           workouts={workouts}
@@ -44,7 +27,6 @@ function PushUpPage(props) {
           setSubPage={setSubPage}
         />
       )}
-
       {workout && subPage === WORKOUT_SUB_PAGE && (
         <PushUpCounter
           workout={workout}
@@ -52,7 +34,6 @@ function PushUpPage(props) {
           setSubPage={setSubPage}
         />
       )}
-
       {workout && subPage === DETAILS_SUB_PAGE && (
         <WrokoutDetails workout={workout} setSubPage={setSubPage} />
       )}
@@ -148,32 +129,32 @@ function WrokoutDetails(props) {
 }
 
 function WorkoutItem(props) {
-  const { item = {}, setWorkout, setSubPage, className } = props;
+  const { item = {}, setWorkout, setSubPage, className, index } = props;
   const { id, name } = item;
 
   return (
     <div className="workout-item">
-      <div>
-        name: {name} <br />
-        {/* id:{id} */}
+      <div className="workout-item__name">
+        <span className="workout-item__name__index">{index + 1}.</span> {name}
       </div>
       <div>
-        <button
+        <Button
           onClick={() => {
             setWorkout(item);
             setSubPage(WORKOUT_SUB_PAGE);
           }}
         >
           Start
-        </button>
-        <button
+        </Button>
+
+        <Button
           onClick={() => {
             setWorkout(item);
             setSubPage(DETAILS_SUB_PAGE);
           }}
         >
           More info
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -198,26 +179,30 @@ function WorkoutsManager(props) {
 
   return (
     <div className="workouts">
-      <div>
-        <input
-          value={newWorkoutName}
-          onChange={(e) => setNewWorkoutName(e.target.value)}
-        />
-        <button disabled={!newWorkoutName} onClick={createWorkout}>
-          create new workout
-        </button>
-      </div>
       {/* <hr /> */}
 
       <div className="workouts__selection">
+        <h2>List of workouts</h2>
         {workouts.length > 0 &&
-          workouts.map((item) => (
+          workouts.map((item, index) => (
             <WorkoutItem
               setWorkout={setWorkout}
               item={item}
               setSubPage={setSubPage}
+              index={index}
             />
           ))}
+      </div>
+
+      <hr />
+      <div>
+        <TextBox
+          value={newWorkoutName}
+          onChange={(e) => setNewWorkoutName(e.target.value)}
+        />
+        <Button disabled={!newWorkoutName} onClick={createWorkout}>
+          Create new workout
+        </Button>
       </div>
     </div>
   );
