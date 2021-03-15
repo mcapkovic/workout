@@ -103,7 +103,7 @@ function Room(props) {
       setwWorkouts(results);
     }
 
-    loadData();
+    loadData().catch((e) => null);
   }, []);
   console.log("workouts2", workouts2);
 

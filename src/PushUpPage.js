@@ -1,6 +1,7 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import {Button} from './common';
 
 const DEFAULT_SUB_PAGE = "default-sub-page";
 const WORKOUT_SUB_PAGE = "workout-sub-page";
@@ -19,6 +20,23 @@ function PushUpPage(props) {
 
   return (
     <div>
+      
+      <Button>asaf</Button>
+      <br />
+      <br />
+      <Button>fadfada dfa</Button>
+      <br />
+      <br />
+      <Button>fae faefaeaefaefa </Button>
+      <br />
+      <br />
+      <Button>aef awefaw fafawf afawfawfw</Button>
+
+      <br />
+      <br />
+
+      <br />
+
       {(!workout || subPage === DEFAULT_SUB_PAGE) && (
         <WorkoutsManager
           workouts={workouts}
@@ -76,7 +94,7 @@ function WrokoutDetails(props) {
   const { workout = {}, setSubPage } = props;
   const { auth, firestore } = React.useContext(FirebaseContext);
   const { uid } = auth.currentUser;
-  const[isDeletable, setIsDeletable] = React.useState(false);
+  const [isDeletable, setIsDeletable] = React.useState(false);
   // const workoutsRef = firestore.collection(`users/${uid}/workouts/${workout.id}`);
 
   async function deleteWorkout() {
@@ -88,7 +106,9 @@ function WrokoutDetails(props) {
   }
   console.log(workout);
 
-  const historyRef = firestore.collection(`workoutsHistory/${workout.id}/workoutEntries`);
+  const historyRef = firestore.collection(
+    `workoutsHistory/${workout.id}/workoutEntries`
+  );
 
   // const historyRef = firestore.collection(`users/${uid}/workoutsHistory`);
   const query = historyRef.orderBy("createdAt", "asc").limitToLast(25);
@@ -105,8 +125,12 @@ function WrokoutDetails(props) {
       {/* <div>category: {workout.template}</div> */}
 
       <br />
-      <button disabled={!isDeletable} onClick={deleteWorkout}>delete workout</button>
-      {!isDeletable && <div> delete is disabled because this workout is part of a room</div>}
+      <button disabled={!isDeletable} onClick={deleteWorkout}>
+        delete workout
+      </button>
+      {!isDeletable && (
+        <div> delete is disabled because this workout is part of a room</div>
+      )}
 
       <hr />
 
@@ -116,7 +140,9 @@ function WrokoutDetails(props) {
       <hr />
 
       <h1>Rooms</h1>
-      {workout.id !== -1 && <RoomsManager setIsDeletable={setIsDeletable} workoutId={workout.id} />}
+      {workout.id !== -1 && (
+        <RoomsManager setIsDeletable={setIsDeletable} workoutId={workout.id} />
+      )}
     </div>
   );
 }
@@ -218,14 +244,13 @@ function RoomsManager(props) {
     setRoomId("");
   }
 
-  React.useEffect(()=> {
-    if (myRooms.length === 0) setIsDeletable(true)
-    if (myRooms.length > 0) setIsDeletable(false)
-  },[myRooms])
+  React.useEffect(() => {
+    if (myRooms.length === 0) setIsDeletable(true);
+    if (myRooms.length > 0) setIsDeletable(false);
+  }, [myRooms]);
 
   return (
     <div>
-     
       <div>paste room id to join a room</div>
       <input value={roomId} onChange={(e) => setRoomId(e.target.value)} />
       <button disabled={!roomId} onClick={updateRoom}>
@@ -247,7 +272,9 @@ function PushUpCounter(props) {
   const { uid, photoURL } = auth.currentUser;
 
   const workoutId = workout ? workout.id : -1;
-  const pushUp2Ref = firestore.collection(`workoutsHistory/${workoutId}/workoutEntries`);
+  const pushUp2Ref = firestore.collection(
+    `workoutsHistory/${workoutId}/workoutEntries`
+  );
 
   function changeCount(value) {
     let newValue = count + value;
@@ -271,17 +298,24 @@ function PushUpCounter(props) {
   return (
     <div>
       {workoutId}
-      <div style={{ color: "white" }}> {count}</div>
+      <div> {count}</div>
+      <div>
+        <button onClick={() => changeCount(-1)}>-1</button>
+        <button onClick={() => changeCount(1)}>+1</button>
+      </div>
 
-      <button onClick={() => changeCount(-1)}>-1</button>
-      <button onClick={() => changeCount(1)}>+1</button>
-      <button onClick={() => changeCount(-5)}>-5</button>
-      <button onClick={() => changeCount(5)}>+5</button>
-      <button onClick={() => changeCount(-10)}>-10</button>
-      <button onClick={() => changeCount(10)}>+10</button>
+      <div>
+        <button onClick={() => changeCount(-5)}>-5</button>
+        <button onClick={() => changeCount(5)}>+5</button>
+      </div>
+      <div>
+        <button onClick={() => changeCount(-10)}>-10</button>
+        <button onClick={() => changeCount(10)}>+10</button>
+      </div>
+
       <br />
       <button disabled={!workout || !count} onClick={saveCount2}>
-        save2
+        save
       </button>
       <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</button>
     </div>

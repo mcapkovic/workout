@@ -1,0 +1,30 @@
+.button {
+  border-radius: 9px;
+  background: #eef0f4;
+  box-shadow: 4px 4px 8px #cacccf, -4px -4px 8px #ffffff;
+  height: 50px;
+  //   width: 50px;
+  border: none;
+  outline: none;
+color: #686a77;
+
+  &:hover {
+    border-radius: 9px;
+    background: linear-gradient(145deg, #d6d8dc60, #ffffff93);
+    box-shadow: 4px 4px 8px #cacccfa6, -4px -4px 8px #ffffff;
+  }
+
+  &:focus {
+    // border-radius: 9px;
+    // background: linear-gradient(145deg, #ffffff, #d6d8dc);
+    // box-shadow: 5px 5px 9px #d1d3d7, -5px -5px 9px #ffffff;
+    // box-shadow: 4px 4px 8px rgb(47, 112, 209), -4px -4px 8px #ffffff;
+
+  }
+
+  &:active {
+    border-radius: 9px;
+    background: #eef0f4;
+    box-shadow: inset 4px 4px 8px #cacccf, inset -4px -4px 8px #ffffff;
+  }
+}
