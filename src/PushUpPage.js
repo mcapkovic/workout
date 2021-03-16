@@ -1,7 +1,8 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox } from "./common";
+import { Button, TextBox, Separator } from "./common";
 import PushUpCounter from "./PushUpCounter";
 import {
   DEFAULT_SUB_PAGE,
@@ -73,6 +74,14 @@ function Table(props) {
   );
 }
 
+function BackButton(props) {
+  const headerStart = React.useRef(document.querySelector("#header-start"));
+  return ReactDOM.createPortal(
+    <Button className='back-button' onClick={() => props.setSubPage(DEFAULT_SUB_PAGE)}>Back</Button>,
+    headerStart.current
+  );
+}
+
 function WrokoutDetails(props) {
   const { workout = {}, setSubPage } = props;
   const { auth, firestore } = React.useContext(FirebaseContext);
@@ -100,14 +109,15 @@ function WrokoutDetails(props) {
   console.log(data);
   return (
     <div>
-      <Button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>go back</Button>
+      <BackButton setSubPage={setSubPage} />
+      <Separator horizontal />
 
       <h1>Info</h1>
       <div>workout name: {workout.name}</div>
       <div>workout id: {workout.id}</div>
       {/* <div>category: {workout.template}</div> */}
 
-      <br />
+      <Separator horizontal />
 
       <Button disabled={!isDeletable} onClick={deleteWorkout}>
         Delete workout
@@ -116,12 +126,12 @@ function WrokoutDetails(props) {
         <div> delete is disabled because this workout is part of a room</div>
       )}
 
-      <hr />
+      <Separator horizontal />
 
       <h1>History</h1>
       {data.length > 0 && <Table data={data} />}
 
-      <hr />
+      <Separator horizontal />
 
       <h1>Rooms</h1>
       {workout.id !== -1 && (
@@ -182,8 +192,7 @@ function WorkoutsManager(props) {
 
   return (
     <div className="workouts">
-      {/* <hr /> */}
-
+      <Separator horizontal />
       <div className="workouts__selection">
         <h2>List of workouts</h2>
         {workouts.length > 0 &&
@@ -197,7 +206,7 @@ function WorkoutsManager(props) {
           ))}
       </div>
 
-      <hr />
+      <Separator horizontal />
       <h2> Create new workout</h2>
 
       <div>
@@ -209,6 +218,7 @@ function WorkoutsManager(props) {
           Add
         </Button>
       </div>
+      <Separator horizontal />
     </div>
   );
 }

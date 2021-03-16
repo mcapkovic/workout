@@ -1,0 +1,9 @@
+.separator {
+  &--horizontal {
+    height: 5px;
+    border-radius: 2px;
+    background: #eef0f4;
+    box-shadow: inset 1px 1px 2px #c8cacd, inset -1px -1px 2px #ffffff;
+    margin: 1rem 0;
+  }
+}
