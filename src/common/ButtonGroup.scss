@@ -1,0 +1,13 @@
+.button-group {
+  display: inline-block;
+  background-color: $background-color;
+  box-shadow: $flat-default;
+  padding: 0.3em;
+  border-radius: 9px;
+  .button {
+    margin-right: 0.3em;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -98,7 +98,7 @@ function WrokoutDetails(props) {
   console.log(data);
   return (
     <div>
-      <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>go back</button>
+      <Button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>go back</Button>
 
       <h1>Info</h1>
       <div>workout name: {workout.name}</div>
@@ -106,9 +106,8 @@ function WrokoutDetails(props) {
       {/* <div>category: {workout.template}</div> */}
 
       <br />
-      <button disabled={!isDeletable} onClick={deleteWorkout}>
-        delete workout
-      </button>
+
+      <Button disabled={!isDeletable} onClick={deleteWorkout}>Delete workout</Button>
       {!isDeletable && (
         <div> delete is disabled because this workout is part of a room</div>
       )}
@@ -137,7 +136,7 @@ function WorkoutItem(props) {
       <div className="workout-item__name">
         <span className="workout-item__name__index">{index + 1}.</span> {name}
       </div>
-      <div>
+      <div className="workout-item__buttons">
         <Button
           onClick={() => {
             setWorkout(item);
@@ -195,13 +194,15 @@ function WorkoutsManager(props) {
       </div>
 
       <hr />
+      <h2> Create new workout</h2>
+
       <div>
         <TextBox
           value={newWorkoutName}
           onChange={(e) => setNewWorkoutName(e.target.value)}
         />
         <Button disabled={!newWorkoutName} onClick={createWorkout}>
-          Create new workout
+          Add
         </Button>
       </div>
     </div>
@@ -237,10 +238,10 @@ function RoomsManager(props) {
   return (
     <div>
       <div>paste room id to join a room</div>
-      <input value={roomId} onChange={(e) => setRoomId(e.target.value)} />
-      <button disabled={!roomId} onClick={updateRoom}>
-        join room
-      </button>
+      <TextBox value={roomId} onChange={(e) => setRoomId(e.target.value)} />
+      <Button disabled={!roomId} onClick={updateRoom}>
+        Join room
+      </Button>
       <h2>Joined rooms:</h2>
       <div>
         {myRooms.length > 0 && myRooms.map((room) => <div>{room.id}</div>)}
@@ -285,24 +286,24 @@ function PushUpCounter(props) {
       {workoutId}
       <div> {count}</div>
       <div>
-        <button onClick={() => changeCount(-1)}>-1</button>
-        <button onClick={() => changeCount(1)}>+1</button>
+        <Button onClick={() => changeCount(-1)}>-1</Button>
+        <Button onClick={() => changeCount(1)}>+1</Button>
       </div>
 
       <div>
-        <button onClick={() => changeCount(-5)}>-5</button>
-        <button onClick={() => changeCount(5)}>+5</button>
+        <Button onClick={() => changeCount(-5)}>-5</Button>
+        <Button onClick={() => changeCount(5)}>+5</Button>
       </div>
       <div>
-        <button onClick={() => changeCount(-10)}>-10</button>
-        <button onClick={() => changeCount(10)}>+10</button>
+        <Button onClick={() => changeCount(-10)}>-10</Button>
+        <Button onClick={() => changeCount(10)}>+10</Button>
       </div>
 
       <br />
-      <button disabled={!workout || !count} onClick={saveCount2}>
+      <Button disabled={!workout || !count} onClick={saveCount2}>
         save
-      </button>
-      <button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</button>
+      </Button>
+      <Button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</Button>
     </div>
   );
 }

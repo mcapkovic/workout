@@ -14,6 +14,7 @@ import Profile from "./Profile";
 import NewUserPage from "./NewUserPage";
 import LandingPage from "./LandingPage";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import {ButtonGroup, Button} from './common';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -73,14 +74,23 @@ function LogedUser(props) {
       {userPubicData.length > 0 ? (
         <>
           <header className="header">
-            <button
+          <ButtonGroup >
+            <Button buttonGroup selected={tab === WORKOUT} onClick={() => setTab(WORKOUT)}>WORKOUTS</Button>
+            <Button buttonGroup selected={tab === PUSH_UP_ROOM} onClick={() => setTab(PUSH_UP_ROOM)}>ROOMS</Button>
+            <Button buttonGroup selected={tab === PROFILE_PAGE} onClick={() => setTab(PROFILE_PAGE)}>PROFILE</Button>
+          </ButtonGroup>
+          {/* <br/>
+          <br/><br/> */}
+
+            {/* <button
                className={`header__button ${
                 tab === WORKOUT ? "header__button--active" : ""
               } `}
               onClick={() => setTab(WORKOUT)}
             >
               Workouts
-            </button>
+            </button> */}
+
             {/* <button
                className={`header__button ${
                 tab === PUSH_UP_HISTORY ? "header__button--active" : ""
@@ -89,7 +99,7 @@ function LogedUser(props) {
             >
               History
             </button> */}
-            <button
+            {/* <button
               className={`header__button ${
                 tab === PUSH_UP_ROOM ? "header__button--active" : ""
               } `}
@@ -104,7 +114,9 @@ function LogedUser(props) {
               onClick={() => setTab(PROFILE_PAGE)}
             >
               Profile
-            </button>{" "}
+            </button> */}
+
+            
           </header>
 
           <div className='main-content'>

@@ -1,8 +1,17 @@
 import React from "react";
-// import './Button.scss';
+import { getClassNames } from "../utils/common";
 
-function Button(props){
-    return <button {...props} className='button' />
+function Button(props) {
+  const { buttonGroup, selected, className, ...otherProps } = props;
+  return (
+    <button
+      {...otherProps}
+      className={getClassNames(className, "button", {
+        "button--group": buttonGroup,
+        "button--selected": selected,
+      })}
+    />
+  );
 }
 
 export default Button;

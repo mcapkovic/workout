@@ -13,12 +13,13 @@ body {
 
 .header {
   /* background-color: #181717; */
-  height: 10vh;
+  // height: 10vh;
+  text-align: center;
   min-height: 50px;
   /* color: white; */
   width: 100%;
   max-width: 728px;
-  display: flex;
+  // display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 99;
@@ -61,5 +62,8 @@ body {
     &__index{
       // font-weight: 800;
     }
+  }
+  &__buttons .button{
+    margin-left: 1.5em;
   }
 }

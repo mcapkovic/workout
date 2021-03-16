@@ -1,1 +1,10 @@
 $text-color: #686a77;
+
+$flat-default: 4px 4px 8px #cacccf, -4px -4px 8px #ffffff;
+$concave-default: 4px 4px 8px #cacccfa6, -4px -4px 8px #ffffff;
+// $pressed-default: inset 4px 4px 8px #cacccf, inset -4px -4px 8px #ffffff;
+
+// $pressed-default: inset 3px 3px 4px #cacccf, inset -3px -3px 4px #ffffff;
+
+$pressed-default:inset 3px 3px 4px #cacccf, inset -1px -5px 9px #ffffff;
+$background-color: #eef0f4;
