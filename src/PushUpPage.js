@@ -2,10 +2,12 @@ import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Button, TextBox } from "./common";
-
-const DEFAULT_SUB_PAGE = "default-sub-page";
-const WORKOUT_SUB_PAGE = "workout-sub-page";
-const DETAILS_SUB_PAGE = "details-sub-page";
+import PushUpCounter from "./PushUpCounter";
+import {
+  DEFAULT_SUB_PAGE,
+  WORKOUT_SUB_PAGE,
+  DETAILS_SUB_PAGE,
+} from "./utils/constants";
 
 function PushUpPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -19,7 +21,7 @@ function PushUpPage(props) {
   const [subPage, setSubPage] = React.useState(DEFAULT_SUB_PAGE);
 
   return (
-    <div>
+    <>
       {(!workout || subPage === DEFAULT_SUB_PAGE) && (
         <WorkoutsManager
           workouts={workouts}
@@ -37,7 +39,7 @@ function PushUpPage(props) {
       {workout && subPage === DETAILS_SUB_PAGE && (
         <WrokoutDetails workout={workout} setSubPage={setSubPage} />
       )}
-    </div>
+    </>
   );
 }
 export default PushUpPage;
@@ -107,7 +109,9 @@ function WrokoutDetails(props) {
 
       <br />
 
-      <Button disabled={!isDeletable} onClick={deleteWorkout}>Delete workout</Button>
+      <Button disabled={!isDeletable} onClick={deleteWorkout}>
+        Delete workout
+      </Button>
       {!isDeletable && (
         <div> delete is disabled because this workout is part of a room</div>
       )}
@@ -246,64 +250,6 @@ function RoomsManager(props) {
       <div>
         {myRooms.length > 0 && myRooms.map((room) => <div>{room.id}</div>)}
       </div>
-    </div>
-  );
-}
-
-function PushUpCounter(props) {
-  const { workout, setWorkout, setSubPage } = props;
-  const { auth, firestore, firebase } = React.useContext(FirebaseContext);
-  const [count, setCount] = React.useState(0);
-
-  const { uid, photoURL } = auth.currentUser;
-
-  const workoutId = workout ? workout.id : -1;
-  const pushUp2Ref = firestore.collection(
-    `workoutsHistory/${workoutId}/workoutEntries`
-  );
-
-  function changeCount(value) {
-    let newValue = count + value;
-    if (newValue < 0) newValue = 0;
-    setCount(newValue);
-  }
-
-  async function saveCount2() {
-    console.log(count);
-
-    await pushUp2Ref.add({
-      count,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-      workoutId,
-    });
-    setCount(0);
-    setWorkout(null);
-  }
-
-  return (
-    <div>
-      {workoutId}
-      <div> {count}</div>
-      <div>
-        <Button onClick={() => changeCount(-1)}>-1</Button>
-        <Button onClick={() => changeCount(1)}>+1</Button>
-      </div>
-
-      <div>
-        <Button onClick={() => changeCount(-5)}>-5</Button>
-        <Button onClick={() => changeCount(5)}>+5</Button>
-      </div>
-      <div>
-        <Button onClick={() => changeCount(-10)}>-10</Button>
-        <Button onClick={() => changeCount(10)}>+10</Button>
-      </div>
-
-      <br />
-      <Button disabled={!workout || !count} onClick={saveCount2}>
-        save
-      </Button>
-      <Button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>cancel</Button>
     </div>
   );
 }
