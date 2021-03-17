@@ -1,15 +1,16 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { Button, TextBox, Separator } from "./common";
 
 function SignOut() {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
 
   return (
     auth.currentUser && (
-      <button className="sign-out" onClick={() => auth.signOut()}>
+      <Button className="sign-out" onClick={() => auth.signOut()}>
         Sign Out
-      </button>
+      </Button>
     )
   );
 }
@@ -27,8 +28,10 @@ function Profile(props) {
 
   return (
     <div>
+      <Separator horizontal />
       <div>{displayName}</div>
       <div>{email}</div>
+      <Separator horizontal />
       <SignOut />
     </div>
   );

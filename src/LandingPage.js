@@ -1,6 +1,7 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { Button, TextBox, Separator } from "./common";
 
 function SignIn() {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -12,18 +13,23 @@ function SignIn() {
 
   return (
     <>
-      <button className="sign-in" onClick={signInWithGoogle}>
+      <Button className="sign-in" onClick={signInWithGoogle}>
         Sign in with Google
-      </button>
-      <p>
+      </Button>
+      {/* <p>
         Do not violate the community guidelines or you will be banned for life!
-      </p>
+      </p> */}
     </>
   );
 }
 
 function LandingPage(props) {
-  return <div><SignIn /></div>;
+  return (
+    <div className="landing-page">
+      <h1 className="landing-title">WORKOUT</h1>
+      <SignIn />
+    </div>
+  );
 }
 
 export default LandingPage;

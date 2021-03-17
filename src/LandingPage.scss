@@ -1,0 +1,12 @@
+.landing-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+
+    &__title{
+        font-size: 30px;
+        margin-top: -1rem;
+    }
+}

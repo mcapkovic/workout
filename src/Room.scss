@@ -1,0 +1,12 @@
+.room {
+  &__header {
+    margin-bottom: 1.5em;
+    &__title {
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+    &__id {
+        color: #686a77b5;
+    }
+  }
+}

@@ -166,7 +166,7 @@ function WorkoutItem(props) {
             setSubPage(DETAILS_SUB_PAGE);
           }}
         >
-          More info
+          More details
         </Button>
       </div>
     </div>

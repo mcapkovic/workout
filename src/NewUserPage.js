@@ -1,6 +1,7 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { Button, TextBox, Separator } from "./common";
 
 function NewUserPage(props) {
     const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -22,8 +23,8 @@ function NewUserPage(props) {
   return (
     <div>
       choose your user name:{" "}
-      <input value={name} onChange={(e) => setName(e.target.value)} />
-      <button disabled={!name} onClick={submitUserInfo}>submit</button>
+      <TextBox value={name} onChange={(e) => setName(e.target.value)} />
+      <Button disabled={!name} onClick={submitUserInfo}>submit</Button>
     </div>
   );
 }
