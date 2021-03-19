@@ -29,7 +29,7 @@ const LineChart = (props) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "transportation",
+      legend: "date",
       legendOffset: 36,
       legendPosition: "middle",
     }}

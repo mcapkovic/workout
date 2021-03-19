@@ -1,16 +1,5 @@
 import React from "react";
-import groupBy from "lodash/groupBy";
-import moment from "moment";
-
-function groupByDay(data) {
-  if (!data) return [];
-  if (data.length === 0) return [];
-  return groupBy(data, (item) =>
-    moment(item.createdAt.seconds * 1000)
-      .startOf("day")
-      .format("MMM Do")
-  );
-}
+import { groupByDay } from "../utils/common";
 
 function reduceCounts(accumulator, currentValue) {
   return accumulator + currentValue.count;

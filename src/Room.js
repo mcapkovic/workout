@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
-import { Button, TextBox, Separator } from "./common";
+import { Button, TextBox, Separator, LineChart } from "./common";
 import moment from "moment";
-import LineChart from "./LineChart";
 import useLineData from "./hooks/useLineData";
 
 function BackButton(props) {
@@ -116,7 +115,7 @@ function Room(props) {
       )} */}
       <Separator horizontal />
       <h2>Workouts history</h2>
-      <div className='room__chart' >
+      <div className="room__chart">
         <LineChart data={data} />
       </div>
       <Separator horizontal />
