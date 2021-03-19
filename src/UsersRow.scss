@@ -1,0 +1,33 @@
+.users-row {
+  display: flex;
+  margin: 1em 0;
+  &__user {
+  }
+}
+
+.users-row-user {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 0.5em;
+  width: 60px;
+  &__avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    box-shadow: $flat-default;
+    margin-bottom: 0.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+  &__name {
+    font-size: 14px;
+    max-width: 60px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+  }
+}

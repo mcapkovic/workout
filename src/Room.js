@@ -6,6 +6,7 @@ import Chat from "./Chat";
 import { Button, TextBox, Separator, LineChart } from "./common";
 import moment from "moment";
 import useLineData from "./hooks/useLineData";
+import UsersRow from './UsersRow';
 
 function BackButton(props) {
   const headerStart = React.useRef(document.querySelector("#header-start"));
@@ -100,10 +101,11 @@ function Room(props) {
         <h2 className="room__header__title">{room.roomName}</h2>
         <span className="room__header__id">id: {room.id}</span>
       </div>
-      users:
-      {membersData.map((member = {}) => (
+      {/* users: */}
+      {/* {membersData.map((member = {}) => (
         <div>{member.name}</div>
-      ))}
+      ))} */}
+      <UsersRow users={membersData} />
       {/* {workouts2 && workouts2.length > 0 && (
         <>
           <Separator horizontal />
