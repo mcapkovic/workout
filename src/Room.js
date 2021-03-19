@@ -116,7 +116,7 @@ function Room(props) {
       )} */}
       <Separator horizontal />
       <h2>Workouts history</h2>
-      <div style={{ height: "300px" }}>
+      <div className='room__chart' >
         <LineChart data={data} />
       </div>
       <Separator horizontal />
