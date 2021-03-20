@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import moment from "moment";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, Separator, BarChart } from "./common";
+import { Button, TextBox, Separator, BarChart, DeleteButton } from "./common";
 import PushUpCounter from "./PushUpCounter";
 import {
   DEFAULT_SUB_PAGE,
@@ -166,9 +166,11 @@ function WorkoutDetails(props) {
       <Separator horizontal />
 
       <h1>Danger zone</h1>
-      <Button disabled={!isDeletable} onClick={deleteWorkout}>
-        Delete workout
-      </Button>
+      <DeleteButton
+        buttonText="Delete workout"
+        onClick={deleteWorkout}
+        disabled={!isDeletable}
+      />
       {!isDeletable && (
         <div> delete is disabled because this workout is part of a room</div>
       )}

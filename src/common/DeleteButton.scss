@@ -1,0 +1,9 @@
+.delete-button {
+  display: inline-block;
+  &__negative {
+    margin-right: 1em;
+    &__button-text {
+      text-transform: lowercase;
+    }
+  }
+}
