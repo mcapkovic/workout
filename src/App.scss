@@ -3,75 +3,83 @@
 body {
   background-color: #eef0f4;
   color: $text-color;
-  height: 100vh;
+  // height: 100vh;
 }
 
 .App {
   /* text-align: center; */
   max-width: 728px;
   margin: 0 auto;
+  // height: 100vh;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  padding: 0 1.4rem;
 }
 
 .header {
-  /* background-color: #181717; */
-  // height: 10vh;
   position: fixed;
   top: 0;
-  // text-align: center;
-  min-height: 50px;
-  /* color: white; */
+  min-height: 85px;
   width: 100%;
   max-width: 728px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // justify-content: center;
   z-index: 99;
-  padding: 1rem 1.4rem;
+  padding: 1rem 0;
   box-sizing: border-box;
 
-
-  &__start{
-    // display: inline-block;
+  &__start {
     position: relative;
   }
 
-  &__button {
-    height: 100%;
-    flex-grow: 1;
-    &--active {
-      background-color: rgb(192, 192, 192);
+  &__center__tabs {
+    position: fixed;
+    width: calc(100% - 1.4rem);
+    left: 0;
+    bottom: 0;
+    display: flex;
+    padding: 0.7rem;
+    button {
+      flex-grow: 1;
+    }
+
+    @media only screen and (min-width: $tabs-breakpoint) {
+      position: relative;
+      width: auto;
+      padding: 0.3rem;
     }
   }
 }
 
 .main-content {
-  padding: 4.5rem 1.4rem 0rem 1.4rem;
-  height: calc(100% - 4.5rem);
+  flex-grow: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5rem;
+  @media only screen and (min-width: $tabs-breakpoint) {
+    padding-bottom: 1rem;
+  }
 }
 
 .workouts {
   max-width: 500px;
   margin: 0 auto;
   &__selection {
-    // maxHeight: "600px",
-    // overflow: "auto",
-    // display: flex;
-    // flex-wrap: wrap;
   }
 }
 
 .workout-item {
-  // border: 1px solid black;
-  // margin:0.5rem 0.5rem 0.5rem 0;
   margin: 1rem 0rem 1rem 0;
   display: flex;
   align-items: center;
   &__name {
     flex-grow: 1;
     &__index {
-      // font-weight: 800;
     }
   }
   &__buttons .button {
@@ -79,10 +87,23 @@ body {
   }
 }
 
+.header-start-button {
+  @media only screen and (min-width: $tabs-breakpoint) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(-50%);
+  }
+}
 
-.back-button{
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateY(-50%);
+.header-separator {
+  margin-top: 5.5rem;
+}
+
+.header-separator-dynamic {
+  display: none;
+  margin-top: 5.5rem;
+  @media only screen and (min-width: $tabs-breakpoint) {
+    display: block;
+  }
 }

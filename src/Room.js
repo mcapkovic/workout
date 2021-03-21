@@ -96,7 +96,7 @@ function Room(props) {
   return (
     <div className="room">
       <BackButton setRoom={setRoom} />
-      <Separator horizontal />
+      <Separator horizontal className='header-separator' />
       <div className="room__header">
         <h2 className="room__header__title">{room.roomName}</h2>
         <span className="room__header__id">id: {room.id}</span>

@@ -28,7 +28,8 @@ function Profile(props) {
 
   return (
     <div>
-      <Separator horizontal />
+      <Separator horizontal className='header-separator-dynamic' />
+      <h2>User details</h2>
       <div>{displayName}</div>
       <div>{email}</div>
       <Separator horizontal />

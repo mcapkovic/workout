@@ -87,7 +87,7 @@ function BackButton(props) {
   const headerStart = React.useRef(document.querySelector("#header-start"));
   return ReactDOM.createPortal(
     <Button
-      className="back-button"
+      className="header-start-button"
       onClick={() => props.setSubPage(DEFAULT_SUB_PAGE)}
     >
       Back
@@ -136,8 +136,6 @@ function WorkoutDetails(props) {
   return (
     <div>
       <BackButton setSubPage={setSubPage} />
-      <Separator horizontal />
-
       <h1>Info</h1>
       <div>workout name: {workout.name}</div>
       <div>workout id: {workout.id}</div>

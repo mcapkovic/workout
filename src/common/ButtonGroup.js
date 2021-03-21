@@ -1,8 +1,11 @@
 import React from "react";
+import { getClassNames } from "../utils/common";
 
 function ButtonGroup(props) {
-  const { children } = props;
-  return <div className="button-group">{children}</div>;
+  const { children, className } = props;
+  return (
+    <div className={getClassNames(className, "button-group")}>{children}</div>
+  );
 }
 
 export default ButtonGroup;

@@ -3,7 +3,7 @@ import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
 import { Button, TextBox, Separator } from "./common";
-import Room from './Room';
+import Room from "./Room";
 
 function RoomItem(props) {
   const { item, setRoom, index } = props;
@@ -43,7 +43,8 @@ function RoomsManager(props) {
 
   return (
     <div className="workouts">
-      <Separator horizontal />
+      <Separator horizontal className="header-separator-dynamic" />
+
       <div className="workouts__selection">
         <h2>Rooms</h2>
         {rooms &&
@@ -69,9 +70,6 @@ function RoomsManager(props) {
     </div>
   );
 }
-
-
-
 
 function Rooms(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);

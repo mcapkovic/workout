@@ -3,7 +3,7 @@ import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Button, TextBox, Separator } from "./common";
 import PushUpCounter from "./PushUpCounter";
-import WorkoutDetails from './WorkoutDetails';
+import WorkoutDetails from "./WorkoutDetails";
 import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
@@ -24,21 +24,30 @@ function PushUpPage(props) {
   return (
     <>
       {(!workout || subPage === DEFAULT_SUB_PAGE) && (
-        <WorkoutsManager
-          workouts={workouts}
-          setWorkout={setWorkout}
-          setSubPage={setSubPage}
-        />
+        <>
+          <Separator horizontal className="header-separator-dynamic" />
+          <WorkoutsManager
+            workouts={workouts}
+            setWorkout={setWorkout}
+            setSubPage={setSubPage}
+          />
+        </>
       )}
       {workout && subPage === WORKOUT_SUB_PAGE && (
-        <PushUpCounter
-          workout={workout}
-          setWorkout={setWorkout}
-          setSubPage={setSubPage}
-        />
+        <>
+          <Separator horizontal className="header-separator" />
+          <PushUpCounter
+            workout={workout}
+            setWorkout={setWorkout}
+            setSubPage={setSubPage}
+          />
+        </>
       )}
       {workout && subPage === DETAILS_SUB_PAGE && (
-        <WorkoutDetails workout={workout} setSubPage={setSubPage} />
+        <>
+          <Separator horizontal className="header-separator" />
+          <WorkoutDetails workout={workout} setSubPage={setSubPage} />
+        </>
       )}
     </>
   );
@@ -96,7 +105,6 @@ function WorkoutsManager(props) {
 
   return (
     <div className="workouts">
-      <Separator horizontal />
       <div className="workouts__selection">
         <h2>List of workouts</h2>
         {workouts.length > 0 &&

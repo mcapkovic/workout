@@ -74,30 +74,33 @@ function LogedUser(props) {
       {userPubicData.length > 0 ? (
         <>
           <header className="header">
-            <div id="header-start" className="header__start" />{" "}
-            <ButtonGroup>
-              <Button
-                buttonGroup
-                selected={tab === WORKOUT}
-                onClick={() => setTab(WORKOUT)}
-              >
-                WORKOUTS
-              </Button>
-              <Button
-                buttonGroup
-                selected={tab === PUSH_UP_ROOM}
-                onClick={() => setTab(PUSH_UP_ROOM)}
-              >
-                ROOMS
-              </Button>
-              <Button
-                buttonGroup
-                selected={tab === PROFILE_PAGE}
-                onClick={() => setTab(PROFILE_PAGE)}
-              >
-                PROFILE
-              </Button>
-            </ButtonGroup>
+            <div id="header-start" className="header__start" />
+            <div id="header-center" className="header__center">
+              <ButtonGroup className="header__center__tabs">
+                <Button
+                  buttonGroup
+                  selected={tab === WORKOUT}
+                  onClick={() => setTab(WORKOUT)}
+                >
+                  WORKOUTS
+                </Button>
+                <Button
+                  buttonGroup
+                  selected={tab === PUSH_UP_ROOM}
+                  onClick={() => setTab(PUSH_UP_ROOM)}
+                >
+                  ROOMS
+                </Button>
+                <Button
+                  buttonGroup
+                  selected={tab === PROFILE_PAGE}
+                  onClick={() => setTab(PROFILE_PAGE)}
+                >
+                  PROFILE
+                </Button>
+              </ButtonGroup>
+            </div>
+
             <div id="header-end" className="header__end" />
           </header>
 
@@ -107,6 +110,11 @@ function LogedUser(props) {
             {tab === PUSH_UP_ROOM && <Room />}
             {tab === PROFILE_PAGE && <Profile />}
           </div>
+
+          <footer className="footer">
+            <div></div> <div footer="footer__center"/>
+            <div></div>
+          </footer>
         </>
       ) : (
         <NewUserPage />
