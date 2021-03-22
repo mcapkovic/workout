@@ -17,9 +17,10 @@ function useLineData(datePeriod, workouts2, membersData) {
         y: groups[date] ? groups[date].reduce(reduceCounts, 0) : 0,
       }));
 
-      const userID = workoutData[0].uid;
+      const { uid } = workoutData[0];
+      const { type } = workoutData.find((item) => item.type) || {};
       let { name = "anonym" } =
-        membersData.find((user) => user.uid === workoutData[0].uid) || {};
+        membersData.find((user) => user.uid === uid) || {};
 
       if (roomUsers.has(name)) {
         name = `${name}_${index}`;
@@ -28,7 +29,9 @@ function useLineData(datePeriod, workouts2, membersData) {
         roomUsers.add(name);
       }
 
-      return { uid: userID, data, id: name };
+      if (type) name = `${name} (${type})`;
+
+      return { uid, data, id: name };
     });
   }, [datePeriod, workouts2, membersData]);
 
