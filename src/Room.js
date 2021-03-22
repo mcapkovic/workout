@@ -118,7 +118,7 @@ function Room(props) {
       <Separator horizontal />
       <h2>Workouts history</h2>
       <div className="room__chart">
-        <LineChart data={data} />
+        <LineChart data={data} legends={[]}  margin={ {top: 10, right: 50, bottom: 50, left: 60 }} />
       </div>
       <Separator horizontal />
     </div>

@@ -34,7 +34,6 @@ function RoomsManager(props) {
     await roomsRef.add({
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      type: "pushUp",
       roomName: newRoomName,
       members: [uid],
     });

@@ -1,10 +1,38 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-const LineChart = (props) => (
+const LineChart = ({
+  data,
+  legends = [
+    {
+      anchor: "top",
+      direction: "row",
+      justify: false,
+      translateX: 0,
+      translateY: -30,
+      itemWidth: 100,
+      itemHeight: 10,
+      itemsSpacing: 5,
+      symbolSize: 20,
+      symbolShape: "circle",
+      itemDirection: "left-to-right",
+      itemTextColor: "#777",
+      effects: [
+        {
+          on: "hover",
+          style: {
+            itemBackground: "rgba(0, 0, 0, .03)",
+            itemOpacity: 1,
+          },
+        },
+      ],
+    },
+  ],
+  margin = { top: 50, right: 50, bottom: 50, left: 60 },
+}) => (
   <ResponsiveLine
-    data={props.data}
-    margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
+    data={data}
+    margin={margin}
     xScale={{ type: "point" }}
     yScale={{
       type: "linear",
@@ -28,8 +56,8 @@ const LineChart = (props) => (
       orient: "bottom",
       tickSize: 5,
       tickPadding: 5,
-      tickRotation: 0,
-      legend: "date",
+      tickRotation: -25,
+      // legend: "date",
       legendOffset: 36,
       legendPosition: "middle",
     }}
@@ -38,7 +66,7 @@ const LineChart = (props) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "count",
+      // legend: "count",
       legendOffset: -40,
       legendPosition: "middle",
     }}
@@ -51,31 +79,7 @@ const LineChart = (props) => (
     pointLabelYOffset={-12}
     enableSlices="x"
     useMesh={true}
-    legends={[
-      {
-        anchor: "top",
-        direction: "row",
-        justify: false,
-        translateX: 0,
-        translateY: -30,
-        itemWidth: 100,
-        itemHeight: 10,
-        itemsSpacing: 5,
-        symbolSize: 20,
-        symbolShape: "circle",
-        itemDirection: "left-to-right",
-        itemTextColor: "#777",
-        effects: [
-          {
-            on: "hover",
-            style: {
-              itemBackground: "rgba(0, 0, 0, .03)",
-              itemOpacity: 1,
-            },
-          },
-        ],
-      },
-    ]}
+    legends={legends}
   />
 );
 

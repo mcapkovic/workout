@@ -132,8 +132,8 @@ const BarChart = ({
     axisBottom={{
       tickSize: 5,
       tickPadding: 5,
-      tickRotation: 0,
-      legend: "date",
+      tickRotation: -25,
+      // legend: "date",
       legendPosition: "middle",
       legendOffset: 32,
     }}
