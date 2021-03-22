@@ -3,7 +3,14 @@ import ReactDOM from "react-dom";
 import moment from "moment";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, Separator, BarChart, DeleteButton } from "./common";
+import {
+  Button,
+  TextBox,
+  Separator,
+  BarChart,
+  DeleteButton,
+  ButtonPortal,
+} from "./common";
 import PushUpCounter from "./PushUpCounter";
 import {
   DEFAULT_SUB_PAGE,
@@ -135,7 +142,14 @@ function WorkoutDetails(props) {
 
   return (
     <div>
-      <BackButton setSubPage={setSubPage} />
+      <ButtonPortal
+        destination="#header-start"
+        className="header-start-button"
+        onClick={() => props.setSubPage(DEFAULT_SUB_PAGE)}
+      >
+        Back
+      </ButtonPortal>
+
       <h1>Info</h1>
       <div>workout name: {workout.name}</div>
       <div>workout id: {workout.id}</div>

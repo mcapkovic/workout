@@ -1,7 +1,7 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox } from "./common";
+import { Button, TextBox, ButtonPortal } from "./common";
 import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
@@ -42,6 +42,23 @@ function PushUpCounter(props) {
   console.log(props);
   return (
     <div className="push-up-counter">
+      <ButtonPortal
+        destination="#header-end"
+        // className="header-start-button"
+        disabled={!workout || !count}
+        onClick={saveCount2}
+      >
+        Save
+      </ButtonPortal>
+
+      <ButtonPortal
+        destination="#header-start"
+        // className="header-start-button"
+        onClick={() => setSubPage(DEFAULT_SUB_PAGE)}
+      >
+        Cancel
+      </ButtonPortal>
+
       <h1 className="push-up-counter__name">{workout.name}</h1>
 
       <div className="push-up-counter__count"> {count}</div>
@@ -52,12 +69,7 @@ function PushUpCounter(props) {
       </div>
 
       <br />
-      <div className="push-up-counter__actions">
-        <Button disabled={!workout || !count} onClick={saveCount2}>
-          Save
-        </Button>
-        <Button onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>Cancel</Button>
-      </div>
+      <div className="push-up-counter__actions"></div>
 
       <div className="push-up-counter__id"> {workoutId}</div>
     </div>
