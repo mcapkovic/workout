@@ -1,7 +1,8 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, Separator } from "./common";
+import { Button, ContentPortal, Separator } from "./common";
+import packageJson from '../package.json';
 
 function SignOut() {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -24,7 +25,6 @@ function Profile(props) {
   const query = historyRef.orderBy("createdAt", "asc").limitToLast(25);
 
   const [data = []] = useCollectionData(query, { idField: "id" });
-  console.log(data);
 
   return (
     <div>
@@ -34,6 +34,9 @@ function Profile(props) {
       <div>{email}</div>
       <Separator horizontal />
       <SignOut />
+      <ContentPortal portalTo="#footer-center">
+       {packageJson.version}
+      </ContentPortal>
     </div>
   );
 }
