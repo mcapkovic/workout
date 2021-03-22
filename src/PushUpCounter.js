@@ -46,7 +46,6 @@ function PushUpCounter(props) {
     <div className="push-up-counter">
       <ButtonPortal
         destination="#header-end"
-        // className="header-start-button"
         disabled={!workout || !count}
         onClick={saveCount2}
       >
@@ -55,7 +54,6 @@ function PushUpCounter(props) {
 
       <ButtonPortal
         destination="#header-start"
-        // className="header-start-button"
         onClick={() => setSubPage(DEFAULT_SUB_PAGE)}
       >
         Cancel
@@ -65,9 +63,9 @@ function PushUpCounter(props) {
 
       <div className="push-up-counter__count"> {count}</div>
       <div className="push-up-counter__controls">
-        <ButtonPair changeCount={changeCount} amount={1} />
-        {/* <ButtonPair changeCount={changeCount} amount={5} /> */}
-        <ButtonPair changeCount={changeCount} amount={10} />
+        <ButtonPair changeCount={changeCount} amount={1} count={count} />
+        <ButtonPair changeCount={changeCount} amount={5} count={count} />
+        <ButtonPair changeCount={changeCount} amount={10} count={count} />
       </div>
 
       <br />
@@ -81,10 +79,12 @@ function PushUpCounter(props) {
 }
 
 function ButtonPair(props) {
-  const { changeCount, amount } = props;
+  const { changeCount, amount, count } = props;
   return (
     <div>
-      <Button onClick={() => changeCount(-amount)}>-{amount}</Button>
+      <Button disabled={count <= 0} onClick={() => changeCount(-amount)}>
+        -{amount}
+      </Button>
       <Button onClick={() => changeCount(amount)}>+{amount}</Button>
     </div>
   );
