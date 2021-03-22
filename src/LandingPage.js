@@ -26,7 +26,7 @@ function SignIn() {
 function LandingPage(props) {
   return (
     <div className="landing-page">
-      <h1 className="landing-title">WORKOUT</h1>
+      <h1 className="landing-title">Hello :)</h1>
       <SignIn />
     </div>
   );

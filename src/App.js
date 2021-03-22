@@ -112,8 +112,9 @@ function LogedUser(props) {
           </div>
 
           <footer className="footer">
-            <div></div> <div footer="footer__center"/>
-            <div></div>
+            <div id="footer-start" />
+            <div id="footer-center" footer="footer__center" />
+            <div id="footer-end" />
           </footer>
         </>
       ) : (

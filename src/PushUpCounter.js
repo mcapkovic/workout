@@ -1,7 +1,7 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, ButtonPortal } from "./common";
+import { Button, TextBox, ButtonPortal, ContentPortal } from "./common";
 import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
@@ -71,7 +71,9 @@ function PushUpCounter(props) {
       <br />
       <div className="push-up-counter__actions"></div>
 
-      <div className="push-up-counter__id"> {workoutId}</div>
+      <ContentPortal portalTo="#footer-center">
+        <div className="push-up-counter__id"> {workoutId}</div>
+      </ContentPortal>
     </div>
   );
 }
