@@ -121,7 +121,7 @@ function Room(props) {
         <LineChart
           data={data}
           legends={[]}
-          margin={{ top: 10, right: 50, bottom: 50, left: 60 }}
+          margin={{ top: 20, right: 50, bottom: 50, left: 60 }}
         />
       </div>
       <Separator horizontal />
