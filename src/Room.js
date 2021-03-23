@@ -6,7 +6,7 @@ import Chat from "./Chat";
 import { Button, TextBox, Separator, LineChart } from "./common";
 import moment from "moment";
 import useLineData from "./hooks/useLineData";
-import UsersRow from './UsersRow';
+import UsersRow from "./UsersRow";
 
 function BackButton(props) {
   const headerStart = React.useRef(document.querySelector("#header-start"));
@@ -96,7 +96,7 @@ function Room(props) {
   return (
     <div className="room">
       <BackButton setRoom={setRoom} />
-      <Separator horizontal className='header-separator' />
+      <Separator horizontal className="header-separator" />
       <div className="room__header">
         <h2 className="room__header__title">{room.roomName}</h2>
         <span className="room__header__id">id: {room.id}</span>
@@ -118,7 +118,11 @@ function Room(props) {
       <Separator horizontal />
       <h2>Workouts history</h2>
       <div className="room__chart">
-        <LineChart data={data} legends={[]}  margin={ {top: 10, right: 50, bottom: 50, left: 60 }} />
+        <LineChart
+          data={data}
+          legends={[]}
+          margin={{ top: 10, right: 50, bottom: 50, left: 60 }}
+        />
       </div>
       <Separator horizontal />
     </div>

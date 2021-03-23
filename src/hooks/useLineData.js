@@ -1,5 +1,6 @@
 import React from "react";
 import { groupByDay } from "../utils/common";
+import { strings } from "../utils/constants";
 
 function reduceCounts(accumulator, currentValue) {
   return accumulator + currentValue.count;
@@ -29,7 +30,7 @@ function useLineData(datePeriod, workouts2, membersData) {
         roomUsers.add(name);
       }
 
-      if (type) name = `${name} (${type})`;
+      if (type) name = `${name} (${strings[type]})`;
 
       return { uid, data, id: name };
     });
