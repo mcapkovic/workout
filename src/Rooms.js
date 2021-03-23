@@ -1,9 +1,11 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
 import { Button, TextBox, Separator } from "./common";
 import Room from "./Room";
+import { listMotion } from "./common/motion";
 
 function RoomItem(props) {
   const { item, setRoom, index } = props;
@@ -46,11 +48,20 @@ function RoomsManager(props) {
 
       <div className="workouts__selection">
         <h2>Rooms</h2>
-        {rooms &&
-          rooms.length > 0 &&
-          rooms.map((item, index) => (
-            <RoomItem item={item} setRoom={setRoom} index={index} />
-          ))}
+        {rooms && rooms.length > 0 && (
+          <motion.div
+            variants={listMotion.listVariants}
+            initial="initial"
+            animate="animate"
+            transition={{ duration: 0.2 }}
+          >
+            {rooms.map((item, index) => (
+              <motion.div key={index} variants={listMotion.listItemVariants}>
+                <RoomItem item={item} setRoom={setRoom} index={index} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
 
       <Separator horizontal />

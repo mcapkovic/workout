@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Button, TextBox, Separator } from "./common";
@@ -9,6 +10,7 @@ import {
   WORKOUT_SUB_PAGE,
   DETAILS_SUB_PAGE,
 } from "./utils/constants";
+import { listMotion } from "./common/motion";
 
 function PushUpPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -25,7 +27,10 @@ function PushUpPage(props) {
     <>
       {(!workout || subPage === DEFAULT_SUB_PAGE) && (
         <>
-          <Separator horizontal className="header-separator-dynamic header-separator--medium" />
+          <Separator
+            horizontal
+            className="header-separator-dynamic header-separator--medium"
+          />
           <WorkoutsManager
             workouts={workouts}
             setWorkout={setWorkout}
@@ -107,15 +112,26 @@ function WorkoutsManager(props) {
     <div className="workouts">
       <div className="workouts__selection">
         <h2>List of workouts</h2>
-        {workouts.length > 0 &&
-          workouts.map((item, index) => (
-            <WorkoutItem
-              setWorkout={setWorkout}
-              item={item}
-              setSubPage={setSubPage}
-              index={index}
-            />
-          ))}
+
+        {workouts.length > 0 && (
+          <motion.div
+            variants={listMotion.listVariants}
+            initial="initial"
+            animate="animate"
+            transition={{ duration: 0.2 }}
+          >
+            {workouts.map((item, index) => (
+              <motion.div key={index} variants={listMotion.listItemVariants}>
+                <WorkoutItem
+                  setWorkout={setWorkout}
+                  item={item}
+                  setSubPage={setSubPage}
+                  index={index}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
 
       <Separator horizontal />
