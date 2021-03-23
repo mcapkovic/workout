@@ -25,7 +25,7 @@ function PushUpPage(props) {
     <>
       {(!workout || subPage === DEFAULT_SUB_PAGE) && (
         <>
-          <Separator horizontal className="header-separator-dynamic" />
+          <Separator horizontal className="header-separator-dynamic header-separator--medium" />
           <WorkoutsManager
             workouts={workouts}
             setWorkout={setWorkout}
