@@ -11,14 +11,22 @@ function SignIn() {
     auth.signInWithPopup(provider);
   };
 
+  function demoSignIn() {
+    auth
+      .signInWithEmailAndPassword("demo@demo.com", "123456")
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <>
-      <Button className="sign-in" onClick={signInWithGoogle}>
+      <Button className="landing-page__google" onClick={signInWithGoogle}>
         Sign in with Google
       </Button>
-      {/* <p>
-        Do not violate the community guidelines or you will be banned for life!
-      </p> */}
+      <Button className="landing-page__demo" onClick={demoSignIn}>
+        Sign in to demo accout
+      </Button>
     </>
   );
 }
@@ -26,7 +34,7 @@ function SignIn() {
 function LandingPage(props) {
   return (
     <div className="landing-page">
-      <h1 className="landing-title">Hello :)</h1>
+      <h1 className="landing-page__title">Hello :)</h1>
       <SignIn />
     </div>
   );
