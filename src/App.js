@@ -14,7 +14,7 @@ import Profile from "./Profile";
 import NewUserPage from "./NewUserPage";
 import LandingPage from "./LandingPage";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { ButtonGroup, Button } from "./common";
+import { ButtonGroup, Button, ButtonGroupItem } from "./common";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -77,27 +77,24 @@ function LogedUser(props) {
             <div id="header-start" className="header__start" />
             <div id="header-center" className="header__center">
               <ButtonGroup className="header__center__tabs">
-                <Button
-                  buttonGroup
-                  selected={tab === WORKOUT}
-                  onClick={() => setTab(WORKOUT)}
-                >
-                  WORKOUTS
-                </Button>
-                <Button
-                  buttonGroup
-                  selected={tab === PUSH_UP_ROOM}
+                <ButtonGroupItem
+                  isSelected={tab === PUSH_UP_ROOM}
                   onClick={() => setTab(PUSH_UP_ROOM)}
                 >
+                  WORKOUTS
+                </ButtonGroupItem>
+                <ButtonGroupItem
+                  isSelected={tab === WORKOUT}
+                  onClick={() => setTab(WORKOUT)}
+                >
                   ROOMS
-                </Button>
-                <Button
-                  buttonGroup
-                  selected={tab === PROFILE_PAGE}
+                </ButtonGroupItem>
+                <ButtonGroupItem
+                  isSelected={tab === PROFILE_PAGE}
                   onClick={() => setTab(PROFILE_PAGE)}
                 >
                   PROFILE
-                </Button>
+                </ButtonGroupItem>
               </ButtonGroup>
             </div>
 

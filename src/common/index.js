@@ -7,3 +7,5 @@ export { default as LineChart } from "./LineChart";
 export { default as DeleteButton } from "./DeleteButton";
 export { default as ButtonPortal } from "./ButtonPortal";
 export { default as ContentPortal } from "./ContentPortal";
+export { default as ButtonGroupItem } from "./ButtonGroupItem";
+
