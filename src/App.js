@@ -77,15 +77,15 @@ function LogedUser(props) {
             <div id="header-start" className="header__start" />
             <div id="header-center" className="header__center">
               <ButtonGroup className="header__center__tabs">
-                <ButtonGroupItem
-                  isSelected={tab === PUSH_UP_ROOM}
-                  onClick={() => setTab(PUSH_UP_ROOM)}
+              <ButtonGroupItem
+                  isSelected={tab === WORKOUT}
+                  onClick={() => setTab(WORKOUT)}
                 >
                   WORKOUTS
                 </ButtonGroupItem>
                 <ButtonGroupItem
-                  isSelected={tab === WORKOUT}
-                  onClick={() => setTab(WORKOUT)}
+                  isSelected={tab === PUSH_UP_ROOM}
+                  onClick={() => setTab(PUSH_UP_ROOM)}
                 >
                   ROOMS
                 </ButtonGroupItem>
