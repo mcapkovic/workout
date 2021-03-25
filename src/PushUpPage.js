@@ -146,6 +146,8 @@ function WorkoutsManager(props) {
           Add
         </Button>
       </div>
+      <br/>
+      <div>currently only push up type workouts are available</div>
       <Separator horizontal />
     </div>
   );

@@ -49,7 +49,7 @@ function Profile(props) {
 
   const [data = []] = useCollectionData(query, { idField: "id" });
 
-  const isDemo = uid === "Fmc3wlvn9eMHC4cieSeNCZIdJbv2";
+  const isDemo = uid === "Fmc3wlvn9eMHC4cieSeNCZIdJbv2" || email === 'demo@demo.com';
   return (
     <div>
       <Separator horizontal className="header-separator-dynamic" />
