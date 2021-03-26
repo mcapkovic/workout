@@ -1,6 +1,10 @@
 .new-workout {
+  &__group__type {
+    text-transform: uppercase;
+  }
+  
   &__add {
-      margin-top: 1.5em;
+    margin-top: 1.5em;
     &__input {
       margin-right: 1em;
     }

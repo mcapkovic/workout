@@ -53,12 +53,14 @@ function NewWorkout(props) {
           </ButtonGroupItem>
 
           <ButtonGroupItem
+            className="new-workout__group__type"
             isSelected={type === PUSH_UP}
             onClick={() => setType(PUSH_UP)}
           >
             {strings[PUSH_UP]}
           </ButtonGroupItem>
           <ButtonGroupItem
+            className="new-workout__group__type"
             isSelected={type === SQUAT}
             onClick={() => setType(SQUAT)}
           >

@@ -9,9 +9,9 @@ const spring = {
 };
 
 function ButtonGroupItem(props) {
-  const { isSelected, onClick, children } = props;
+  const { isSelected, onClick, children, className } = props;
   return (
-    <button onClick={onClick} className={getClassNames("btn-group-item")}>
+    <button onClick={onClick} className={getClassNames("btn-group-item", className)}>
       {children}
       {isSelected && (
         <motion.div
