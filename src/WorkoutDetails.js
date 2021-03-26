@@ -124,7 +124,7 @@ function WorkoutDetails(props) {
   );
 
   // const historyRef = firestore.collection(`users/${uid}/workoutsHistory`);
-  const query = historyRef.orderBy("createdAt", "asc").limitToLast(25);
+  const query = historyRef.orderBy("createdAt", "asc").limitToLast(50);
 
   const [data = []] = useCollectionData(query, { idField: "id" });
   console.log(data);

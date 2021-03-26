@@ -61,7 +61,7 @@ function Room(props) {
         firestore
           .collection(`workoutsHistory/${id}/workoutEntries`)
           .orderBy("createdAt", "asc")
-          .limitToLast(25)
+          .limitToLast(50)
       );
 
       const rawResults = await Promise.all(queries.map((q) => q.get()));
