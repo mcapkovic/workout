@@ -34,7 +34,7 @@ function PushUpCounter(props) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       workoutId,
-      type: "pushUp",
+      type: workout.template || "",
       unit: "",
     });
     setCount(0);

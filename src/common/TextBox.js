@@ -1,7 +1,15 @@
 import React from "react";
+import { getClassNames } from "../utils/common";
 
-function TextBox(props){
-    return <input {...props} autoComplete='off' className='textbox' />
+function TextBox(props) {
+  const { className, ...otherProps } = props;
+  return (
+    <input
+      {...otherProps}
+      autoComplete="off"
+      className={getClassNames("textbox", className)}
+    />
+  );
 }
 
 export default TextBox;

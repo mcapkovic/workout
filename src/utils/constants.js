@@ -6,3 +6,6 @@ export const strings = {
   pushUp: "push up",
   squat: "squat",
 };
+
+export const PUSH_UP = 'pushUp'
+export const SQUAT = 'squat'

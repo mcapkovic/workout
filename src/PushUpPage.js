@@ -11,6 +11,7 @@ import {
   DETAILS_SUB_PAGE,
 } from "./utils/constants";
 import { listMotion } from "./common/motion";
+import NewWorkout from "./NewWorkout";
 
 function PushUpPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -135,20 +136,8 @@ function WorkoutsManager(props) {
       </div>
 
       <Separator horizontal />
-      <h2> Create new workout</h2>
-
-      <div>
-        <TextBox
-          value={newWorkoutName}
-          onChange={(e) => setNewWorkoutName(e.target.value)}
-        />
-        <Button disabled={!newWorkoutName} onClick={createWorkout}>
-          Add
-        </Button>
-      </div>
-      <br/>
-      <div>currently only push up type workouts are available</div>
-      <Separator horizontal />
+      <NewWorkout />
+      <div style={{height: '1rem'}}/>
     </div>
   );
 }
