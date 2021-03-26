@@ -66,17 +66,17 @@ function NewWorkout(props) {
           </ButtonGroupItem>
         </ButtonGroup>
       </motion.div>
-      
+
       <AnimatePresence>
         {type && (
           <motion.div
-          className="new-workout__add"
+            className="new-workout__add"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
           >
             <TextBox
-            className="new-workout__add__input"
+              className="new-workout__add__input"
               value={newWorkoutName}
               onChange={(e) => setNewWorkoutName(e.target.value)}
               placeholder="Workout name"
