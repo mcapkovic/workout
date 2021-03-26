@@ -12,7 +12,6 @@ function PushUpCounter(props) {
   const { workout, setWorkout, setSubPage } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [count, setCount] = React.useState(0);
-
   const { uid, photoURL } = auth.currentUser;
 
   const workoutId = workout ? workout.id : -1;
@@ -26,8 +25,10 @@ function PushUpCounter(props) {
     setCount(newValue);
   }
 
-  async function saveCount2() {
-    console.log(count);
+  const saveCalled = React.useRef(false);
+  async function saveCount() {
+    if (saveCalled.current) return;
+    saveCalled.current = true;
 
     await pushUp2Ref.add({
       count,
@@ -41,13 +42,12 @@ function PushUpCounter(props) {
     setWorkout(null);
   }
 
-  console.log(props);
   return (
     <div className="push-up-counter">
       <ButtonPortal
         destination="#header-end"
         disabled={!workout || !count}
-        onClick={saveCount2}
+        onClick={saveCount}
       >
         Save
       </ButtonPortal>
