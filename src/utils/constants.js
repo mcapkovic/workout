@@ -7,5 +7,9 @@ export const strings = {
   squat: "squat",
 };
 
+export const SAVING = 'saving'
+export const ERROR = 'error';
+export const SAVED = 'saved'
+
 export const PUSH_UP = 'pushUp'
 export const SQUAT = 'squat'

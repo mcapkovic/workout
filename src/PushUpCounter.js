@@ -1,11 +1,20 @@
 import React from "react";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, ButtonPortal, ContentPortal } from "./common";
+import {
+  Button,
+  TextBox,
+  ButtonPortal,
+  ContentPortal,
+  StatusPage,
+} from "./common";
 import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
   DETAILS_SUB_PAGE,
+  SAVING,
+  ERROR,
+  SAVED,
 } from "./utils/constants";
 
 function PushUpCounter(props) {
@@ -13,6 +22,7 @@ function PushUpCounter(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [count, setCount] = React.useState(0);
   const { uid, photoURL } = auth.currentUser;
+  const [saveStatus, setSaveStatus] = React.useState("");
 
   const workoutId = workout ? workout.id : -1;
   const pushUp2Ref = firestore.collection(
@@ -29,18 +39,39 @@ function PushUpCounter(props) {
   async function saveCount() {
     if (saveCalled.current) return;
     saveCalled.current = true;
+    setSaveStatus(SAVING);
 
-    await pushUp2Ref.add({
-      count,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-      workoutId,
-      type: workout.template || "",
-      unit: "",
-    });
-    setCount(0);
-    setWorkout(null);
+    pushUp2Ref
+      .add({
+        count,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        uid,
+        workoutId,
+        type: workout.template || "",
+        unit: "",
+      })
+      .then(() => {
+        setSaveStatus(SAVED);
+
+        setTimeout(function () {
+          setWorkout(null);
+        }, 1000);
+      })
+      .catch((error) => {
+        saveCalled.current = false;
+        console.error("Error writing document: ", error);
+        // setSaveStatus(ERROR);
+
+        // setTimeout(function () {
+        //   setSaveStatus("");
+        // }, 1000);
+      });
+
+    // setCount(0);
+    // setWorkout(null);
   }
+
+  if (saveStatus === SAVED) return <StatusPage status={saveStatus} />;
 
   return (
     <div className="push-up-counter">
