@@ -13,7 +13,7 @@ function DeleteButton(props) {
 
   return (
     <div className={`${className} delete-button`}>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence exitBeforeEnter initial={false} >
         {!askQuestion && (
           <motion.div
             key="first"
