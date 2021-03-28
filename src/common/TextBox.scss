@@ -9,6 +9,7 @@
     outline: none;
     padding: 0 12px;
     color: $text-color;
+    -webkit-appearance: none;
 
     &::placeholder {
         color: #686a777a;
