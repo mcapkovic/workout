@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Button, ContentPortal, Separator, DeleteButton } from "./common";
@@ -39,6 +40,18 @@ function RemoveUser(props) {
   );
 }
 
+const animation = {
+  initial: {
+    opacity: 0,
+    x: -50,
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+  },
+  transition: { duration: 0.2 },
+};
+
 function Profile(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const user = auth.currentUser || {};
@@ -49,24 +62,30 @@ function Profile(props) {
 
   const [data = []] = useCollectionData(query, { idField: "id" });
 
-  const isDemo = uid === "Fmc3wlvn9eMHC4cieSeNCZIdJbv2" || email === 'demo@demo.com';
+  const isDemo =
+    uid === "Fmc3wlvn9eMHC4cieSeNCZIdJbv2" || email === "demo@demo.com";
   return (
-    <div>
+    <div className="profile">
       <Separator horizontal className="header-separator-dynamic" />
-      <h2>User details</h2>
-      <div>{displayName}</div>
-      <div>{email}</div>
-      <br />
-      <SignOut />
+        <h2>User details</h2>
+        <motion.div {...animation}>
+
+        <div>{displayName}</div>
+        <div>{email}</div>
+        <br />
+        <SignOut />
+      </motion.div>
       <Separator horizontal />
+        <h1>Danger zone</h1>
+        <motion.div {...animation}>
 
-      <h1>Danger zone</h1>
-      <RemoveUser disabled={isDemo} />
-      {isDemo && <p>demo acconut can not be deleted</p>}
+        <RemoveUser disabled={isDemo} />
+        {isDemo && <p>demo acconut can not be deleted</p>}
 
-      <ContentPortal portalTo="#footer-center">
-        {packageJson.version}
-      </ContentPortal>
+        <ContentPortal portalTo="#footer-center">
+          {packageJson.version}
+        </ContentPortal>
+      </motion.div>
     </div>
   );
 }

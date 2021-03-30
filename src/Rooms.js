@@ -76,8 +76,7 @@ function RoomsManager(props) {
           Create room
         </Button>
       </div>
-      <Separator horizontal />
-    </div>
+  </div>
   );
 }
 
