@@ -37,6 +37,19 @@ export const listMotion = {
   },
 };
 
+export const heightMotion = {
+  default: {
+    initial: {
+      opacity: 0,
+      height: 0,
+    },
+    animate: {
+      opacity: 1,
+      height: "auto",
+    },
+  },
+};
+
 export const buttonMotion = {
   left: {
     initial: {
