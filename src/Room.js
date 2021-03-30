@@ -3,20 +3,10 @@ import ReactDOM from "react-dom";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
-import { Button, TextBox, Separator, LineChart } from "./common";
+import { Button, TextBox, Separator, LineChart, buttonMotion, ButtonPortal } from "./common";
 import moment from "moment";
 import useLineData from "./hooks/useLineData";
 import UsersRow from "./UsersRow";
-
-function BackButton(props) {
-  const headerStart = React.useRef(document.querySelector("#header-start"));
-  return ReactDOM.createPortal(
-    <Button className="back-button" onClick={() => props.setRoom(null)}>
-      Back
-    </Button>,
-    headerStart.current
-  );
-}
 
 // function Row(props) {
 //   const { createdAt, count, workoutId } = props.item;
@@ -95,7 +85,14 @@ function Room(props) {
 
   return (
     <div className="room">
-      <BackButton setRoom={setRoom} />
+      <ButtonPortal
+        destination="#header-start"
+        onClick={() => setRoom(null)}
+        {...buttonMotion.right}
+      >
+        Cancel
+      </ButtonPortal>
+
       <Separator horizontal className="header-separator" />
       <div className="room__header">
         <h2 className="room__header__title">{room.roomName}</h2>

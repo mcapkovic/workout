@@ -24,7 +24,7 @@ export const listMotion = {
       },
     },
   },
-  
+
   listItemVariants: {
     initial: {
       opacity: 0,
@@ -33,7 +33,31 @@ export const listMotion = {
     animate: {
       opacity: 1,
       x: 0,
-      // transition:{duration: 2}
     },
+  },
+};
+
+export const buttonMotion = {
+  left: {
+    initial: {
+      opacity: 0.5,
+      x: -30,
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+    },
+    transition: { duration: 0.1 },
+  },
+  right: {
+    initial: {
+      opacity: 0.5,
+      x: 30,
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+    },
+    transition: { duration: 0.1 },
   },
 };

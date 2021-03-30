@@ -10,3 +10,4 @@ export { default as ContentPortal } from "./ContentPortal";
 export { default as ButtonGroupItem } from "./ButtonGroupItem";
 export { default as StatusPage } from "./StatusPage";
 export { default as SuccesState } from "./SuccesState";
+export * from './motion';

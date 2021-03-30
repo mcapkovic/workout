@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FirebaseContext } from "./context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import {
@@ -7,6 +8,7 @@ import {
   ButtonPortal,
   ContentPortal,
   StatusPage,
+  buttonMotion,
 } from "./common";
 import {
   DEFAULT_SUB_PAGE,
@@ -79,6 +81,7 @@ function PushUpCounter(props) {
         destination="#header-end"
         disabled={!workout || !count}
         onClick={saveCount}
+        {...buttonMotion.left}
       >
         Save
       </ButtonPortal>
@@ -86,13 +89,25 @@ function PushUpCounter(props) {
       <ButtonPortal
         destination="#header-start"
         onClick={() => setSubPage(DEFAULT_SUB_PAGE)}
+        {...buttonMotion.right}
       >
         Cancel
       </ButtonPortal>
 
       <h1 className="push-up-counter__name">{workout.name}</h1>
 
-      <div className="push-up-counter__count"> {count}</div>
+      <motion.div
+        className="push-up-counter__count"
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{ duration: 0.5 }}
+      >
+        {count}
+      </motion.div>
       <div className="push-up-counter__controls">
         <ButtonPair changeCount={changeCount} amount={1} count={count} />
         <ButtonPair changeCount={changeCount} amount={5} count={count} />
@@ -113,10 +128,16 @@ function ButtonPair(props) {
   const { changeCount, amount, count } = props;
   return (
     <div>
-      <Button disabled={count <= 0} onClick={() => changeCount(-amount)}>
+      <Button
+        disabled={count <= 0}
+        onClick={() => changeCount(-amount)}
+        {...buttonMotion.left}
+      >
         -{amount}
       </Button>
-      <Button onClick={() => changeCount(amount)}>+{amount}</Button>
+      <Button onClick={() => changeCount(amount)} {...buttonMotion.right}>
+        +{amount}
+      </Button>
     </div>
   );
 }

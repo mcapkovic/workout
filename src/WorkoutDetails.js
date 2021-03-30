@@ -10,6 +10,7 @@ import {
   BarChart,
   DeleteButton,
   ButtonPortal,
+  buttonMotion
 } from "./common";
 import PushUpCounter from "./PushUpCounter";
 import {
@@ -144,8 +145,9 @@ function WorkoutDetails(props) {
     <div>
       <ButtonPortal
         destination="#header-start"
-        className="header-start-button"
+        // className="header-start-button"
         onClick={() => props.setSubPage(DEFAULT_SUB_PAGE)}
+       {...buttonMotion.right}
       >
         Back
       </ButtonPortal>
