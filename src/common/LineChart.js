@@ -48,7 +48,7 @@ const LineChart = ({
         },
       },
     }}
-    yFormat=" >-.2f"
+    // yFormat=" >-.2f"
     curve="catmullRom"
     axisTop={null}
     axisRight={null}
