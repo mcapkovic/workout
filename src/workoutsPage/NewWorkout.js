@@ -19,6 +19,8 @@ import {
 import { listMotion } from "../common/motion";
 import { strings, PUSH_UP, SQUAT, SIT_UP, PULL_UP } from "../utils/constants";
 
+const workoutButtons = [PUSH_UP, SQUAT, SIT_UP, PULL_UP];
+
 function NewWorkout(props) {
   const { setWorkout, workouts, setSubPage } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -52,34 +54,16 @@ function NewWorkout(props) {
             Choose a workout type:
           </ButtonGroupItem>
 
-          <ButtonGroupItem
-            className="new-workout__group__type"
-            isSelected={type === PUSH_UP}
-            onClick={() => setType(PUSH_UP)}
-          >
-            {strings[PUSH_UP]}
-          </ButtonGroupItem>
-          <ButtonGroupItem
-            className="new-workout__group__type"
-            isSelected={type === SQUAT}
-            onClick={() => setType(SQUAT)}
-          >
-            {strings[SQUAT]}
-          </ButtonGroupItem>
-          <ButtonGroupItem
-            className="new-workout__group__type"
-            isSelected={type === SIT_UP}
-            onClick={() => setType(SIT_UP)}
-          >
-            {strings[SIT_UP]}
-          </ButtonGroupItem>
-          <ButtonGroupItem
-            className="new-workout__group__type"
-            isSelected={type === PULL_UP}
-            onClick={() => setType(PULL_UP)}
-          >
-            {strings[PULL_UP]}
-          </ButtonGroupItem>
+          {workoutButtons.map((itemType) => (
+            <ButtonGroupItem
+              key={itemType}
+              className="new-workout__group__type"
+              isSelected={type === itemType}
+              onClick={() => setType(itemType)}
+            >
+              {strings[itemType]}
+            </ButtonGroupItem>
+          ))}
         </ButtonGroup>
       </motion.div>
 
