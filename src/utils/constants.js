@@ -49,9 +49,7 @@ export const PRAISE_MESSAGES = [
   "superb job",
   "magnificent job",
   "wonderful job",
-  "do very well",
   "doing so well",
-  "going very well",
   "doing so great",
   "make it big",
 ];

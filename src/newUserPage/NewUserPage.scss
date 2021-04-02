@@ -1,0 +1,13 @@
+.new-user-page {
+  max-width: 500px;
+  margin: 0 auto;
+  &__name {
+      margin-top: 8rem;
+      label{
+        display: block;
+      }
+      .textbox{
+        margin: 1rem 1rem 0px 0px;
+      }
+  }
+}

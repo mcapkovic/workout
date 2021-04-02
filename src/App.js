@@ -67,11 +67,13 @@ function LogedUser(props) {
 
   const userPubicDataRef = firestore.collection(`users/${uid}/userPublicData`);
   const query2 = userPubicDataRef.where("uid", "==", uid);
-  const [userPubicData = []] = useCollectionData(query2, { idField: "id" });
+  const [userPubicData] = useCollectionData(query2, { idField: "id" });
 
   return (
     <>
-      {userPubicData.length > 0 ? (
+      {userPubicData && userPubicData.length === 0 ? (
+        <NewUserPage />
+      ) : (
         <>
           <header className="header">
             <div id="header-start" className="header__start" />
@@ -114,8 +116,6 @@ function LogedUser(props) {
             <div id="footer-end" />
           </footer>
         </>
-      ) : (
-        <NewUserPage />
       )}
     </>
   );
