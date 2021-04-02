@@ -1,23 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FirebaseContext } from "../context";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import {
   Button,
-  TextBox,
   ButtonPortal,
   ContentPortal,
   StatusPage,
   buttonMotion,
 } from "../common";
-import {
-  DEFAULT_SUB_PAGE,
-  WORKOUT_SUB_PAGE,
-  DETAILS_SUB_PAGE,
-  SAVING,
-  ERROR,
-  SAVED,
-} from "../utils/constants";
+import { DEFAULT_SUB_PAGE, SAVING, SAVED } from "../utils/constants";
 import { randomPraise } from "../utils/common";
 
 function PushUpCounter(props) {
@@ -69,9 +60,6 @@ function PushUpCounter(props) {
         //   setSaveStatus("");
         // }, 1000);
       });
-
-    // setCount(0);
-    // setWorkout(null);
   }
 
   if (saveStatus === SAVED)

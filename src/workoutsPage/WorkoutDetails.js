@@ -10,14 +10,9 @@ import {
   BarChart,
   DeleteButton,
   ButtonPortal,
-  buttonMotion
+  buttonMotion,
 } from "../common";
-import PushUpCounter from "./PushUpCounter";
-import {
-  DEFAULT_SUB_PAGE,
-  WORKOUT_SUB_PAGE,
-  DETAILS_SUB_PAGE,
-} from "../utils/constants";
+import { DEFAULT_SUB_PAGE } from "../utils/constants";
 import useSingleBarData from "../hooks/useSingleBarData";
 
 function RoomsManager(props) {
@@ -118,7 +113,6 @@ function WorkoutDetails(props) {
       .delete({ uid });
     setSubPage(DEFAULT_SUB_PAGE);
   }
-  console.log(workout);
 
   const historyRef = firestore.collection(
     `workoutsHistory/${workout.id}/workoutEntries`
@@ -128,7 +122,6 @@ function WorkoutDetails(props) {
   const query = historyRef.orderBy("createdAt", "asc").limitToLast(50);
 
   const [data = []] = useCollectionData(query, { idField: "id" });
-  console.log(data);
 
   const datePeriod = React.useMemo(() => {
     return Array.from({ length: 7 }, (v, i) =>
@@ -139,7 +132,6 @@ function WorkoutDetails(props) {
   }, []);
 
   const barData = useSingleBarData(datePeriod, data);
-  console.log("barData", barData);
 
   return (
     <div>
@@ -147,7 +139,7 @@ function WorkoutDetails(props) {
         destination="#header-start"
         // className="header-start-button"
         onClick={() => props.setSubPage(DEFAULT_SUB_PAGE)}
-       {...buttonMotion.right}
+        {...buttonMotion.right}
       >
         Back
       </ButtonPortal>

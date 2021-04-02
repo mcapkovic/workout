@@ -1,43 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import Chat from "./Chat";
-import { Button, TextBox, Separator, LineChart, buttonMotion, ButtonPortal } from "../common";
+import { Separator, LineChart, buttonMotion, ButtonPortal } from "../common";
 import moment from "moment";
 import useLineData from "../hooks/useLineData";
 import UsersRow from "./UsersRow";
-
-// function Row(props) {
-//   const { createdAt, count, workoutId } = props.item;
-//   let date = undefined;
-//   if (createdAt && "seconds" in createdAt)
-//     date = new Date(createdAt.seconds * 1000);
-//   const dateString = date ? date.toLocaleDateString() : "";
-//   const timeString = date ? date.toLocaleTimeString() : "";
-//   return (
-//     <tr>
-//       <th>{workoutId}</th>
-//       <th>{dateString}</th>
-//       <th>{timeString}</th>
-//       <th>{count}</th>
-//     </tr>
-//   );
-// }
-// function Table(props) {
-//   const { data } = props;
-//   return (
-//     <div style={{ margin: "10px" }}>
-//       <table>
-//         <tbody>
-//           {data.map((item) => (
-//             <Row key={item.id} item={item} />
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
 
 function Room(props) {
   const { setRoom, room } = props;
@@ -81,7 +48,6 @@ function Room(props) {
   }, []);
 
   const data = useLineData(datePeriod, workouts2, membersData);
-  console.log("GROUPED", data);
 
   return (
     <div className="room">
@@ -98,20 +64,7 @@ function Room(props) {
         <h2 className="room__header__title">{room.roomName}</h2>
         <span className="room__header__id">id: {room.id}</span>
       </div>
-      {/* users: */}
-      {/* {membersData.map((member = {}) => (
-        <div>{member.name}</div>
-      ))} */}
       <UsersRow users={membersData} />
-      {/* {workouts2 && workouts2.length > 0 && (
-        <>
-          <Separator horizontal />
-          <h2>Workouts history</h2>
-          {workouts2.map((workout) => (
-            <Table data={workout} />
-          ))}
-        </>
-      )} */}
       <Separator horizontal />
       <h2>Workouts history</h2>
       <div className="room__chart">

@@ -1,11 +1,10 @@
 import React from "react";
 import { FirebaseContext } from "../context";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, Separator } from "../common";
+import { Button, TextBox } from "../common";
 
 function NewUserPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
-  const { uid, photoURL } = auth.currentUser;
+  const { uid } = auth.currentUser;
 
   const [name, setName] = React.useState("");
 

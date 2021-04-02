@@ -24,7 +24,7 @@ function RemoveUser(props) {
   function remove() {
     const user = firebase.auth().currentUser;
     user.delete().catch(function (error) {
-      console.log(error);
+      console.error(error);
     });
   }
 

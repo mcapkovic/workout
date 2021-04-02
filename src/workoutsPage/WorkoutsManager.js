@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FirebaseContext } from "../context";
-import { Button, TextBox, Separator } from "../common";
+import { Separator } from "../common";
 import { listMotion } from "../common/motion";
 import NewWorkout from "./NewWorkout";
 import WorkoutItem from "./WorkoutItem";
@@ -9,7 +9,7 @@ import WorkoutItem from "./WorkoutItem";
 function WorkoutsManager(props) {
   const { setWorkout, workouts, setSubPage } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
-  const { uid, photoURL } = auth.currentUser;
+  const { uid } = auth.currentUser;
   const [newWorkoutName, setNewWorkoutName] = React.useState("");
   const workoutsRef = firestore.collection(`users/${uid}/workouts`);
 

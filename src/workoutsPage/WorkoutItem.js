@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, TextBox, Separator } from "../common";
+import { Button } from "../common";
 import { WORKOUT_SUB_PAGE, DETAILS_SUB_PAGE } from "../utils/constants";
 
 function WorkoutItem(props) {

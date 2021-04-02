@@ -1,7 +1,6 @@
 import React from "react";
 import { FirebaseContext } from "../context";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, Separator } from "../common";
+import { Button } from "../common";
 
 function SignIn() {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -15,7 +14,7 @@ function SignIn() {
     auth
       .signInWithEmailAndPassword("demo@demo.com", "123456")
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 

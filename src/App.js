@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import "./App.scss";
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -6,7 +6,6 @@ import "firebase/auth";
 // import 'firebase/analytics';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FirebaseContext } from "./context";
-import Chat from "./roomsPage/Chat";
 import WorkoutsPage from "./workoutsPage/WorkoutsPage";
 import History from "./History";
 import Room from "./roomsPage/Rooms";
@@ -14,7 +13,7 @@ import Profile from "./profilePage/Profile";
 import NewUserPage from "./newUserPage/NewUserPage";
 import LandingPage from "./landingPage/LandingPage";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { ButtonGroup, Button, ButtonGroupItem } from "./common";
+import { ButtonGroup, ButtonGroupItem } from "./common";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,

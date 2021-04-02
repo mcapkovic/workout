@@ -1,22 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FirebaseContext } from "../context";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import {
-  Button,
-  TextBox,
-  Separator,
-  ButtonGroup,
-  ButtonGroupItem,
-} from "../common";
-import PushUpCounter from "./PushUpCounter";
-import WorkoutDetails from "./WorkoutDetails";
-import {
-  DEFAULT_SUB_PAGE,
-  WORKOUT_SUB_PAGE,
-  DETAILS_SUB_PAGE,
-} from "../utils/constants";
-import { listMotion } from "../common/motion";
+import { Button, TextBox, ButtonGroup, ButtonGroupItem } from "../common";
 import { strings, PUSH_UP, SQUAT, SIT_UP, PULL_UP } from "../utils/constants";
 
 const workoutButtons = [PUSH_UP, SQUAT, SIT_UP, PULL_UP];
