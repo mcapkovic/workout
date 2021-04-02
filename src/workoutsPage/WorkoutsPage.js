@@ -5,13 +5,12 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Button, TextBox, Separator } from "../common";
 import PushUpCounter from "./PushUpCounter";
 import WorkoutDetails from "./WorkoutDetails";
+import WorkoutsManager from "./WorkoutsManager";
 import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
   DETAILS_SUB_PAGE,
 } from "../utils/constants";
-import { listMotion } from "../common/motion";
-import NewWorkout from "./NewWorkout";
 
 function WorkoutsPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -59,85 +58,3 @@ function WorkoutsPage(props) {
   );
 }
 export default WorkoutsPage;
-
-function WorkoutItem(props) {
-  const { item = {}, setWorkout, setSubPage, className, index } = props;
-  const { id, name } = item;
-
-  return (
-    <div className="workout-item">
-      <div className="workout-item__name">
-        <span className="workout-item__name__index">{index + 1}.</span> {name}
-      </div>
-      <div className="workout-item__buttons">
-        <Button
-          onClick={() => {
-            setWorkout(item);
-            setSubPage(WORKOUT_SUB_PAGE);
-          }}
-        >
-          Start
-        </Button>
-
-        <Button
-          onClick={() => {
-            setWorkout(item);
-            setSubPage(DETAILS_SUB_PAGE);
-          }}
-        >
-          More details
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-function WorkoutsManager(props) {
-  const { setWorkout, workouts, setSubPage } = props;
-  const { auth, firestore, firebase } = React.useContext(FirebaseContext);
-  const { uid, photoURL } = auth.currentUser;
-  const [newWorkoutName, setNewWorkoutName] = React.useState("");
-  const workoutsRef = firestore.collection(`users/${uid}/workouts`);
-
-  async function createWorkout() {
-    await workoutsRef.add({
-      template: "pushUp",
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      name: newWorkoutName,
-      uid,
-    });
-    setNewWorkoutName("");
-  }
-
-  return (
-    <div className="workouts">
-      <div className="workouts__selection">
-        <h2>List of workouts</h2>
-
-        {workouts.length > 0 && (
-          <motion.div
-            variants={listMotion.listVariants}
-            initial="initial"
-            animate="animate"
-            transition={{ duration: 0.2 }}
-          >
-            {workouts.map((item, index) => (
-              <motion.div key={index} variants={listMotion.listItemVariants}>
-                <WorkoutItem
-                  setWorkout={setWorkout}
-                  item={item}
-                  setSubPage={setSubPage}
-                  index={index}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </div>
-
-      <Separator horizontal />
-      <NewWorkout />
-      <div style={{height: '1rem'}}/>
-    </div>
-  );
-}
