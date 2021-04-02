@@ -17,7 +17,7 @@ import {
   DETAILS_SUB_PAGE,
 } from "../utils/constants";
 import { listMotion } from "../common/motion";
-import { strings, PUSH_UP, SQUAT } from "../utils/constants";
+import { strings, PUSH_UP, SQUAT, SIT_UP, PULL_UP } from "../utils/constants";
 
 function NewWorkout(props) {
   const { setWorkout, workouts, setSubPage } = props;
@@ -65,6 +65,20 @@ function NewWorkout(props) {
             onClick={() => setType(SQUAT)}
           >
             {strings[SQUAT]}
+          </ButtonGroupItem>
+          <ButtonGroupItem
+            className="new-workout__group__type"
+            isSelected={type === SIT_UP}
+            onClick={() => setType(SIT_UP)}
+          >
+            {strings[SIT_UP]}
+          </ButtonGroupItem>
+          <ButtonGroupItem
+            className="new-workout__group__type"
+            isSelected={type === PULL_UP}
+            onClick={() => setType(PULL_UP)}
+          >
+            {strings[PULL_UP]}
           </ButtonGroupItem>
         </ButtonGroup>
       </motion.div>

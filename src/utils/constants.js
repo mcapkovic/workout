@@ -2,17 +2,23 @@ export const DEFAULT_SUB_PAGE = "default-sub-page";
 export const WORKOUT_SUB_PAGE = "workout-sub-page";
 export const DETAILS_SUB_PAGE = "details-sub-page";
 
+export const PUSH_UP = "pushUp"; // do not change!
+export const SQUAT = "squat"; // do not change!
+export const SIT_UP = "sitUp"; // do not change!
+export const PULL_UP = "pullUp"; // do not change!
+
+
 export const strings = {
-  pushUp: "push up",
-  squat: "squat",
+  [PUSH_UP]: "push up",
+  [SQUAT]: "squat",
+  [SIT_UP]: "sit up",
+  [PULL_UP]: "pull up",
+
 };
 
 export const SAVING = "saving";
 export const ERROR = "error";
 export const SAVED = "saved";
-
-export const PUSH_UP = "pushUp";
-export const SQUAT = "squat";
 
 export const PRAISE_MESSAGES = [
   "well done",
