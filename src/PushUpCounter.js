@@ -18,6 +18,7 @@ import {
   ERROR,
   SAVED,
 } from "./utils/constants";
+import { randomPraise } from "./utils/common";
 
 function PushUpCounter(props) {
   const { workout, setWorkout, setSubPage } = props;
@@ -73,7 +74,8 @@ function PushUpCounter(props) {
     // setWorkout(null);
   }
 
-  if (saveStatus === SAVED) return <StatusPage status={saveStatus} />;
+  if (saveStatus === SAVED)
+    return <StatusPage status={saveStatus} message={randomPraise()} />;
 
   return (
     <div className="push-up-counter">

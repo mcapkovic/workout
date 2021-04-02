@@ -1,5 +1,6 @@
 import groupBy from "lodash/groupBy";
 import moment from "moment";
+import {PRAISE_MESSAGES} from './constants';
 
 export function getClassNames(...classes) {
   return classes
@@ -23,4 +24,13 @@ export function groupByDay(data) {
       .startOf("day")
       .format("MMM Do")
   );
+}
+
+function randomNumber(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min+1)+min);
+}
+
+export function randomPraise(){
+const index = randomNumber(0, PRAISE_MESSAGES.length -1)
+return `${PRAISE_MESSAGES[index]}!`
 }
