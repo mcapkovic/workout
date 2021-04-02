@@ -7,7 +7,7 @@ import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FirebaseContext } from "./context";
 import Chat from "./Chat";
-import PushUpPage from "./PushUpPage";
+import WorkoutsPage from "./WorkoutsPage";
 import History from "./History";
 import Room from "./Rooms";
 import Profile from "./Profile";
@@ -102,7 +102,7 @@ function LogedUser(props) {
           </header>
 
           <div className="main-content">
-            {tab === WORKOUT && <PushUpPage />}
+            {tab === WORKOUT && <WorkoutsPage />}
             {tab === PUSH_UP_HISTORY && <History />}
             {tab === PUSH_UP_ROOM && <Room />}
             {tab === PROFILE_PAGE && <Profile />}

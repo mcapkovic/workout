@@ -13,7 +13,7 @@ import {
 import { listMotion } from "./common/motion";
 import NewWorkout from "./NewWorkout";
 
-function PushUpPage(props) {
+function WorkoutsPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [workout, setWorkout] = React.useState(null);
   const { uid, photoURL } = auth.currentUser;
@@ -58,7 +58,7 @@ function PushUpPage(props) {
     </>
   );
 }
-export default PushUpPage;
+export default WorkoutsPage;
 
 function WorkoutItem(props) {
   const { item = {}, setWorkout, setSubPage, className, index } = props;
