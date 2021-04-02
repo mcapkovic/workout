@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FirebaseContext } from "./context";
+import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, ContentPortal, Separator, DeleteButton } from "./common";
-import packageJson from "../package.json";
+import { Button, ContentPortal, Separator, DeleteButton } from "../common";
+import packageJson from "../../package.json";
 
 function SignOut() {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);

@@ -1,16 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FirebaseContext } from "./context";
+import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, Separator } from "./common";
+import { Button, TextBox, Separator } from "../common";
 import PushUpCounter from "./PushUpCounter";
 import WorkoutDetails from "./WorkoutDetails";
 import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
   DETAILS_SUB_PAGE,
-} from "./utils/constants";
-import { listMotion } from "./common/motion";
+} from "../utils/constants";
+import { listMotion } from "../common/motion";
 import NewWorkout from "./NewWorkout";
 
 function WorkoutsPage(props) {

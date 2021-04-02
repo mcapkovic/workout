@@ -7,11 +7,12 @@
 @import './common/ButtonGroupItem';
 @import './common/StatusPage';
 @import './common/SuccesState';
-@import './Profile';
 
 
-@import './PushUpCounter';
-@import './LandingPage';
-@import './Room';
-@import './UsersRow';
-@import './NewWorkout';
+
+@import './profilePage/Profile';
+@import './workoutsPage/PushUpCounter';
+@import './landingPage/LandingPage';
+@import './roomsPage/Room';
+@import './roomsPage/UsersRow';
+@import './workoutsPage//NewWorkout';

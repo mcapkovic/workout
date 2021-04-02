@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { FirebaseContext } from "./context";
+import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
-import { Button, TextBox, Separator, LineChart, buttonMotion, ButtonPortal } from "./common";
+import { Button, TextBox, Separator, LineChart, buttonMotion, ButtonPortal } from "../common";
 import moment from "moment";
-import useLineData from "./hooks/useLineData";
+import useLineData from "../hooks/useLineData";
 import UsersRow from "./UsersRow";
 
 // function Row(props) {

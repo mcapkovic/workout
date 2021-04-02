@@ -1,7 +1,7 @@
 import React from "react";
-import { FirebaseContext } from "./context";
+import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { Button, TextBox, Separator } from "./common";
+import { Button, TextBox, Separator } from "../common";
 
 function SignIn() {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);

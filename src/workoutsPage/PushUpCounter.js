@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FirebaseContext } from "./context";
+import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import {
   Button,
@@ -9,7 +9,7 @@ import {
   ContentPortal,
   StatusPage,
   buttonMotion,
-} from "./common";
+} from "../common";
 import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
@@ -17,8 +17,8 @@ import {
   SAVING,
   ERROR,
   SAVED,
-} from "./utils/constants";
-import { randomPraise } from "./utils/common";
+} from "../utils/constants";
+import { randomPraise } from "../utils/common";
 
 function PushUpCounter(props) {
   const { workout, setWorkout, setSubPage } = props;

@@ -1,11 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FirebaseContext } from "./context";
+import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
-import { Button, TextBox, Separator } from "./common";
+import { Button, TextBox, Separator } from "../common";
 import Room from "./Room";
-import { listMotion } from "./common/motion";
+import { listMotion } from "../common/motion";
 
 function RoomItem(props) {
   const { item, setRoom, index } = props;

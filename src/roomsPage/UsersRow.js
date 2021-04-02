@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { heightMotion } from "./common";
+import { heightMotion } from "../common";
 
 const animation = {
   initial: {

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import moment from "moment";
-import { FirebaseContext } from "./context";
+import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import {
   Button,
@@ -11,14 +11,14 @@ import {
   DeleteButton,
   ButtonPortal,
   buttonMotion
-} from "./common";
+} from "../common";
 import PushUpCounter from "./PushUpCounter";
 import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
   DETAILS_SUB_PAGE,
-} from "./utils/constants";
-import useSingleBarData from "./hooks/useSingleBarData";
+} from "../utils/constants";
+import useSingleBarData from "../hooks/useSingleBarData";
 
 function RoomsManager(props) {
   const { workoutId, setIsDeletable } = props;

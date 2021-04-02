@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { FirebaseContext } from "./context";
+import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 // function Chat(props) {
