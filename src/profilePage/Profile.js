@@ -43,11 +43,11 @@ function RemoveUser(props) {
 const animation = {
   initial: {
     opacity: 0,
-    x: -50,
+    height: 0,
   },
   animate: {
     opacity: 1,
-    x: 0,
+    height: "auto",
   },
   transition: { duration: 0.2 },
 };
@@ -67,18 +67,16 @@ function Profile(props) {
   return (
     <div className="profile">
       <Separator horizontal className="header-separator-dynamic" />
-        <h2>User details</h2>
-        <motion.div {...animation}>
-
+      <h2>User details</h2>
+      <motion.div {...animation}>
         <div>{displayName}</div>
         <div>{email}</div>
         <br />
         <SignOut />
       </motion.div>
       <Separator horizontal />
-        <h1>Danger zone</h1>
-        <motion.div {...animation}>
-
+      <h1>Danger zone</h1>
+      <motion.div {...animation}>
         <RemoveUser disabled={isDemo} />
         {isDemo && <p>demo acconut can not be deleted</p>}
 

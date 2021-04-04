@@ -39,7 +39,6 @@ function History(props) {
   const query = historyRef.orderBy("createdAt", "asc").limitToLast(25);
 
   const [data = []] = useCollectionData(query, { idField: "id" });
-  console.log(data);
   return (
     <div>
       <Table data={data} />
