@@ -9,6 +9,8 @@ import {
   DEFAULT_SUB_PAGE,
   WORKOUT_SUB_PAGE,
   DETAILS_SUB_PAGE,
+  UNITS,
+  defaultClickerAdditions,
 } from "../utils/constants";
 
 function WorkoutsPage(props) {
@@ -44,6 +46,12 @@ function WorkoutsPage(props) {
             workout={workout}
             setWorkout={setWorkout}
             setSubPage={setSubPage}
+            unit={UNITS[workout.unit]}
+            integerOptions={[1, 5, 10]}
+            options={
+              defaultClickerAdditions[workout.template] ||
+              defaultClickerAdditions.default
+            }
           />
         </>
       )}

@@ -9,10 +9,10 @@ import {
   buttonMotion,
 } from "../common";
 import { DEFAULT_SUB_PAGE, SAVING, SAVED } from "../utils/constants";
-import { randomPraise } from "../utils/common";
+import { randomPraise, roundNumber } from "../utils/common";
 
 function Clicker(props) {
-  const { workout, setWorkout, setSubPage } = props;
+  const { workout, setWorkout, setSubPage, unit, options } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [count, setCount] = React.useState(0);
   const { uid, photoURL } = auth.currentUser;
@@ -24,7 +24,7 @@ function Clicker(props) {
   );
 
   function changeCount(value) {
-    let newValue = count + value;
+    let newValue = roundNumber(count + value);
     if (newValue < 0) newValue = 0;
     setCount(newValue);
   }
@@ -66,7 +66,7 @@ function Clicker(props) {
     return <StatusPage status={saveStatus} message={randomPraise()} />;
 
   return (
-    <div className="push-up-counter">
+    <div className="clicker">
       <ButtonPortal
         destination="#header-end"
         disabled={!workout || !count}
@@ -84,10 +84,10 @@ function Clicker(props) {
         Cancel
       </ButtonPortal>
 
-      <h1 className="push-up-counter__name">{workout.name}</h1>
+      <h1 className="clicker__name">{workout.name}</h1>
 
       <motion.div
-        className="push-up-counter__count"
+        className="clicker__display"
         initial={{
           opacity: 0,
         }}
@@ -96,19 +96,28 @@ function Clicker(props) {
         }}
         transition={{ duration: 0.5 }}
       >
-        {count}
+        <span className="clicker__display__count">{count}</span>
+        {unit && (
+          <span className="clicker__display__unit">
+            {count > 0 && count < 2 ? unit.singular : unit.plural}
+          </span>
+        )}
       </motion.div>
-      <div className="push-up-counter__controls">
-        <ButtonPair changeCount={changeCount} amount={1} count={count} />
-        <ButtonPair changeCount={changeCount} amount={5} count={count} />
-        <ButtonPair changeCount={changeCount} amount={10} count={count} />
+      <div className="clicker__controls">
+        {options.map((option) => (
+          <ButtonPair
+            key={option}
+            changeCount={changeCount}
+            amount={option}
+            count={count}
+          />
+        ))}
       </div>
-
       <br />
-      <div className="push-up-counter__actions"></div>
+      <div className="clicker__actions"></div>
 
       <ContentPortal portalTo="#footer-center">
-        <div className="push-up-counter__id"> {workoutId}</div>
+        <div className="clicker__id"> {workoutId}</div>
       </ContentPortal>
     </div>
   );

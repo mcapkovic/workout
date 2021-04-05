@@ -2,9 +2,19 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FirebaseContext } from "../context";
 import { Button, TextBox, ButtonGroup, ButtonGroupItem } from "../common";
-import { strings, PUSH_UP, SQUAT, SIT_UP, PULL_UP } from "../utils/constants";
+import {
+  strings,
+  PUSH_UP,
+  SQUAT,
+  SIT_UP,
+  PULL_UP,
+  CYCLING,
+  VR,
+  RUNNING,
+  typeDefaultUnit,
+} from "../utils/constants";
 
-const workoutButtons = [PUSH_UP, SQUAT, SIT_UP, PULL_UP];
+const workoutButtons = [PUSH_UP, SQUAT, SIT_UP, PULL_UP, CYCLING, VR, RUNNING];
 
 function NewWorkout(props) {
   const { setWorkout, workouts, setSubPage } = props;
@@ -14,6 +24,7 @@ function NewWorkout(props) {
   const workoutsRef = firestore.collection(`users/${uid}/workouts`);
 
   const [type, setType] = React.useState("");
+  const defaultUnit = React.useMemo(() => typeDefaultUnit[type], [type]);
 
   async function createWorkout() {
     await workoutsRef.add({
@@ -21,6 +32,7 @@ function NewWorkout(props) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       name: newWorkoutName,
       uid,
+      unit: defaultUnit,
     });
     setNewWorkoutName("");
   }
@@ -36,7 +48,7 @@ function NewWorkout(props) {
       >
         <ButtonGroup>
           <ButtonGroupItem isSelected={type === ""} onClick={() => setType("")}>
-            Choose a workout type:
+            Choose an exercise:
           </ButtonGroupItem>
 
           {workoutButtons.map((itemType) => (

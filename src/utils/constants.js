@@ -6,14 +6,39 @@ export const PUSH_UP = "pushUp"; // do not change!
 export const SQUAT = "squat"; // do not change!
 export const SIT_UP = "sitUp"; // do not change!
 export const PULL_UP = "pullUp"; // do not change!
-
+export const VR = "vr"; // do not change!
+export const CYCLING = "cycling"; // do not change!
+export const RUNNING = "running"; // do not change!
 
 export const strings = {
   [PUSH_UP]: "push up",
   [SQUAT]: "squat",
   [SIT_UP]: "sit up",
   [PULL_UP]: "pull up",
+  [VR]: "vr",
+  [CYCLING]: "cycling",
+  [RUNNING]: "running",
+};
 
+export const UNITS = {
+  m: { singular: "meter", plural: "meters", id: "m" },
+  min: { singular: "minute", plural: "minutes", id: "min" },
+  km: { singular: "kilometer", plural: "kilometers", id: "km" },
+};
+
+export const typeDefaultUnit = {
+  [PUSH_UP]: "",
+  [SQUAT]: "",
+  [SIT_UP]: "",
+  [PULL_UP]: "",
+  [VR]: UNITS.min.id,
+  [CYCLING]: UNITS.km.id,
+  [RUNNING]: UNITS.km.id,
+};
+
+export const defaultClickerAdditions = {
+  default: [1, 5, 10],
+  [RUNNING]: [0.1, 0.5, 1],
 };
 
 export const SAVING = "saving";

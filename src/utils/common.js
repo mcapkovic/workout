@@ -34,3 +34,8 @@ export function randomPraise(){
 const index = randomNumber(0, PRAISE_MESSAGES.length -1)
 return `${PRAISE_MESSAGES[index]}!`
 }
+
+export function roundNumber(number, decimals = 12) {
+  var newnumber = new Number(number + "").toFixed(parseInt(decimals));
+  return parseFloat(newnumber);
+}

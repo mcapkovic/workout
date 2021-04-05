@@ -1,4 +1,4 @@
-.push-up-counter {
+.clicker {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +8,7 @@
     text-transform: uppercase;
     margin-bottom: 0;
   }
-  &__count {
+  &__display {
     border-radius: 50%;
     background: #eef0f4;
     box-shadow: 5px 5px 10px #d9dade, -5px -5px 10px #ffffff;
@@ -19,7 +19,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 80px;
+    flex-direction: column;
+    &__count {
+      font-size: 80px;
+    }
+    &__unit {
+      font-size: 16px;
+    }
   }
   &__controls {
     display: flex;
@@ -31,13 +37,13 @@
     }
   }
 
-  &__actions{
+  &__actions {
     .button {
-        margin: 0.3em;
-      }
+      margin: 0.3em;
+    }
   }
 
-  &__id{
+  &__id {
     // color: #686a7747;
     // display: flex;
     // align-items: flex-end;
@@ -45,4 +51,3 @@
     // margin: 0.5rem 0
   }
 }
-
