@@ -2,7 +2,7 @@ import React from "react";
 import { FirebaseContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Separator } from "../common";
-import PushUpCounter from "./PushUpCounter";
+import Clicker from "./Clicker";
 import WorkoutDetails from "./WorkoutDetails";
 import WorkoutsManager from "./WorkoutsManager";
 import {
@@ -40,7 +40,7 @@ function WorkoutsPage(props) {
       {workout && subPage === WORKOUT_SUB_PAGE && (
         <>
           <Separator horizontal className="header-separator" />
-          <PushUpCounter
+          <Clicker
             workout={workout}
             setWorkout={setWorkout}
             setSubPage={setSubPage}

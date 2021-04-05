@@ -11,7 +11,7 @@ import {
 import { DEFAULT_SUB_PAGE, SAVING, SAVED } from "../utils/constants";
 import { randomPraise } from "../utils/common";
 
-function PushUpCounter(props) {
+function Clicker(props) {
   const { workout, setWorkout, setSubPage } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [count, setCount] = React.useState(0);
@@ -132,4 +132,4 @@ function ButtonPair(props) {
   );
 }
 
-export default PushUpCounter;
+export default Clicker;

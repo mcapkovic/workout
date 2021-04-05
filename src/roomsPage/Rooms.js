@@ -43,10 +43,10 @@ function RoomsManager(props) {
   }
 
   return (
-    <div className="workouts">
+    <div className="rooms">
       <Separator horizontal className="header-separator-dynamic" />
 
-      <div className="workouts__selection">
+      <div className="rooms__selection">
         <h2>Rooms</h2>
         {rooms && rooms.length > 0 && (
           <motion.div
@@ -67,8 +67,9 @@ function RoomsManager(props) {
       <Separator horizontal />
       <h2> Create new Room</h2>
 
-      <div>
+      <div className="rooms__new-user">
         <TextBox
+        className="rooms__new-user__input"
           value={newRoomName}
           onChange={(e) => setNewRoomName(e.target.value)}
         />
