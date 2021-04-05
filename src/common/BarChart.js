@@ -141,9 +141,9 @@ const BarChart = ({
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "count",
-      legendPosition: "middle",
-      legendOffset: -40,
+      // legend: "count",
+      // legendPosition: "middle",
+      // legendOffset: -40,
     }}
     labelSkipWidth={12}
     labelSkipHeight={12}
