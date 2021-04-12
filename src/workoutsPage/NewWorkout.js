@@ -39,7 +39,7 @@ function NewWorkout(props) {
 
   return (
     <div className="new-workout">
-      <h2> Create new workout</h2>
+      <h2> Create new exercise</h2>
 
       <motion.div
         animate={{
@@ -76,7 +76,7 @@ function NewWorkout(props) {
               className="new-workout__add__input"
               value={newWorkoutName}
               onChange={(e) => setNewWorkoutName(e.target.value)}
-              placeholder="Workout name"
+              placeholder="Exercise name"
             />
             <Button disabled={!newWorkoutName} onClick={createWorkout}>
               Add

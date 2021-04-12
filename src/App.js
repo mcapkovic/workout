@@ -46,6 +46,7 @@ const WORKOUT = "workout";
 const PUSH_UP_HISTORY = "push-up-history";
 const PUSH_UP_ROOM = "push-up-room";
 const PROFILE_PAGE = "profile-page";
+const EXERCISE = "exercise";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -62,7 +63,7 @@ function App() {
 
 function LogedUser(props) {
   const { uid } = auth.currentUser;
-  const [tab, setTab] = React.useState(WORKOUT);
+  const [tab, setTab] = React.useState(EXERCISE);
 
   const userPubicDataRef = firestore.collection(`users/${uid}/userPublicData`);
   const query2 = userPubicDataRef.where("uid", "==", uid);
@@ -79,10 +80,10 @@ function LogedUser(props) {
             <div id="header-center" className="header__center">
               <ButtonGroup className="header__center__tabs">
                 <ButtonGroupItem
-                  isSelected={tab === WORKOUT}
-                  onClick={() => setTab(WORKOUT)}
+                  isSelected={tab === EXERCISE}
+                  onClick={() => setTab(EXERCISE)}
                 >
-                  WORKOUTS
+                  EXERCISES
                 </ButtonGroupItem>
                 <ButtonGroupItem
                   isSelected={tab === PUSH_UP_ROOM}
@@ -103,7 +104,7 @@ function LogedUser(props) {
           </header>
 
           <div className="main-content">
-            {tab === WORKOUT && <WorkoutsPage />}
+            {tab === EXERCISE && <WorkoutsPage />}
             {tab === PUSH_UP_HISTORY && <History />}
             {tab === PUSH_UP_ROOM && <Room />}
             {tab === PROFILE_PAGE && <Profile />}

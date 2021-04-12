@@ -66,7 +66,7 @@ function Room(props) {
       </div>
       <UsersRow users={membersData} />
       <Separator horizontal />
-      <h2>Workouts history</h2>
+      <h2>Exercise history</h2>
       <div className="room__chart">
         <LineChart
           data={data}

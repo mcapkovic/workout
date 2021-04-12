@@ -1,6 +1,6 @@
 @import './common/variables.scss';
 @import './common/Button';
-@import './common//TextBox';
+@import './common/TextBox';
 @import './common/ButtonGroup';
 @import './common/Separator';
 @import './common/DeleteButton';
@@ -10,8 +10,9 @@
 
 @import './profilePage/Profile';
 @import './workoutsPage/Clicker';
-@import './workoutsPage//NewWorkout';
-@import './workoutsPage//WorkoutItem';
+@import './workoutsPage/NewWorkout';
+@import './workoutsPage/WorkoutItem';
+@import './workoutsPage/WorkoutsManager';
 @import './landingPage/LandingPage';
 @import './roomsPage/Room';
 @import './roomsPage/UsersRow';

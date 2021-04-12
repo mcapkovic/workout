@@ -8,25 +8,11 @@ import WorkoutItem from "./WorkoutItem";
 
 function WorkoutsManager(props) {
   const { setWorkout, workouts, setSubPage } = props;
-  const { auth, firestore, firebase } = React.useContext(FirebaseContext);
-  const { uid } = auth.currentUser;
-  const [newWorkoutName, setNewWorkoutName] = React.useState("");
-  const workoutsRef = firestore.collection(`users/${uid}/workouts`);
-
-  async function createWorkout() {
-    await workoutsRef.add({
-      template: "pushUp",
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      name: newWorkoutName,
-      uid,
-    });
-    setNewWorkoutName("");
-  }
 
   return (
-    <div className="workouts">
-      <div className="workouts__selection">
-        <h2>List of workouts</h2>
+    <div className="workouts-manager">
+      <div className="workouts-manager__selection">
+        <h2>List of exercises</h2>
 
         {workouts.length > 0 && (
           <motion.div

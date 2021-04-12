@@ -145,8 +145,8 @@ function WorkoutDetails(props) {
       </ButtonPortal>
 
       <h1>Info</h1>
-      <div>workout name: {workout.name}</div>
-      <div>workout id: {workout.id}</div>
+      <div>Exercise name: {workout.name}</div>
+      <div>Exercise id: {workout.id}</div>
       {/* <div>category: {workout.template}</div> */}
 
       <Separator horizontal />
@@ -173,12 +173,12 @@ function WorkoutDetails(props) {
 
       <h1>Danger zone</h1>
       <DeleteButton
-        buttonText="Delete workout"
+        buttonText="Delete exercise"
         onClick={deleteWorkout}
         disabled={!isDeletable}
       />
       {!isDeletable && (
-        <div> delete is disabled because this workout is part of a room</div>
+        <div> delete is disabled because this exercise is part of a room</div>
       )}
     </div>
   );
