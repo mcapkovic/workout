@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "exercise-prod"
+    "prod": "exercise-prod",
+    "dev": "exercise-7eae7"
   }
 }
