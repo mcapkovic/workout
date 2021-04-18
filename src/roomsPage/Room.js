@@ -26,10 +26,11 @@ function Room(props) {
       const results = rawResults.map((querySnapshot2) => {
         const items = [];
         querySnapshot2.forEach((doc) => items.push(doc.data()));
-        return items;
+        return items.length > 0 ? items : undefined;
       });
 
-      setwWorkouts(results);
+      const filteredResults = results.filter((item) => item);
+      setwWorkouts(filteredResults);
     }
 
     loadData().catch((e) => null);

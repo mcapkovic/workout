@@ -9,6 +9,8 @@ function reduceCounts(accumulator, currentValue) {
 function useLineData(datePeriod, workouts2, membersData) {
   const data = React.useMemo(() => {
     const roomUsers = new Set();
+console.log(workouts2)
+    if(!workouts2 || workouts2.length === 0) return [];
 
     return workouts2.map((workoutData, index) => {
       const groups = groupByDay(workoutData);
@@ -18,7 +20,7 @@ function useLineData(datePeriod, workouts2, membersData) {
         y: groups[date] ? groups[date].reduce(reduceCounts, 0) : 0,
       }));
 
-      const { uid } = workoutData[0];
+      const { uid } = workoutData.length > 0 ? workoutData[0] : "";
       const { type } = workoutData.find((item) => item.type) || {};
       let { name = "anonym" } =
         membersData.find((user) => user.uid === uid) || {};
