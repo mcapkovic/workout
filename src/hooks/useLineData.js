@@ -33,7 +33,7 @@ function useLineData(datePeriod, workouts2, membersData) {
         roomUsers.add(nameWithType);
       }
 
-      return { uid, data, id: nameWithType };
+      return { uid, data, id: nameWithType, type };
     });
   }, [datePeriod, workouts2, membersData]);
 
