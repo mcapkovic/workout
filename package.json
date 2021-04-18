@@ -1,6 +1,6 @@
 {
   "name": "exercise",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "private": true,
   "dependencies": {
     "@nivo/bar": "0.64.0",
