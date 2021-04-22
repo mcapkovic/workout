@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import "./App.scss";
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -12,8 +18,8 @@ import Room from "./roomsPage/Rooms";
 import Profile from "./profilePage/Profile";
 import NewUserPage from "./newUserPage/NewUserPage";
 import LandingPage from "./landingPage/LandingPage";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { ButtonGroup, ButtonGroupItem } from "./common";
+import useUserData from "./hooks/useUserData";
+import Tabs from "./Tabs";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -49,75 +55,47 @@ const PROFILE_PAGE = "profile-page";
 const EXERCISE = "exercise";
 
 function App() {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [firebaseData, setFirebaseData] = React.useState(getFirebase);
 
   return (
     <div className="App">
       <FirebaseContext.Provider value={firebaseData}>
-        {user ? <LogedUser /> : <LandingPage />}
+        <header className="header">
+          <div id="header-start" className="header__start" />
+          <div id="header-center" className="header__center"></div>
+          <div id="header-end" className="header__end" />
+        </header>
+
+        <Router>
+          {user ? <LogedUser /> : <LandingPage loading={loading} />}
+        </Router>
+
+        <footer className="footer">
+          <div id="footer-start" />
+          <div id="footer-center" footer="footer__center" />
+          <div id="footer-end" />
+        </footer>
       </FirebaseContext.Provider>
     </div>
   );
 }
 
-function LogedUser(props) {
-  const { uid } = auth.currentUser;
-  const [tab, setTab] = React.useState(EXERCISE);
-
-  const userPubicDataRef = firestore.collection(`users/${uid}/userPublicData`);
-  const query2 = userPubicDataRef.where("uid", "==", uid);
-  const [userPubicData] = useCollectionData(query2, { idField: "id" });
+function LogedUser() {
+  const userPubicData = useUserData();
 
   return (
-    <>
-      {userPubicData && userPubicData.length === 0 ? (
-        <NewUserPage />
-      ) : (
-        <>
-          <header className="header">
-            <div id="header-start" className="header__start" />
-            <div id="header-center" className="header__center">
-              <ButtonGroup className="header__center__tabs">
-                <ButtonGroupItem
-                  isSelected={tab === EXERCISE}
-                  onClick={() => setTab(EXERCISE)}
-                >
-                  EXERCISES
-                </ButtonGroupItem>
-                <ButtonGroupItem
-                  isSelected={tab === PUSH_UP_ROOM}
-                  onClick={() => setTab(PUSH_UP_ROOM)}
-                >
-                  ROOMS
-                </ButtonGroupItem>
-                <ButtonGroupItem
-                  isSelected={tab === PROFILE_PAGE}
-                  onClick={() => setTab(PROFILE_PAGE)}
-                >
-                  PROFILE
-                </ButtonGroupItem>
-              </ButtonGroup>
-            </div>
-
-            <div id="header-end" className="header__end" />
-          </header>
-
-          <div className="main-content">
-            {tab === EXERCISE && <WorkoutsPage />}
-            {tab === PUSH_UP_HISTORY && <History />}
-            {tab === PUSH_UP_ROOM && <Room />}
-            {tab === PROFILE_PAGE && <Profile />}
-          </div>
-
-          <footer className="footer">
-            <div id="footer-start" />
-            <div id="footer-center" footer="footer__center" />
-            <div id="footer-end" />
-          </footer>
-        </>
-      )}
-    </>
+    <div className="main-content">
+      {userPubicData && userPubicData.length > 0&& <Tabs />}
+      
+      <Switch>
+        <Route path="/exercises" component={WorkoutsPage} />
+        <Route path="/rooms" component={Room} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/new-user" component={NewUserPage} />
+        <Redirect to="/exercises" from="*" />
+      </Switch>
+    </div>
   );
 }
 
