@@ -10,6 +10,18 @@
     &__index {
     }
   }
+  &__today {
+    text-align: center;
+    margin-left: 1rem;
+    color: #9e9e9e;
+    &__count {
+      margin-top: 0.3rem;
+      font-size: 1.1rem;
+    }
+    &__label {
+      font-size: 0.7rem;
+    }
+  }
   &__buttons {
     flex-shrink: 0;
     .button {

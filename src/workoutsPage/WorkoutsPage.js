@@ -12,6 +12,7 @@ import {
   UNITS,
   defaultClickerAdditions,
 } from "../utils/constants";
+import useTodayHistory from "../hooks/useTodayHistory";
 
 function WorkoutsPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
@@ -23,6 +24,8 @@ function WorkoutsPage(props) {
   const [workouts = []] = useCollectionData(query, { idField: "id" });
 
   const [subPage, setSubPage] = React.useState(DEFAULT_SUB_PAGE);
+
+  const dataToday = useTodayHistory({ uid });
 
   return (
     <>
@@ -36,6 +39,7 @@ function WorkoutsPage(props) {
             workouts={workouts}
             setWorkout={setWorkout}
             setSubPage={setSubPage}
+            dataToday={dataToday}
           />
         </>
       )}

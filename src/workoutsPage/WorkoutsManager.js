@@ -1,13 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FirebaseContext } from "../context";
 import { Separator } from "../common";
 import { listMotion } from "../common/motion";
 import NewWorkout from "./NewWorkout";
 import WorkoutItem from "./WorkoutItem";
 
 function WorkoutsManager(props) {
-  const { setWorkout, workouts, setSubPage } = props;
+  const { setWorkout, workouts, setSubPage, dataToday } = props;
 
   return (
     <div className="workouts-manager">
@@ -28,6 +27,7 @@ function WorkoutsManager(props) {
                   item={item}
                   setSubPage={setSubPage}
                   index={index}
+                  dataToday={dataToday[item.id]}
                 />
               </motion.div>
             ))}
