@@ -44,7 +44,6 @@ function Chat() {
     e.preventDefault();
 
     const { uid, photoURL } = auth.currentUser;
-    // console.log(auth.currentUser)
 
     await messagesRef.add({
       text: formValue,

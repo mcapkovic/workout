@@ -16,10 +16,9 @@ function useTodayHistory(props) {
     .orderBy("createdAt", "asc")
     .limitToLast(50);
 
-  const [allData = [],,error] = useCollectionData(query2, {
+  const [allData = []] = useCollectionData(query2, {
     idField: "id",
   });
-  console.log(error)
 
   const data = React.useMemo(() => {
     const workouts = {};
