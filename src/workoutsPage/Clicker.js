@@ -32,6 +32,7 @@ function Clicker(props) {
   const saveCalled = React.useRef(false);
   async function saveCount() {
     if (saveCalled.current) return;
+
     saveCalled.current = true;
     setSaveStatus(SAVING);
 
@@ -64,6 +65,9 @@ function Clicker(props) {
 
   if (saveStatus === SAVED)
     return <StatusPage status={saveStatus} message={randomPraise()} />;
+
+  if (saveStatus === SAVING)
+    return <StatusPage status={saveStatus} />;
 
   return (
     <div className="clicker">
