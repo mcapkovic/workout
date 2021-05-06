@@ -9,6 +9,7 @@ export const PULL_UP = "pullUp"; // do not change!
 export const VR = "vr"; // do not change!
 export const CYCLING = "cycling"; // do not change!
 export const RUNNING = "running"; // do not change!
+export const STEPPER = "stepper"; // do not change!
 
 export const strings = {
   [PUSH_UP]: "push up",
@@ -18,6 +19,7 @@ export const strings = {
   [VR]: "vr",
   [CYCLING]: "cycling",
   [RUNNING]: "running",
+  [STEPPER]: "stepper",
 };
 
 export const UNITS = {
@@ -34,11 +36,13 @@ export const typeDefaultUnit = {
   [VR]: UNITS.min.id,
   [CYCLING]: UNITS.km.id,
   [RUNNING]: UNITS.km.id,
+  [STEPPER]: "",
 };
 
 export const defaultClickerAdditions = {
   default: [1, 5, 10],
   [RUNNING]: [0.1, 0.5, 1],
+  [STEPPER]: [1, 10, 50, 200, 1000],
 };
 
 export const SAVING = "saving";

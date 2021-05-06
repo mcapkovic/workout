@@ -11,10 +11,11 @@ import {
   CYCLING,
   VR,
   RUNNING,
+  STEPPER,
   typeDefaultUnit,
 } from "../utils/constants";
 
-const workoutButtons = [PUSH_UP, SQUAT, SIT_UP, PULL_UP, CYCLING, VR, RUNNING];
+const workoutButtons = [PUSH_UP, SQUAT, SIT_UP, PULL_UP, CYCLING, VR, RUNNING, STEPPER];
 
 function NewWorkout(props) {
   const { setWorkout, workouts, setSubPage } = props;

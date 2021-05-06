@@ -12,7 +12,7 @@ import "firebase/auth";
 // import 'firebase/analytics';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FirebaseContext } from "./context";
-import WorkoutsPage from "./workoutsPage/WorkoutsPage";
+import WorkoutsPage from "./workoutsPage";
 import History from "./History";
 import Room from "./roomsPage/Rooms";
 import Profile from "./profilePage/Profile";
