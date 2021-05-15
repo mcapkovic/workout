@@ -11,6 +11,7 @@ import {
   DeleteButton,
   ButtonPortal,
   buttonMotion,
+  Hint,
 } from "../common";
 import { DEFAULT_SUB_PAGE } from "../utils/constants";
 import useSingleBarData from "../hooks/useSingleBarData";
@@ -42,12 +43,18 @@ function RoomsManager(props) {
   }, [myRooms]);
 
   return (
-    <div>
-      <div>paste room id to join a room</div>
-      <TextBox value={roomId} onChange={(e) => setRoomId(e.target.value)} />
-      <Button disabled={!roomId} onClick={updateRoom}>
-        Join room
-      </Button>
+    <div className=''>
+      <div className='' style={{ display: "flex" }}>
+        <div className=''>
+          <TextBox value={roomId} onChange={(e) => setRoomId(e.target.value)} />
+          <Hint>paste room id to join a room</Hint>
+        </div>
+
+        <Button disabled={!roomId} onClick={updateRoom}>
+          Join room
+        </Button>
+      </div>
+
       <h2>Joined rooms:</h2>
       <div>
         {myRooms.length > 0 &&
