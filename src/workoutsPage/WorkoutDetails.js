@@ -50,7 +50,8 @@ function RoomsManager(props) {
       </Button>
       <h2>Joined rooms:</h2>
       <div>
-        {myRooms.length > 0 && myRooms.map((room) => <div>{room.id}</div>)}
+        {myRooms.length > 0 &&
+          myRooms.map((room) => <div key={room.id}>{room.id}</div>)}
       </div>
     </div>
   );
@@ -118,8 +119,13 @@ function WorkoutDetails(props) {
     `workoutsHistory/${workout.id}/workoutEntries`
   );
 
-  // const historyRef = firestore.collection(`users/${uid}/workoutsHistory`);
-  const query = historyRef.orderBy("createdAt", "asc").limitToLast(50);
+  const startDate = new Date(moment().subtract(7, "days"));
+  startDate.setHours(0, 0, 0, 0);
+
+  const query = historyRef
+    .where("createdAt", ">=", new Date(startDate))
+    .orderBy("createdAt", "asc")
+    .limitToLast(50);
 
   const [data = []] = useCollectionData(query, { idField: "id" });
 
