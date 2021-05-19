@@ -1,0 +1,37 @@
+$date-font-size: 1.2rem;
+
+.date-picker {
+  display: flex;
+  align-items: center;
+  &__segment {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__value {
+      font-size: $date-font-size;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    &__button{
+        height: 1.5rem;
+    }
+  }
+
+//   &__day {
+
+//     &__value {
+//       font-size: $date-font-size;
+//     }
+//   }
+//   &__month {
+//     &__value {
+//       font-size: $date-font-size;
+//     }
+//   }
+//   &__year {
+//     &__value {
+//       font-size: $date-font-size;
+//     }
+//   }
+}

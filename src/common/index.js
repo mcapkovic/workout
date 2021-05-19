@@ -13,5 +13,6 @@ export { default as SuccesState } from "./SuccesState";
 export { default as LoadingState } from "./LoadingState";
 export { default as ChartFilters } from "./ChartFilters";
 export { default as Hint } from './labels/Hint';
+export { default as DatePicker } from './DatePicker';
 
 export * from './motion';

@@ -15,6 +15,7 @@ import {
 } from "../common";
 import { DEFAULT_SUB_PAGE } from "../utils/constants";
 import useSingleBarData from "../hooks/useSingleBarData";
+import DateEditor from './DateEditor';
 
 function RoomsManager(props) {
   const { workoutId, setIsDeletable } = props;
@@ -43,9 +44,9 @@ function RoomsManager(props) {
   }, [myRooms]);
 
   return (
-    <div className=''>
-      <div className='' style={{ display: "flex" }}>
-        <div className=''>
+    <div className="">
+      <div className="" style={{ display: "flex" }}>
+        <div className="">
           <TextBox value={roomId} onChange={(e) => setRoomId(e.target.value)} />
           <Hint>paste room id to join a room</Hint>
         </div>
@@ -183,6 +184,11 @@ function WorkoutDetails(props) {
       )}
 
       <Separator horizontal />
+      <h1>Add/Subtract count</h1>
+      <DateEditor />
+
+      <Separator horizontal />
+
 
       <h1>Danger zone</h1>
       <DeleteButton
