@@ -16,5 +16,6 @@ export { default as Hint } from './labels/Hint';
 export { default as BottomNavigation } from './navigation/BottomNavigation';
 export { default as NavButton } from './navigation/NavButton';
 export { default as NavigationRail } from './navigation/NavigationRail';
+export { default as NavigationDrawer } from './navigation/NavigationDrawer';
 
 export * from './motion';

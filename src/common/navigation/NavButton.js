@@ -19,7 +19,7 @@ function NavButton(props) {
         "nav-button--active": active,
       })}
     >
-      <div>{iconToRender}</div>
+      <div className='nav-button__icon'>{iconToRender}</div>
       <div>{label}</div>
       <div>{children}</div>
     </button>

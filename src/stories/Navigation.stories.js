@@ -1,5 +1,5 @@
 import React from "react";
-import { BottomNavigation, NavButton, NavigationRail } from "../common";
+import { BottomNavigation, NavButton, NavigationRail, NavigationDrawer } from "../common";
 import { Person24Filled, Person24Regular } from "@fluentui/react-icons";
 
 export default {
@@ -73,3 +73,38 @@ export const NavigationRailStory = () => {
 };
 
 NavigationRailStory.storyName = "Navigation Rail";
+
+export const NavigationDrawerStory = () => {
+  const [page, setPage] = React.useState("");
+  return (
+    <div style={{ height: "500px", border: "1px solid black" }}>
+      <NavigationDrawer>
+        <NavButton
+          onClick={() => setPage("EXERCISES")}
+          icon={<Person24Filled />}
+          // activeIcon={<Person24Filled />}
+          label="Exercises"
+          active={page === "EXERCISES"}
+        />
+        <NavButton
+          onClick={() => setPage("ROOMS")}
+          icon={<Person24Filled />}
+          // activeIcon={<Person24Filled />}
+          label="Rooms"
+          active={page === "ROOMS"}
+        />
+        <NavButton
+          onClick={() => setPage("PROFILE")}
+          icon={<Person24Filled />}
+          // activeIcon={<Person24Filled />}
+          label="Profile"
+          active={page === "PROFILE"}
+        />
+      </NavigationDrawer>
+    </div>
+  );
+};
+
+NavigationDrawerStory.storyName = "Navigation Drawer";
+
+
