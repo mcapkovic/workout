@@ -13,5 +13,7 @@ export { default as SuccesState } from "./SuccesState";
 export { default as LoadingState } from "./LoadingState";
 export { default as ChartFilters } from "./ChartFilters";
 export { default as Hint } from './labels/Hint';
+export { default as BottomNavigation } from './navigation/BottomNavigation';
+export { default as NavButton } from './navigation/NavButton';
 
 export * from './motion';

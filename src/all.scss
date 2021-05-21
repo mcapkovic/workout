@@ -10,14 +10,20 @@
 @import './common/LoadingState';
 @import './common/ChartFilters';
 @import './common/labels/Hint';
+@import './common/navigation/BottomNavigation';
+
 
 @import './profilePage/Profile';
+
 @import './workoutsPage/Clicker';
 @import './workoutsPage/NewWorkout';
 @import './workoutsPage/WorkoutItem';
 @import './workoutsPage/WorkoutsManager';
+
 @import './landingPage/LandingPage';
+
 @import './roomsPage/Room';
 @import './roomsPage/UsersRow';
 @import './roomsPage/Rooms';
+
 @import './newUserPage/NewUserPage';
