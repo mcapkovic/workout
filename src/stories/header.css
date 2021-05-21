@@ -7,7 +7,7 @@
   justify-content: space-between;
 }
 
-svg {
+/* svg {
   display: inline-block;
   vertical-align: top;
 }
@@ -19,8 +19,8 @@ h1 {
   margin: 6px 0 6px 10px;
   display: inline-block;
   vertical-align: top;
-}
+} */
 
-button + button {
+/* button + button {
   margin-left: 10px;
-}
+} */

@@ -15,5 +15,6 @@ export { default as ChartFilters } from "./ChartFilters";
 export { default as Hint } from './labels/Hint';
 export { default as BottomNavigation } from './navigation/BottomNavigation';
 export { default as NavButton } from './navigation/NavButton';
+export { default as NavigationRail } from './navigation/NavigationRail';
 
 export * from './motion';
