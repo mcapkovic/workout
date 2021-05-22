@@ -10,10 +10,11 @@ function NavButton(props) {
     active,
     activeIcon,
     activeLabel,
+    ripple,
     ...otherProps
   } = props;
   const iconToRender = active && activeIcon ? activeIcon : icon;
-  const labelToRender = active && activeLabel ? activeLabel : label;
+  const isLabelVisible = active && activeLabel ? !!activeLabel : !!label;
 
   return (
     <button
@@ -21,10 +22,20 @@ function NavButton(props) {
       className={getClassNames(className, "nav-button", {
         "nav-button--active": active,
       })}
-      // anim="ripple"
+      data-animation={ripple ? "ripple" : ""}
     >
-      <div className='nav-button__icon'>{iconToRender}</div>
-      <div>{labelToRender}</div>
+      <div className={getClassNames("nav-button__icon", {
+          "nav-button__icon--with-label": isLabelVisible,
+        })}>{iconToRender}</div>
+
+      <div
+        className={getClassNames("nav-button__label", {
+          "nav-button__label--hidden": !isLabelVisible,
+          "nav-button__label--visible": isLabelVisible,
+        })}
+      >
+        {activeLabel || label}
+      </div>
       <div>{children}</div>
     </button>
   );

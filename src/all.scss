@@ -1,32 +1,37 @@
-@import './common/variables.scss';
-@import './common/Button';
-@import './common/TextBox';
-@import './common/ButtonGroup';
-@import './common/Separator';
-@import './common/DeleteButton';
-@import './common/ButtonGroupItem';
-@import './common/StatusPage';
-@import './common/SuccesState';
-@import './common/LoadingState';
-@import './common/ChartFilters';
-@import './common/labels/Hint';
-@import './common/navigation/BottomNavigation';
-@import './common/navigation/NavigationRail';
-@import './common/navigation/NavButton';
-@import './common/navigation/NavigationDrawer';
-// @import './common/ripple';
+:root {
+  --primary-color: #5d5da5;
+}
 
-@import './profilePage/Profile';
+@import "./common/variables.scss";
+@import "./common/Button";
+@import "./common/TextBox";
+@import "./common/ButtonGroup";
+@import "./common/Separator";
+@import "./common/DeleteButton";
+@import "./common/ButtonGroupItem";
+@import "./common/StatusPage";
+@import "./common/SuccesState";
+@import "./common/LoadingState";
+@import "./common/ChartFilters";
+@import "./common/labels/Hint";
+@import "./common/navigation/BottomNavigation";
+@import "./common/navigation/NavigationRail";
+@import "./common/navigation/NavButton";
+@import "./common/navigation/NavigationDrawer";
 
-@import './workoutsPage/Clicker';
-@import './workoutsPage/NewWorkout';
-@import './workoutsPage/WorkoutItem';
-@import './workoutsPage/WorkoutsManager';
+@import "./hooks/useRipple";
 
-@import './landingPage/LandingPage';
+@import "./profilePage/Profile";
 
-@import './roomsPage/Room';
-@import './roomsPage/UsersRow';
-@import './roomsPage/Rooms';
+@import "./workoutsPage/Clicker";
+@import "./workoutsPage/NewWorkout";
+@import "./workoutsPage/WorkoutItem";
+@import "./workoutsPage/WorkoutsManager";
 
-@import './newUserPage/NewUserPage';
+@import "./landingPage/LandingPage";
+
+@import "./roomsPage/Room";
+@import "./roomsPage/UsersRow";
+@import "./roomsPage/Rooms";
+
+@import "./newUserPage/NewUserPage";

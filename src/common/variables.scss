@@ -11,4 +11,4 @@ $background-color: #eef0f4;
 $gray-color: #686a77;
 $tabs-breakpoint: 768px;
 
-$primary-color: #5d5da5;
+$primary-color: var(--primary-color, #5d5da5);

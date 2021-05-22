@@ -10,22 +10,8 @@ export default {
 export const BottomNavigationStory = () => {
   const [page, setPage] = React.useState("EXERCISES");
 
-  // React.useEffect(()=>{
-  //   [].map.call(document.querySelectorAll('[anim="ripple"]'), el=> {
-  //     el.addEventListener('click',e => {
-  //         e = e.touches ? e.touches[0] : e;
-  //         const r = el.getBoundingClientRect(), d = Math.sqrt(Math.pow(r.width,2)+Math.pow(r.height,2)) * 2;
-  //         el.style.cssText = `--s: 0; --o: 1;`;  
-  //         // el.offsetTop; 
-  //         console.log(el.offsetTop)
-  //         el.style.cssText = `--t: 1; --o: 0; --d: ${d}; --x:${e.clientX - r.left}; --y:${e.clientY - r.top};`
-  //     })
-  // })
-  // },[])
-
   return (
     <div style={{ border: "1px solid black", overflow: 'hidden' }}>
-      <button anim="ripple">dfadfadfadsf</button>
       <div style={{ height: "150px" }}></div>
       <BottomNavigation>
         <NavButton
@@ -34,6 +20,7 @@ export const BottomNavigationStory = () => {
           activeIcon={<TextBulletListSquare24Filled />}
           activeLabel='Exercises'
           active={page === "EXERCISES"}
+          ripple
         />
         <NavButton
           onClick={() => setPage("ROOMS")}
@@ -41,6 +28,7 @@ export const BottomNavigationStory = () => {
           activeIcon={<ConferenceRoom24Filled />}
           activeLabel='Rooms'
           active={page === "ROOMS"}
+          ripple
         />
         <NavButton
           onClick={() => setPage("PROFILE")}
@@ -48,6 +36,7 @@ export const BottomNavigationStory = () => {
           activeIcon={<Person24Filled />}
           activeLabel='Profile'
           active={page === "PROFILE"}
+          ripple
         />
       </BottomNavigation>
     </div>
@@ -67,6 +56,7 @@ export const NavigationRailStory = () => {
           activeIcon={<TextBulletListSquare24Filled />}
           label="Exercises"
           active={page === "EXERCISES"}
+          ripple
         />
         <NavButton
           onClick={() => setPage("ROOMS")}
@@ -74,6 +64,7 @@ export const NavigationRailStory = () => {
           activeIcon={<ConferenceRoom24Filled />}
           label="Rooms"
           active={page === "ROOMS"}
+          ripple
         />
         <NavButton
           onClick={() => setPage("PROFILE")}
@@ -81,6 +72,7 @@ export const NavigationRailStory = () => {
           activeIcon={<Person24Filled />}
           label="Profile"
           active={page === "PROFILE"}
+          ripple
         />
       </NavigationRail>
     </div>

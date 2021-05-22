@@ -4,4 +4,26 @@
   background: none;
   border: none;
   outline: none;
+
+  &__icon {
+    transform: translateY(8px);
+    transition: transform 100ms;
+    &--with-label {
+      transform: translateY(0px);
+    }
+  }
+
+  &__label {
+    height: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    transition: opacity 100ms;
+    &--hidden {
+      opacity: 0;
+    }
+    &--visible {
+      opacity: 1;
+    }
+  }
 }

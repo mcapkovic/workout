@@ -1,8 +1,8 @@
-[anim="ripple"] {
+[data-animation="ripple"] {
     //  Customize effect by defining the following
     //  variables on the parent element 
-     --ripple-background: white;
-     --ripple-opacity: 0.3;  
+     --ripple-background: var(--primary-color, white);
+     --ripple-opacity: 0.2;  
      --ripple-duration: 600ms;      
      --ripple-easing: linear;
     
