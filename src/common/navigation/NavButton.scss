@@ -4,6 +4,7 @@
   background: none;
   border: none;
   outline: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0); // remove safari highlight on click
 
   &__icon {
     transform: translateY(8px);

@@ -1,6 +1,18 @@
 import React from "react";
-import { BottomNavigation, NavButton, NavigationRail, NavigationDrawer } from "../common";
-import { Person24Filled, Person24Regular , ConferenceRoom24Regular, ConferenceRoom24Filled, TextBulletListSquare24Regular, TextBulletListSquare24Filled} from "@fluentui/react-icons";
+import {
+  BottomNavigation,
+  NavButton,
+  NavigationRail,
+  NavigationDrawer,
+} from "../common";
+import {
+  Person24Filled,
+  Person24Regular,
+  ConferenceRoom24Regular,
+  ConferenceRoom24Filled,
+  TextBulletListSquare24Regular,
+  TextBulletListSquare24Filled,
+} from "@fluentui/react-icons";
 
 export default {
   title: "Navigation",
@@ -11,14 +23,14 @@ export const BottomNavigationStory = () => {
   const [page, setPage] = React.useState("EXERCISES");
 
   return (
-    <div style={{ border: "1px solid black", overflow: 'hidden' }}>
+    <div style={{ border: "1px solid black", overflow: "hidden" }}>
       <div style={{ height: "150px" }}></div>
       <BottomNavigation>
         <NavButton
           onClick={() => setPage("EXERCISES")}
           icon={<TextBulletListSquare24Regular />}
           activeIcon={<TextBulletListSquare24Filled />}
-          activeLabel='Exercises'
+          activeLabel="Exercises"
           active={page === "EXERCISES"}
           ripple
         />
@@ -26,7 +38,7 @@ export const BottomNavigationStory = () => {
           onClick={() => setPage("ROOMS")}
           icon={<ConferenceRoom24Regular />}
           activeIcon={<ConferenceRoom24Filled />}
-          activeLabel='Rooms'
+          activeLabel="Rooms"
           active={page === "ROOMS"}
           ripple
         />
@@ -34,7 +46,7 @@ export const BottomNavigationStory = () => {
           onClick={() => setPage("PROFILE")}
           icon={<Person24Regular />}
           activeIcon={<Person24Filled />}
-          activeLabel='Profile'
+          activeLabel="Profile"
           active={page === "PROFILE"}
           ripple
         />
@@ -48,7 +60,9 @@ BottomNavigationStory.storyName = "Bottom Navigation";
 export const NavigationRailStory = () => {
   const [page, setPage] = React.useState("EXERCISES");
   return (
-    <div style={{ height: "500px", border: "1px solid black", overflow: 'hidden' }}>
+    <div
+      style={{ height: "500px", border: "1px solid black", overflow: "hidden" }}
+    >
       <NavigationRail>
         <NavButton
           onClick={() => setPage("EXERCISES")}
@@ -84,7 +98,9 @@ NavigationRailStory.storyName = "Navigation Rail";
 export const NavigationDrawerStory = () => {
   const [page, setPage] = React.useState("EXERCISES");
   return (
-    <div style={{ height: "500px", border: "1px solid black", overflow: 'hidden'}}>
+    <div
+      style={{ height: "500px", border: "1px solid black", overflow: "hidden" }}
+    >
       <NavigationDrawer>
         <NavButton
           onClick={() => setPage("EXERCISES")}
@@ -113,5 +129,3 @@ export const NavigationDrawerStory = () => {
 };
 
 NavigationDrawerStory.storyName = "Navigation Drawer";
-
-
