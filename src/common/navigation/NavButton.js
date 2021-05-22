@@ -9,18 +9,22 @@ function NavButton(props) {
     children,
     active,
     activeIcon,
+    activeLabel,
     ...otherProps
   } = props;
   const iconToRender = active && activeIcon ? activeIcon : icon;
+  const labelToRender = active && activeLabel ? activeLabel : label;
+
   return (
     <button
       {...otherProps}
       className={getClassNames(className, "nav-button", {
         "nav-button--active": active,
       })}
+      // anim="ripple"
     >
       <div className='nav-button__icon'>{iconToRender}</div>
-      <div>{label}</div>
+      <div>{labelToRender}</div>
       <div>{children}</div>
     </button>
   );

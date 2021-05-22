@@ -8,5 +8,17 @@
   .nav-button {
     padding: 0;
     height: 72px;
+    color: $text-color;
+    svg {
+      fill: $text-color;
+    }
+    opacity: 0.6;
+    &--active {
+      opacity: 1;
+      color: $primary-color;
+      svg {
+        fill: $primary-color;
+      }
+    }
   }
 }

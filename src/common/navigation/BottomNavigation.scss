@@ -1,16 +1,24 @@
-.navigation-bottom{
-    // border: 1px solid red;
-    display: flex;
-    justify-content: center;
-    height: 56px;
-    box-shadow: $flat-default;
-    .nav-button{
-        flex-grow: 1;
-        max-width: 168px;
-        padding: auto 12px;
-
-        // &--active{
-        //     background-color: red;
-        // }
+.navigation-bottom {
+  // border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  height: 56px;
+  box-shadow: $flat-default;
+  .nav-button {
+    flex-grow: 1;
+    max-width: 168px;
+    padding: auto 12px;
+    color: $text-color;
+    svg {
+      fill: $text-color;
     }
+    opacity: 0.6;
+    &--active {
+      opacity: 1;
+      color: $primary-color;
+      svg {
+        fill: $primary-color;
+      }
+    }
+  }
 }
