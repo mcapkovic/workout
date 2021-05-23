@@ -3,22 +3,7 @@
 }
 
 @import "./common/variables.scss";
-@import "./common/layout/MainLayout";
-@import "./common/Button";
-@import "./common/TextBox";
-@import "./common/ButtonGroup";
-@import "./common/Separator";
-@import "./common/DeleteButton";
-@import "./common/ButtonGroupItem";
-@import "./common/StatusPage";
-@import "./common/SuccesState";
-@import "./common/LoadingState";
-@import "./common/ChartFilters";
-@import "./common/labels/Hint";
-@import "./common/navigation/BottomNavigation";
-@import "./common/navigation/NavigationRail";
-@import "./common/navigation/NavButton";
-@import "./common/navigation/NavigationDrawer";
+@import "./common/allCommon";
 
 @import "./hooks/useRipple";
 
