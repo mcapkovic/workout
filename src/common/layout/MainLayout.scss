@@ -1,36 +1,9 @@
-$appBarHeight: 40px;
+$appBarHeight: 56px;
 $navBottomHeight: 56px;
 $navDrawerWidth: 256px;
 $navRailWidth: 72px;
 
 .main-layout {
-  display: grid;
-  height: 100%;
-
-  grid-template-areas:
-    "appBar"
-    "content"
-    "navBottom";
-  grid-template-rows: $appBarHeight auto $navBottomHeight;
-  grid-template-columns: auto;
-  grid-gap: 10px;
-
-  &--medium {
-    grid-template-areas:
-      "navRail appBar"
-      "navRail content";
-    grid-template-rows: $appBarHeight auto;
-    grid-template-columns: $navRailWidth auto;
-  }
-
-  &--large {
-    grid-template-areas:
-      "navDrawer appBar"
-      "navDrawer content";
-    grid-template-rows: $appBarHeight auto;
-    grid-template-columns: $navDrawerWidth auto;
-  }
-
   #navDrawer {
     grid-area: navDrawer;
   }
@@ -41,13 +14,63 @@ $navRailWidth: 72px;
 
   #appBar {
     grid-area: appBar;
+    position: fixed;
+    height:$appBarHeight ;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 
   #appBar {
+    transition: transform 0.2s;
     grid-area: appBar;
   }
 
   #navBottom {
     grid-area: navBottom;
+  }
+
+  #appContent {
+    overflow: auto;
+    padding-top: $appBarHeight + 10px  ;
+  }
+
+  display: grid;
+  height: 100%;
+  overflow: hidden;
+
+  grid-template-areas:
+    "content"
+    "navBottom";
+  grid-template-rows: auto $navBottomHeight;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+
+  &--medium {
+    grid-template-areas:
+      "navRail appBar"
+      "navRail content";
+    grid-template-rows: $appBarHeight auto;
+    grid-template-columns: $navRailWidth auto;
+    #appBar {
+      position: static;
+    }
+    #appContent {
+      padding-top: 0px;
+    }
+  }
+
+  &--large {
+    grid-template-areas:
+      "navDrawer appBar"
+      "navDrawer content";
+    grid-template-rows: $appBarHeight auto;
+    grid-template-columns: $navDrawerWidth auto;
+    #appBar {
+      position: static;
+    }
+    #appContent {
+      padding-top: 0px;
+    }
   }
 }
