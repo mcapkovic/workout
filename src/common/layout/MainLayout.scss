@@ -1,0 +1,53 @@
+$appBarHeight: 40px;
+$navBottomHeight: 56px;
+$navDrawerWidth: 256px;
+$navRailWidth: 72px;
+
+.main-layout {
+  display: grid;
+  height: 100%;
+
+  grid-template-areas:
+    "appBar"
+    "content"
+    "navBottom";
+  grid-template-rows: $appBarHeight auto $navBottomHeight;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+
+  &--medium {
+    grid-template-areas:
+      "navRail appBar"
+      "navRail content";
+    grid-template-rows: $appBarHeight auto;
+    grid-template-columns: $navRailWidth auto;
+  }
+
+  &--large {
+    grid-template-areas:
+      "navDrawer appBar"
+      "navDrawer content";
+    grid-template-rows: $appBarHeight auto;
+    grid-template-columns: $navDrawerWidth auto;
+  }
+
+  #navDrawer {
+    grid-area: navDrawer;
+  }
+
+  #navRail {
+    grid-area: navRail;
+  }
+
+  #appBar {
+    grid-area: appBar;
+  }
+
+  #appBar {
+    grid-area: appBar;
+  }
+
+  #navBottom {
+    grid-area: navBottom;
+  }
+}

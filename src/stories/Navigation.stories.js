@@ -105,21 +105,18 @@ export const NavigationDrawerStory = () => {
         <NavButton
           onClick={() => setPage("EXERCISES")}
           icon={<TextBulletListSquare24Filled />}
-          // activeIcon={<Person24Filled />}
           label="Exercises"
           active={page === "EXERCISES"}
         />
         <NavButton
           onClick={() => setPage("ROOMS")}
           icon={<ConferenceRoom24Filled />}
-          // activeIcon={<Person24Filled />}
           label="Rooms"
           active={page === "ROOMS"}
         />
         <NavButton
           onClick={() => setPage("PROFILE")}
           icon={<Person24Filled />}
-          // activeIcon={<Person24Filled />}
           label="Profile"
           active={page === "PROFILE"}
         />
