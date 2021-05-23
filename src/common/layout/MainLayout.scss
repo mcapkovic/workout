@@ -22,7 +22,7 @@ $navRailWidth: 72px;
   }
 
   #appBar {
-    transition: transform 0.2s;
+    // transition: transform 0.2s;
     grid-area: appBar;
   }
 
@@ -33,6 +33,8 @@ $navRailWidth: 72px;
   #appContent {
     overflow: auto;
     padding-top: $appBarHeight + 10px  ;
+    padding-bottom:  10px  ;
+
   }
 
   display: grid;
@@ -44,9 +46,10 @@ $navRailWidth: 72px;
     "navBottom";
   grid-template-rows: auto $navBottomHeight;
   grid-template-columns: auto;
-  grid-gap: 10px;
+  grid-gap: 0px;
 
   &--medium {
+    grid-gap: 10px;
     grid-template-areas:
       "navRail appBar"
       "navRail content";
@@ -56,11 +59,12 @@ $navRailWidth: 72px;
       position: static;
     }
     #appContent {
-      padding-top: 0px;
+      padding: 0px;
     }
   }
 
   &--large {
+    grid-gap: 10px;
     grid-template-areas:
       "navDrawer appBar"
       "navDrawer content";
@@ -70,7 +74,7 @@ $navRailWidth: 72px;
       position: static;
     }
     #appContent {
-      padding-top: 0px;
+      padding: 0px;
     }
   }
 }

@@ -16,20 +16,27 @@ function MainLayout(props) {
   const barRef = React.useRef();
   const contentRef = React.useRef();
   const prevScrollpos = React.useRef(0);
+  const barTransform = React.useRef(0);
 
   React.useEffect(() => {
     if (medium || large) {
       contentRef.current.onscroll = undefined;
       return;
     }
-    prevScrollpos.current = contentRef.current.scrollTop;
 
+    prevScrollpos.current = contentRef.current.scrollTop;
     contentRef.current.onscroll = function () {
       var currentScrollPos = contentRef.current.scrollTop;
+      const deltaScroll = Math.abs(prevScrollpos.current - currentScrollPos);
+
       if (prevScrollpos.current > currentScrollPos) {
-        barRef.current.style.transform = "translateY(0px)";
+        const newVal = barTransform.current + deltaScroll;
+        barTransform.current = newVal < 0 ? newVal : 0;
+        barRef.current.style.transform = `translateY(${barTransform.current}px)`;
       } else {
-        barRef.current.style.transform = "translateY(-60px)";
+        const newVal = barTransform.current - deltaScroll;
+        barTransform.current = newVal > -60 ? newVal : -60;
+        barRef.current.style.transform = `translateY(${barTransform.current}px)`;
       }
       prevScrollpos.current = currentScrollPos;
     };
