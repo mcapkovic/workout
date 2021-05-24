@@ -13,6 +13,7 @@ import {
   TextBulletListSquare24Regular,
   TextBulletListSquare24Filled,
 } from "@fluentui/react-icons";
+import { AnimateSharedLayout } from "framer-motion";
 
 export default {
   title: "Navigation",
@@ -102,24 +103,29 @@ export const NavigationDrawerStory = () => {
       style={{ height: "500px", border: "1px solid black", overflow: "hidden" }}
     >
       <NavigationDrawer>
-        <NavButton
-          onClick={() => setPage("EXERCISES")}
-          icon={<TextBulletListSquare24Filled />}
-          label="Exercises"
-          active={page === "EXERCISES"}
-        />
-        <NavButton
-          onClick={() => setPage("ROOMS")}
-          icon={<ConferenceRoom24Filled />}
-          label="Rooms"
-          active={page === "ROOMS"}
-        />
-        <NavButton
-          onClick={() => setPage("PROFILE")}
-          icon={<Person24Filled />}
-          label="Profile"
-          active={page === "PROFILE"}
-        />
+        <AnimateSharedLayout>
+          <NavButton
+            onClick={() => setPage("EXERCISES")}
+            icon={<TextBulletListSquare24Filled />}
+            label="Exercises"
+            active={page === "EXERCISES"}
+            outline
+          />
+          <NavButton
+            onClick={() => setPage("ROOMS")}
+            icon={<ConferenceRoom24Filled />}
+            label="Rooms"
+            active={page === "ROOMS"}
+            outline
+          />
+          <NavButton
+            onClick={() => setPage("PROFILE")}
+            icon={<Person24Filled />}
+            label="Profile"
+            active={page === "PROFILE"}
+            outline
+          />
+        </AnimateSharedLayout>
       </NavigationDrawer>
     </div>
   );

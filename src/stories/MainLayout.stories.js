@@ -7,6 +7,7 @@ import {
   MainLayout,
 } from "../common";
 import useMedia from "../hooks/useMedia";
+import { AnimateSharedLayout } from "framer-motion";
 
 import {
   Person24Filled,
@@ -155,27 +156,32 @@ export const MainLayoutStory2 = () => {
         }
         navDrawer={
           <NavigationDrawer>
-            <NavButton
-              onClick={() => setPage("EXERCISES")}
-              icon={<TextBulletListSquare24Filled />}
-              // activeIcon={<Person24Filled />}
-              label="Exercises"
-              active={page === "EXERCISES"}
-            />
-            <NavButton
-              onClick={() => setPage("ROOMS")}
-              icon={<ConferenceRoom24Filled />}
-              // activeIcon={<Person24Filled />}
-              label="Rooms"
-              active={page === "ROOMS"}
-            />
-            <NavButton
-              onClick={() => setPage("PROFILE")}
-              icon={<Person24Filled />}
-              // activeIcon={<Person24Filled />}
-              label="Profile"
-              active={page === "PROFILE"}
-            />
+            <AnimateSharedLayout>
+              <NavButton
+                onClick={() => setPage("EXERCISES")}
+                icon={<TextBulletListSquare24Filled />}
+                // activeIcon={<Person24Filled />}
+                label="Exercises"
+                active={page === "EXERCISES"}
+                outline
+              />
+              <NavButton
+                onClick={() => setPage("ROOMS")}
+                icon={<ConferenceRoom24Filled />}
+                // activeIcon={<Person24Filled />}
+                label="Rooms"
+                active={page === "ROOMS"}
+                outline
+              />
+              <NavButton
+                onClick={() => setPage("PROFILE")}
+                icon={<Person24Filled />}
+                // activeIcon={<Person24Filled />}
+                label="Profile"
+                active={page === "PROFILE"}
+                outline
+              />
+            </AnimateSharedLayout>
           </NavigationDrawer>
         }
       />
