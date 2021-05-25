@@ -1,0 +1,33 @@
+.app-bar {
+  height: 54px;
+  box-shadow: $flat-default;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  // padding: 0 16px;
+  background-color: $background-color;
+
+  &__start {
+    // padding: 0 16px;
+    width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 200ms;
+    &--hidden{
+        opacity: 0;
+    }
+  }
+  &__center {
+    flex-grow: 1;
+    padding-left: 16px;
+    transition: transform 200ms;
+    &--push-left {
+      transform: translateX(-56px);
+    }
+  }
+  &__end {
+    padding: 0 16px;
+  }
+}

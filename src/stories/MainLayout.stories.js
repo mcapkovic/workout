@@ -5,6 +5,7 @@ import {
   NavigationRail,
   NavigationDrawer,
   MainLayout,
+  AppBar,
 } from "../common";
 import useMedia from "../hooks/useMedia";
 import { AnimateSharedLayout } from "framer-motion";
@@ -16,6 +17,7 @@ import {
   ConferenceRoom24Filled,
   TextBulletListSquare24Regular,
   TextBulletListSquare24Filled,
+  ChevronLeft24Regular,
 } from "@fluentui/react-icons";
 
 export default {
@@ -72,6 +74,9 @@ export const MainLayoutStory = () => {
 
 MainLayoutStory.storyName = "Main layout empty";
 
+/**
+ * example with real components
+ */
 export const MainLayoutStory2 = () => {
   const size = useMedia(
     // Media queries
@@ -124,8 +129,17 @@ export const MainLayoutStory2 = () => {
             />
           </NavigationRail>
         }
-        appBar={<div style={{ height: "100%" }}>appBar</div>}
-        appContent={<div>{contentText}</div>}
+        appBar={
+          <AppBar
+            startComponent={<ChevronLeft24Regular />}
+            centerComponent={page === "EXERCISES" ? "Center" : "Detail Center"}
+            endComponent="End"
+            hideStart={page === "EXERCISES"}
+          />
+        }
+        appContent={
+          <div>{page === "EXERCISES" ? <ListExample /> : contentText}</div>
+        }
         navBottom={
           <BottomNavigation>
             <NavButton
@@ -239,3 +253,17 @@ ante. Sed arcu elit, tincidunt eu lorem quis, eleifend luctus leo.
 Maecenas viverra laoreet leo nec viverra. Pellentesque mi lacus,
 vehicula eget egestas vel, lobortis et est. Nam eget porta lorem.
 `;
+
+function ListExample() {
+  const items = contentText.split(" ").slice(0, 30);
+  return (
+    <div>
+      List
+      <ul>
+        {items.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
