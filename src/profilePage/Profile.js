@@ -66,7 +66,6 @@ function Profile(props) {
     uid === "Fmc3wlvn9eMHC4cieSeNCZIdJbv2" || email === "demo@demo.com";
   return (
     <div className="profile">
-      <Separator horizontal className="header-separator-dynamic" />
       <h2>User details</h2>
       <motion.div {...animation}>
         <div>{displayName}</div>

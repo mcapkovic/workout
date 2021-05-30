@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FirebaseContext } from "../context";
+import { FirebaseContext, AppContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
 import { Button, TextBox, Separator } from "../common";
@@ -44,10 +44,8 @@ function RoomsManager(props) {
 
   return (
     <div className="rooms">
-      <Separator horizontal className="header-separator-dynamic" />
 
       <div className="rooms__selection">
-        <h2>Rooms</h2>
         {rooms && rooms.length > 0 && (
           <motion.div
             variants={listMotion.listVariants}
@@ -69,7 +67,7 @@ function RoomsManager(props) {
 
       <div className="rooms__new-user">
         <TextBox
-        className="rooms__new-user__input"
+          className="rooms__new-user__input"
           value={newRoomName}
           onChange={(e) => setNewRoomName(e.target.value)}
         />
@@ -77,7 +75,7 @@ function RoomsManager(props) {
           Create room
         </Button>
       </div>
-  </div>
+    </div>
   );
 }
 
@@ -85,10 +83,25 @@ function Rooms(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [room, setRoom] = React.useState(null);
   const { uid, photoURL } = auth.currentUser;
+  const [appState = {}, setAppState] = React.useContext(AppContext);
 
   const roomsRef = firestore.collection(`rooms`);
   const query = roomsRef.where("members", "array-contains", uid);
   const [rooms = []] = useCollectionData(query, { idField: "id" });
+
+  React.useEffect(() => {
+    if (!room)
+      setAppState({
+        ...appState,
+        appBarData: { hideStart: true, title: "Rooms" },
+      });
+
+    if (room)
+      setAppState({
+        ...appState,
+        appBarData: { hideStart: false, title: "Room" },
+      });
+  }, [room]);
 
   return (
     <div>

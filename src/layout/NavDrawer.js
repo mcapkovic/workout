@@ -27,33 +27,38 @@ import {
   TextBulletListSquare24Filled,
   ChevronLeft24Regular,
 } from "@fluentui/react-icons";
+import usePageChange from "../hooks/usePageChange";
+import { PAGES } from "../utils/constants";
 
 function NavDrawer(props) {
-  const history = useHistory();
-  const { pathname } = useLocation();
+  const { pageChange, pathname } = usePageChange();
+  const exercisePath = PAGES.exercise.path;
+  const roomsPath = PAGES.rooms.path;
 
   return (
     <NavigationDrawer>
       <AnimateSharedLayout>
         <NavButton
-          onClick={() => history.push("/exercises")}
+          onClick={() =>
+            pathname !== exercisePath && pageChange(PAGES.exercise)
+          }
           icon={<TextBulletListSquare24Filled />}
-          label="Exercises"
-          active={pathname === "/exercises"}
+          label={PAGES.exercise.label}
+          active={pathname === exercisePath}
           outline
         />
         <NavButton
-          onClick={() => history.push("/rooms")}
+          onClick={() => pathname !== roomsPath && pageChange(PAGES.rooms)}
           icon={<ConferenceRoom24Filled />}
-          label="Rooms"
-          active={pathname === "/rooms"}
+          label={PAGES.rooms.label}
+          active={pathname === roomsPath}
           outline
         />
         <NavButton
-          onClick={() => history.push("/profile")}
+          onClick={() => pageChange(PAGES.profile)}
           icon={<Person24Filled />}
-          label="Profile"
-          active={pathname === "/profile"}
+          label={PAGES.profile.label}
+          active={pathname === PAGES.profile.path}
           outline
         />
       </AnimateSharedLayout>
@@ -61,4 +66,4 @@ function NavDrawer(props) {
   );
 }
 
-  export default NavDrawer;
+export default NavDrawer;

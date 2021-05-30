@@ -11,7 +11,6 @@ function WorkoutsManager(props) {
   return (
     <div className="workouts-manager">
       <div className="workouts-manager__selection">
-        <h2>List of exercises</h2>
 
         {workouts.length > 0 && (
           <motion.div

@@ -13,23 +13,25 @@ import usePageChange from "../hooks/usePageChange";
 
 function NavRail(props) {
   const { pageChange, pathname } = usePageChange();
+  const exercisePath = PAGES.exercise.path;
+  const roomsPath = PAGES.rooms.path;
 
   return (
     <NavigationRail>
       <NavButton
-        onClick={() => pageChange(PAGES.exercise)}
+        onClick={() => pathname !== exercisePath && pageChange(PAGES.exercise)}
         icon={<TextBulletListSquare24Regular />}
         activeIcon={<TextBulletListSquare24Filled />}
         label={PAGES.exercise.label}
-        active={pathname === PAGES.exercise.path}
+        active={pathname === exercisePath}
         ripple
       />
       <NavButton
-        onClick={() => pageChange(PAGES.rooms)}
+        onClick={() => pathname !== roomsPath && pageChange(PAGES.rooms)}
         icon={<ConferenceRoom24Regular />}
         activeIcon={<ConferenceRoom24Filled />}
         label={PAGES.rooms.label}
-        active={pathname === PAGES.rooms.path}
+        active={pathname === roomsPath}
         ripple
       />
       <NavButton

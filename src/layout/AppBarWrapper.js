@@ -46,9 +46,9 @@ function AppBarWrapper() {
 
   return (
     <AppBar
-      startComponent={<ChevronLeft24Regular />}
+      // startComponent={<ChevronLeft24Regular />}
       centerComponent={title}
-      endComponent="End"
+      // endComponent="End"
       hideStart={hideStart}
     />
   );

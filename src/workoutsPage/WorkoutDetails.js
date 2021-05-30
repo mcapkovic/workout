@@ -12,9 +12,12 @@ import {
   ButtonPortal,
   buttonMotion,
   Hint,
+  NavButton,
+  ContentPortal,
 } from "../common";
 import { DEFAULT_SUB_PAGE } from "../utils/constants";
 import useSingleBarData from "../hooks/useSingleBarData";
+import { ChevronLeft24Regular } from "@fluentui/react-icons";
 
 function RoomsManager(props) {
   const { workoutId, setIsDeletable } = props;
@@ -43,9 +46,9 @@ function RoomsManager(props) {
   }, [myRooms]);
 
   return (
-    <div className=''>
-      <div className='' style={{ display: "flex" }}>
-        <div className=''>
+    <div className="">
+      <div className="" style={{ display: "flex" }}>
+        <div className="">
           <TextBox value={roomId} onChange={(e) => setRoomId(e.target.value)} />
           <Hint>paste room id to join a room</Hint>
         </div>
@@ -148,16 +151,12 @@ function WorkoutDetails(props) {
 
   return (
     <div>
-      <ButtonPortal
-        destination="#header-start"
-        // className="header-start-button"
-        onClick={() => props.setSubPage(DEFAULT_SUB_PAGE)}
-        {...buttonMotion.right}
-      >
-        Back
-      </ButtonPortal>
+      <ContentPortal portalTo="#app-bar-start-main">
+        <NavButton onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>
+          <ChevronLeft24Regular />
+        </NavButton>
+      </ContentPortal>
 
-      <h1>Info</h1>
       <div>Exercise name: {workout.name}</div>
       <div>Exercise id: {workout.id}</div>
       {/* <div>category: {workout.template}</div> */}

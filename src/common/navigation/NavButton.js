@@ -46,7 +46,7 @@ function NavButton(props) {
       >
         {activeLabel || label}
       </div>
-      <div>{children}</div>
+      <div className='nav-button__child'>{children}</div>
       {active && outline && (
         <motion.div
           layoutId="outline"

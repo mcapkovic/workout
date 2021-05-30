@@ -1,5 +1,6 @@
 import React from "react";
 import { getClassNames } from "../../utils/common";
+import useRipple from "../../hooks/useRipple";
 
 function AppBar(props) {
   const {
@@ -9,8 +10,11 @@ function AppBar(props) {
     hideStart,
     id = "main",
   } = props;
+  const elRef = React.useRef();
+  useRipple(elRef);
+
   return (
-    <div className="app-bar">
+    <div className="app-bar" ref={elRef}>
       <div
         id={`app-bar-start-${id}`}
         className={getClassNames("app-bar__start", {

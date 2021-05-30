@@ -26,39 +26,44 @@ import {
   TextBulletListSquare24Filled,
   ChevronLeft24Regular,
 } from "@fluentui/react-icons";
+import usePageChange from "../hooks/usePageChange";
+import { PAGES } from "../utils/constants";
 
 function NavBottom(props) {
-    const history = useHistory();
-    const { pathname } = useLocation();
-  
-    return (
-      <BottomNavigation style={{ position: "fixed", bottom: "0", width: "100%" }}>
-        <NavButton
-          onClick={() => history.push("/exercises")}
-          icon={<TextBulletListSquare24Regular />}
-          activeIcon={<TextBulletListSquare24Filled />}
-          activeLabel="Exercises"
-          active={pathname === "/exercises"}
-          ripple
-        />
-        <NavButton
-          onClick={() => history.push("/rooms")}
-          icon={<ConferenceRoom24Regular />}
-          activeIcon={<ConferenceRoom24Filled />}
-          activeLabel="Rooms"
-          active={pathname === "/rooms"}
-          ripple
-        />
-        <NavButton
-          onClick={() => history.push("/profile")}
-          icon={<Person24Regular />}
-          activeIcon={<Person24Filled />}
-          activeLabel="Profile"
-          active={pathname === "/profile"}
-          ripple
-        />
-      </BottomNavigation>
-    );
-  }
+  const { pageChange, pathname } = usePageChange();
+  const exercisePath = PAGES.exercise.path;
+  const roomsPath = PAGES.rooms.path;
 
-  export default NavBottom;
+  return (
+    <BottomNavigation style={{ position: "fixed", bottom: "0", width: "100%" }}>
+      <NavButton
+        onClick={() => pathname !== exercisePath && pageChange(PAGES.exercise)}
+        icon={<TextBulletListSquare24Regular />}
+        activeIcon={<TextBulletListSquare24Filled />}
+        activeLabel={PAGES.exercise.label}
+        active={pathname === exercisePath}
+        ripple
+      />
+
+      <NavButton
+        onClick={() => pathname !== roomsPath && pageChange(PAGES.rooms)}
+        icon={<ConferenceRoom24Regular />}
+        activeIcon={<ConferenceRoom24Filled />}
+        activeLabel={PAGES.rooms.label}
+        active={pathname === roomsPath}
+        ripple
+      />
+
+      <NavButton
+        onClick={() => pageChange(PAGES.profile)}
+        icon={<Person24Regular />}
+        activeIcon={<Person24Filled />}
+        activeLabel={PAGES.profile.label}
+        active={pathname === PAGES.profile.path}
+        ripple
+      />
+    </BottomNavigation>
+  );
+}
+
+export default NavBottom;

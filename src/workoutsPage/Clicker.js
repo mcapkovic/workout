@@ -7,9 +7,11 @@ import {
   ContentPortal,
   StatusPage,
   buttonMotion,
+  NavButton,
 } from "../common";
 import { DEFAULT_SUB_PAGE, SAVING, SAVED } from "../utils/constants";
 import { randomPraise, roundNumber } from "../utils/common";
+import { ChevronLeft24Regular, Save24Regular } from "@fluentui/react-icons";
 
 function Clicker(props) {
   const { workout, setWorkout, setSubPage, unit, options } = props;
@@ -66,30 +68,23 @@ function Clicker(props) {
   if (saveStatus === SAVED)
     return <StatusPage status={saveStatus} message={randomPraise()} />;
 
-  if (saveStatus === SAVING)
-    return <StatusPage status={saveStatus} />;
+  if (saveStatus === SAVING) return <StatusPage status={saveStatus} />;
 
   return (
     <div className="clicker">
-      <ButtonPortal
-        destination="#header-end"
-        disabled={!workout || !count}
-        onClick={saveCount}
-        {...buttonMotion.left}
-      >
-        Save
-      </ButtonPortal>
+      <ContentPortal portalTo="#app-bar-end-main">
+        <NavButton disabled={!workout || !count} onClick={saveCount}>
+          Save
+        </NavButton>
+      </ContentPortal>
 
-      <ButtonPortal
-        destination="#header-start"
-        onClick={() => setSubPage(DEFAULT_SUB_PAGE)}
-        {...buttonMotion.right}
-      >
-        Cancel
-      </ButtonPortal>
+      <ContentPortal portalTo="#app-bar-start-main">
+        <NavButton onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>
+          <ChevronLeft24Regular />
+        </NavButton>
+      </ContentPortal>
 
       <h1 className="clicker__name">{workout.name}</h1>
-
       <motion.div
         className="clicker__display"
         initial={{
@@ -119,7 +114,6 @@ function Clicker(props) {
       </div>
       <br />
       <div className="clicker__actions"></div>
-
       <ContentPortal portalTo="#footer-center">
         <div className="clicker__id"> {workoutId}</div>
       </ContentPortal>
