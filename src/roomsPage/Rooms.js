@@ -11,10 +11,9 @@ function RoomItem(props) {
   const { item, setRoom, index } = props;
   return (
     <div className="workout-item">
-      <div className="workout-item__name">
-        <span className="workout-item__name__index">{index + 1}.</span>{" "}
-        {item.roomName}
-      </div>
+      <div className="workout-item__name">{item.roomName}</div>
+      <div className="workout-item__name-copy">{item.roomName}</div>
+
       <div className="workout-item__buttons">
         <Button onClick={() => setRoom(item)}>More details</Button>
       </div>
@@ -44,7 +43,6 @@ function RoomsManager(props) {
 
   return (
     <div className="rooms">
-
       <div className="rooms__selection">
         {rooms && rooms.length > 0 && (
           <motion.div

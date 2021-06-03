@@ -1,15 +1,45 @@
 .workout-item {
-  margin: 1rem 0rem 1rem 0;
+  // margin: 1rem 0rem 1rem 0;
+  padding: 0.5rem 0;
   display: flex;
   align-items: center;
+  position: relative;
+
   &__name {
     flex-grow: 1;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    transition-delay: 0.1s;
+
     &__index {
     }
   }
+
+  &__name-copy {
+    display: none;
+    background: linear-gradient(
+      90deg,
+      $text-color,
+      $text-color,
+      $text-color,
+      $background-color
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+    max-width: 5rem;
+    transition: opacity 0.2s ease-in-out;
+    margin-right: 0.5rem;
+  }
+
   &__today {
     text-align: center;
     margin-left: 1rem;
@@ -26,6 +56,18 @@
     flex-shrink: 0;
     .button {
       margin-left: 1.5em;
+    }
+  }
+
+  @media (min-width: 800px) {
+    &__name-copy {
+      display: block;
+    }
+  }
+
+  &:hover {
+    .workout-item__name-copy {
+      opacity: 0.2;
     }
   }
 }
