@@ -69,8 +69,9 @@ body {
 }
 
 .main-content {
-  flex-grow: 1;
   padding: 0 1rem;
+  min-height: 100%;
+  position: relative;
 
   @media (min-width: 600px) {
     padding: 0 0 0 0.5rem;
