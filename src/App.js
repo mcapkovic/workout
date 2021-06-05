@@ -113,7 +113,6 @@ function App() {
   const [firebaseData, setFirebaseData] = React.useState(getFirebase);
   const appState = React.useState(defaultAppDataState);
 
-  console.log('render')
   return (
     <div className="App">
       <FirebaseContext.Provider value={firebaseData}>

@@ -16,7 +16,7 @@ const animation = {
 
 function User(props) {
   const { className, data = {} } = props;
-  const { name = "" } = data;
+  const { name = "anonym" } = data;
   return (
     <motion.div {...animation} key={data.uid} className={className + " users-row-user"}>
       <div className="users-row-user__avatar">{name[0]}</div>
