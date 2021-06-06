@@ -33,6 +33,8 @@ $navRailWidth: 72px;
   #appContent {
     overflow: auto;
     padding-top: $appBarHeight + 10px  ;
+    display: flex;
+    flex-direction: column;
   }
 
   display: grid;
