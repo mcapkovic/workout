@@ -17,7 +17,7 @@ function Clicker(props) {
   const { workout, setWorkout, setSubPage, unit, options } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [count, setCount] = React.useState(0);
-  const { uid, photoURL } = auth.currentUser;
+  const { uid } = auth.currentUser;
   const [saveStatus, setSaveStatus] = React.useState("");
 
   const workoutId = workout ? workout.id : -1;
@@ -27,7 +27,6 @@ function Clicker(props) {
 
   function changeCount(value) {
     let newValue = roundNumber(count + value);
-    if (newValue < 0) newValue = 0;
     setCount(newValue);
   }
 
@@ -108,7 +107,6 @@ function Clicker(props) {
             key={option}
             changeCount={changeCount}
             amount={option}
-            count={count}
           />
         ))}
       </div>
@@ -121,11 +119,10 @@ function Clicker(props) {
 }
 
 function ButtonPair(props) {
-  const { changeCount, amount, count } = props;
+  const { changeCount, amount } = props;
   return (
     <div>
       <Button
-        disabled={count <= 0}
         onClick={() => changeCount(-amount)}
         {...buttonMotion.left}
       >
