@@ -114,9 +114,8 @@ function Clicker(props) {
       </div>
       <br />
       <div className="clicker__actions"></div>
-      <ContentPortal portalTo="#footer-center">
-        <div className="clicker__id"> {workoutId}</div>
-      </ContentPortal>
+      <div className="clicker__spacer"/>
+      <div className="clicker__id"> {workoutId}</div>
     </div>
   );
 }
