@@ -17,6 +17,7 @@ function NavButton(props) {
     activeLabel,
     ripple,
     outline,
+    primary,
     ...otherProps
   } = props;
   const iconToRender = active && activeIcon ? activeIcon : icon;
@@ -27,6 +28,7 @@ function NavButton(props) {
       {...otherProps}
       className={getClassNames(className, "nav-button", {
         "nav-button--active": active,
+        "nav-button--primary": primary,
       })}
       data-animation={ripple ? "ripple" : ""}
     >
