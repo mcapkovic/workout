@@ -102,17 +102,27 @@ function Clicker(props) {
         )}
       </motion.div>
       <div className="clicker__controls">
-        {options.map((option) => (
-          <ButtonPair
-            key={option}
-            changeCount={changeCount}
-            amount={option}
-          />
-        ))}
+        <div className="clicker__controls__keypad">
+          {options.map((option) => (
+            <ButtonPair
+              key={option}
+              changeCount={changeCount}
+              amount={option}
+            />
+          ))}
+        </div>
+
+        <Button
+          className="clicker__controls__clear"
+          onClick={() => setCount(0)}
+          disabled={!count}
+        >
+          Clear count
+        </Button>
       </div>
       <br />
       <div className="clicker__actions"></div>
-      <div className="clicker__spacer"/>
+      <div className="clicker__spacer" />
       <div className="clicker__id"> {workoutId}</div>
     </div>
   );
@@ -122,10 +132,7 @@ function ButtonPair(props) {
   const { changeCount, amount } = props;
   return (
     <div>
-      <Button
-        onClick={() => changeCount(-amount)}
-        {...buttonMotion.left}
-      >
+      <Button onClick={() => changeCount(-amount)} {...buttonMotion.left}>
         -{amount}
       </Button>
       <Button onClick={() => changeCount(amount)} {...buttonMotion.right}>

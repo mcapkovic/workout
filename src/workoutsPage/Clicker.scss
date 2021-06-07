@@ -30,9 +30,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    .button {
-      min-width: 4rem;
-      margin: 0.3rem;
+    &__keypad {
+      .button {
+        min-width: 4rem;
+        margin: 0.3rem;
+      }
+    }
+
+    &__clear {
+      width: 100%;
+      margin: 1.5rem 0.3rem 0.3rem 0.3rem;
     }
   }
 
@@ -42,7 +49,7 @@
     }
   }
 
-  &__spacer{
+  &__spacer {
     flex-grow: 1;
   }
 
