@@ -66,7 +66,6 @@ function Profile(props) {
     uid === "Fmc3wlvn9eMHC4cieSeNCZIdJbv2" || email === "demo@demo.com";
   return (
     <div className="profile">
-      <Separator horizontal className="header-separator-dynamic" />
       <h2>User details</h2>
       <motion.div {...animation}>
         <div>{displayName}</div>
@@ -79,11 +78,10 @@ function Profile(props) {
       <motion.div {...animation}>
         <RemoveUser disabled={isDemo} />
         {isDemo && <p>demo acconut can not be deleted</p>}
-
-        <ContentPortal portalTo="#footer-center">
-          {packageJson.version}
-        </ContentPortal>
       </motion.div>
+
+      <div className="profile__spacer" />
+      <div className="profile__version">{packageJson.version}</div>
     </div>
   );
 }

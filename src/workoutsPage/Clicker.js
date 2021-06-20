@@ -7,15 +7,17 @@ import {
   ContentPortal,
   StatusPage,
   buttonMotion,
+  NavButton,
 } from "../common";
 import { DEFAULT_SUB_PAGE, SAVING, SAVED } from "../utils/constants";
 import { randomPraise, roundNumber } from "../utils/common";
+import { ChevronLeft24Regular, Save24Regular } from "@fluentui/react-icons";
 
 function Clicker(props) {
   const { workout, setWorkout, setSubPage, unit, options } = props;
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [count, setCount] = React.useState(0);
-  const { uid, photoURL } = auth.currentUser;
+  const { uid } = auth.currentUser;
   const [saveStatus, setSaveStatus] = React.useState("");
 
   const workoutId = workout ? workout.id : -1;
@@ -25,7 +27,6 @@ function Clicker(props) {
 
   function changeCount(value) {
     let newValue = roundNumber(count + value);
-    if (newValue < 0) newValue = 0;
     setCount(newValue);
   }
 
@@ -66,30 +67,23 @@ function Clicker(props) {
   if (saveStatus === SAVED)
     return <StatusPage status={saveStatus} message={randomPraise()} />;
 
-  if (saveStatus === SAVING)
-    return <StatusPage status={saveStatus} />;
+  if (saveStatus === SAVING) return <StatusPage status={saveStatus} />;
 
   return (
     <div className="clicker">
-      <ButtonPortal
-        destination="#header-end"
-        disabled={!workout || !count}
-        onClick={saveCount}
-        {...buttonMotion.left}
-      >
-        Save
-      </ButtonPortal>
+      <ContentPortal portalTo="#app-bar-end-main">
+        <NavButton disabled={!workout || !count} onClick={saveCount}>
+          Save
+        </NavButton>
+      </ContentPortal>
 
-      <ButtonPortal
-        destination="#header-start"
-        onClick={() => setSubPage(DEFAULT_SUB_PAGE)}
-        {...buttonMotion.right}
-      >
-        Cancel
-      </ButtonPortal>
+      <ContentPortal portalTo="#app-bar-start-main">
+        <NavButton onClick={() => setSubPage(DEFAULT_SUB_PAGE)}>
+          <ChevronLeft24Regular />
+        </NavButton>
+      </ContentPortal>
 
       <h1 className="clicker__name">{workout.name}</h1>
-
       <motion.div
         className="clicker__display"
         initial={{
@@ -108,34 +102,37 @@ function Clicker(props) {
         )}
       </motion.div>
       <div className="clicker__controls">
-        {options.map((option) => (
-          <ButtonPair
-            key={option}
-            changeCount={changeCount}
-            amount={option}
-            count={count}
-          />
-        ))}
+        <div className="clicker__controls__keypad">
+          {options.map((option) => (
+            <ButtonPair
+              key={option}
+              changeCount={changeCount}
+              amount={option}
+            />
+          ))}
+        </div>
+
+        <Button
+          className="clicker__controls__clear"
+          onClick={() => setCount(0)}
+          disabled={!count}
+        >
+          Clear count
+        </Button>
       </div>
       <br />
       <div className="clicker__actions"></div>
-
-      <ContentPortal portalTo="#footer-center">
-        <div className="clicker__id"> {workoutId}</div>
-      </ContentPortal>
+      <div className="clicker__spacer" />
+      <div className="clicker__id"> {workoutId}</div>
     </div>
   );
 }
 
 function ButtonPair(props) {
-  const { changeCount, amount, count } = props;
+  const { changeCount, amount } = props;
   return (
     <div>
-      <Button
-        disabled={count <= 0}
-        onClick={() => changeCount(-amount)}
-        {...buttonMotion.left}
-      >
+      <Button onClick={() => changeCount(-amount)} {...buttonMotion.left}>
         -{amount}
       </Button>
       <Button onClick={() => changeCount(amount)} {...buttonMotion.right}>

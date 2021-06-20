@@ -55,7 +55,7 @@ function MainLayout(props) {
       {medium && <div id="navRail">{navRail}</div>}
       {large && <div id="navDrawer">{navDrawer}</div>}
       <div ref={contentRef} id="appContent">
-        {appContent}{" "}
+        {appContent}
       </div>
       {small && <div id="navBottom">{navBottom}</div>}
     </div>

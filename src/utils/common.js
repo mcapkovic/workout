@@ -1,6 +1,6 @@
 import groupBy from "lodash/groupBy";
 import moment from "moment";
-import {PRAISE_MESSAGES} from './constants';
+import { PRAISE_MESSAGES } from "./constants";
 
 export function getClassNames(...classes) {
   return classes
@@ -26,16 +26,40 @@ export function groupByDay(data) {
   );
 }
 
-function randomNumber(min, max) { // min and max included
-  return Math.floor(Math.random() * (max - min+1)+min);
+function randomNumber(min, max) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function randomPraise(){
-const index = randomNumber(0, PRAISE_MESSAGES.length -1)
-return `${PRAISE_MESSAGES[index]}!`
+export function randomPraise() {
+  const index = randomNumber(0, PRAISE_MESSAGES.length - 1);
+  return `${PRAISE_MESSAGES[index]}!`;
 }
 
 export function roundNumber(number, decimals = 12) {
   var newnumber = new Number(number + "").toFixed(parseInt(decimals));
   return parseFloat(newnumber);
+}
+
+export function getColorCode() {
+  const makeColorCode = "0123456789ABCDEF";
+  let code = "#";
+  for (let count = 0; count < 6; count++) {
+    code = code + makeColorCode[Math.floor(Math.random() * 16)];
+  }
+  document.documentElement.style.setProperty("--primary-color", code);
+  return code;
+}
+
+export function GenerateColor() {
+  function generate() {
+    const makeColorCode = "0123456789ABCDEF";
+    let code = "#";
+    for (let count = 0; count < 6; count++) {
+      code = code + makeColorCode[Math.floor(Math.random() * 16)];
+    }
+    document.documentElement.style.setProperty("--primary-color", code);
+  }
+
+  return <button onClick={generate}>generate</button>;
 }

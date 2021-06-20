@@ -1,5 +1,5 @@
 import React from "react";
-import { FirebaseContext } from "../context";
+import { FirebaseContext, AppContext } from "../context";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Separator } from "../common";
 import Clicker from "./Clicker";
@@ -18,6 +18,7 @@ function WorkoutsPage(props) {
   const { auth, firestore, firebase } = React.useContext(FirebaseContext);
   const [workout, setWorkout] = React.useState(null);
   const { uid, photoURL } = auth.currentUser;
+  const [appState = {}, setAppState] = React.useContext(AppContext);
 
   const workoutsRef = firestore.collection(`users/${uid}/workouts`);
   const query = workoutsRef.orderBy("createdAt", "asc").limitToLast(25);
@@ -27,14 +28,31 @@ function WorkoutsPage(props) {
 
   const dataToday = useTodayHistory({ uid });
 
+  React.useEffect(() => {
+    if (subPage === WORKOUT_SUB_PAGE)
+      setAppState({
+        ...appState,
+        appBarData: { hideStart: false, title: 'Exercise' },
+      });
+
+      if (subPage === DETAILS_SUB_PAGE)
+      setAppState({
+        ...appState,
+        appBarData: { hideStart: false, title: 'Detail' },
+      });
+
+      if (!workout || subPage === DEFAULT_SUB_PAGE)
+      setAppState({
+        ...appState,
+        appBarData: { hideStart: true, title: 'Exercises' },
+      });
+
+  }, [subPage, workout]);
+
   return (
     <>
       {(!workout || subPage === DEFAULT_SUB_PAGE) && (
         <>
-          <Separator
-            horizontal
-            className="header-separator-dynamic header-separator--medium"
-          />
           <WorkoutsManager
             workouts={workouts}
             setWorkout={setWorkout}
@@ -45,7 +63,6 @@ function WorkoutsPage(props) {
       )}
       {workout && subPage === WORKOUT_SUB_PAGE && (
         <>
-          <Separator horizontal className="header-separator" />
           <Clicker
             workout={workout}
             setWorkout={setWorkout}
@@ -61,7 +78,6 @@ function WorkoutsPage(props) {
       )}
       {workout && subPage === DETAILS_SUB_PAGE && (
         <>
-          <Separator horizontal className="header-separator" />
           <WorkoutDetails workout={workout} setSubPage={setSubPage} />
         </>
       )}

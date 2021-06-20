@@ -8,13 +8,13 @@ body {
 
 .App {
   /* text-align: center; */
-  max-width: 728px;
-  margin: 0 auto;
+  // max-width: 728px;
+  // margin: 0 auto;
   // height: 100vh;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   height: 100vh;
-  padding: 0 1.4rem;
+  // padding: 0 1.4rem;
 }
 
 .header {
@@ -69,7 +69,17 @@ body {
 }
 
 .main-content {
+  padding: 0 1rem;
+  position: relative;
   flex-grow: 1;
+  
+  @media (min-width: 600px) {
+    padding: 0 0 0 0.5rem;
+
+  }
+  // @media (min-width: 1000px) {
+  //   padding: 0 1rem;
+  // }
 }
 
 .footer {

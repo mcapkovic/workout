@@ -7,10 +7,13 @@ import {
   buttonMotion,
   ButtonPortal,
   ChartFilters,
+  ContentPortal,
+  NavButton,
 } from "../common";
 import moment from "moment";
 import useLineData from "../hooks/useLineData";
 import UsersRow from "./UsersRow";
+import { ChevronLeft24Regular } from "@fluentui/react-icons";
 
 function Room(props) {
   const { setRoom, room } = props;
@@ -66,15 +69,12 @@ function Room(props) {
 
   return (
     <div className="room">
-      <ButtonPortal
-        destination="#header-start"
-        onClick={() => setRoom(null)}
-        {...buttonMotion.right}
-      >
-        Cancel
-      </ButtonPortal>
+      <ContentPortal portalTo="#app-bar-start-main">
+        <NavButton onClick={() => setRoom(null)}>
+          <ChevronLeft24Regular />
+        </NavButton>
+      </ContentPortal>
 
-      <Separator horizontal className="header-separator" />
       <div className="room__header">
         <h2 className="room__header__title">{room.roomName}</h2>
         <span className="room__header__id">id: {room.id}</span>
