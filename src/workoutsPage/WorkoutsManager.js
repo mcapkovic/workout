@@ -11,30 +11,31 @@ function WorkoutsManager(props) {
   return (
     <div className="workouts-manager">
       <div className="workouts-manager__selection">
-
         {workouts.length > 0 && (
-          <motion.div
-            variants={listMotion.listVariants}
-            initial="initial"
-            animate="animate"
-            transition={{ duration: 0.2 }}
-          >
-            {workouts.map((item, index) => (
-              <motion.div key={index} variants={listMotion.listItemVariants}>
-                <WorkoutItem
-                  setWorkout={setWorkout}
-                  item={item}
-                  setSubPage={setSubPage}
-                  index={index}
-                  dataToday={dataToday[item.id]}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+          <>
+            <motion.div
+              variants={listMotion.listVariants}
+              initial="initial"
+              animate="animate"
+              transition={{ duration: 0.2 }}
+            >
+              {workouts.map((item, index) => (
+                <motion.div key={index} variants={listMotion.listItemVariants}>
+                  <WorkoutItem
+                    setWorkout={setWorkout}
+                    item={item}
+                    setSubPage={setSubPage}
+                    index={index}
+                    dataToday={dataToday[item.id]}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+            <Separator horizontal />
+          </>
         )}
       </div>
 
-      <Separator horizontal />
       <NewWorkout />
       <div style={{ height: "1rem" }} />
     </div>

@@ -45,22 +45,24 @@ function RoomsManager(props) {
     <div className="rooms">
       <div className="rooms__selection">
         {rooms && rooms.length > 0 && (
-          <motion.div
-            variants={listMotion.listVariants}
-            initial="initial"
-            animate="animate"
-            transition={{ duration: 0.2 }}
-          >
-            {rooms.map((item, index) => (
-              <motion.div key={index} variants={listMotion.listItemVariants}>
-                <RoomItem item={item} setRoom={setRoom} index={index} />
-              </motion.div>
-            ))}
-          </motion.div>
+          <>
+            <motion.div
+              variants={listMotion.listVariants}
+              initial="initial"
+              animate="animate"
+              transition={{ duration: 0.2 }}
+            >
+              {rooms.map((item, index) => (
+                <motion.div key={index} variants={listMotion.listItemVariants}>
+                  <RoomItem item={item} setRoom={setRoom} index={index} />
+                </motion.div>
+              ))}
+            </motion.div>
+            <Separator horizontal />
+          </>
         )}
       </div>
 
-      <Separator horizontal />
       <h2> Create new Room</h2>
 
       <div className="rooms__new-user">
