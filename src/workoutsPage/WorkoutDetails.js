@@ -132,7 +132,7 @@ function WorkoutDetails(props) {
   const query = historyRef
     .where("createdAt", ">=", new Date(startDate))
     .orderBy("createdAt", "asc")
-    .limitToLast(50);
+    .limitToLast(100);
 
   const [data = []] = useCollectionData(query, { idField: "id" });
 
