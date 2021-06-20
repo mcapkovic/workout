@@ -22,7 +22,7 @@ function useRipple(element) {
         });
       }
     );
-  }, [element.curren]);
+  }, [element.current]);
   
 }
 

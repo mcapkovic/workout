@@ -88,3 +88,9 @@ export const PRAISE_MESSAGES = [
   "doing so great",
   "make it big",
 ];
+
+export const PAGES = {
+  exercise: { path: "/exercises", title: "Exercises", hideStart: true, label: "Exercises"},
+  rooms: { path: "/rooms", title: "Rooms", hideStart: true, label: "Rooms"},
+  profile: { path: "/profile", title: "Profile", hideStart: true, label: "Profile"}
+}

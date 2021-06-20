@@ -7,6 +7,8 @@ function ButtonPortal(props) {
   const { className, destination = "", ...buttonProps } = props;
 
   const headerStart = React.useRef(document.querySelector(destination));
+  if(!headerStart.current) return <span />
+
   return ReactDOM.createPortal(
     <Button
       {...buttonProps}

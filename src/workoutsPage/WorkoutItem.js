@@ -2,6 +2,15 @@ import React from "react";
 import { Button } from "../common";
 import { WORKOUT_SUB_PAGE, DETAILS_SUB_PAGE } from "../utils/constants";
 
+import {
+  CursorHover16Regular,
+  Emoji16Regular,
+  LeafOne16Regular,
+  PresenceUnknown16Regular,
+  Ruler16Regular,
+  Square16Regular,
+  ArrowRight16Regular,
+} from "@fluentui/react-icons";
 function WorkoutItem(props) {
   const {
     item = {},
@@ -15,9 +24,11 @@ function WorkoutItem(props) {
 
   return (
     <div className="workout-item">
+    
       <div className="workout-item__name">
-        <span className="workout-item__name__index">{index + 1}.</span> {name}
+        {name}
       </div>
+      <div className="workout-item__name-copy">{name}</div>
       {dataToday && (
         <div className="workout-item__today">
           <div className="workout-item__today__count">{dataToday.count}</div>

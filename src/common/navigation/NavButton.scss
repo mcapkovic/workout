@@ -1,11 +1,21 @@
 .nav-button {
-  font-size: 12px;
   margin: 0;
   background: none;
   border: none;
   outline: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0); // remove safari highlight on click
+  color: $text-color;
+  opacity: 1;
+  transition: opacity 200ms;
+  font-size: inherit;
 
+  &--primary{
+    color: $primary-color;
+  }
+
+  &:disabled{
+    opacity: 0.5;
+  }
   &__icon {
     transform: translateY(8px);
     transition: transform 100ms;
@@ -15,7 +25,8 @@
   }
 
   &__label {
-    height: 14px;
+    font-size: 12px;
+    max-height: 14px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
@@ -26,5 +37,10 @@
     &--visible {
       opacity: 1;
     }
+  }
+
+  &__child{
+    display:flex;
+    align-items: center;
   }
 }

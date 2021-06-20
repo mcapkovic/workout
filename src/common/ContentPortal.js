@@ -6,6 +6,8 @@ function ContentPortal(props) {
   const { className, portalTo = "", ...otherProps } = props;
 
   const element = React.useRef(document.querySelector(portalTo));
+  if(!element.current) return <span />
+  
   return ReactDOM.createPortal(
     <div
       {...otherProps}
